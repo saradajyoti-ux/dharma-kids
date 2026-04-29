@@ -1,4 +1,4 @@
-const lessons = [
+window.lessons = [
   {
     title: "Loving God Within Us",
     ageGroup: "Ages 8–12",
