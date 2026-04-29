@@ -1,83 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Loving God Within Us</title>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Loving God Within Us</title>
+
   <style>
+    * { box-sizing: border-box; }
+
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #fff7ed;
-      padding: 20px;
-      max-width: 850px;
-      margin: auto;
+      background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
       color: #292524;
     }
 
-    h1, h2, h3 {
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid #fed7aa;
+      padding: 14px 20px;
+    }
+
+    nav {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
       color: #7c2d12;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 28px 20px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 26px;
+      align-items: center;
+      padding: 35px 0;
+    }
+
+    h1 {
+      color: #431407;
+      font-size: 46px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    h2, h3 {
+      color: #7c2d12;
+    }
+
+    p {
+      line-height: 1.65;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #ffedd5;
+      color: #9a3412;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      margin-right: 6px;
+    }
+
+    .pill.green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .pill.blue {
+      background: #e0f2fe;
+      color: #075985;
     }
 
     .card {
       background: white;
-      padding: 22px;
-      margin: 16px 0;
-      border-radius: 18px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      border: 1px solid #ffedd5;
+      border-radius: 24px;
+      padding: 24px;
+      margin: 18px 0;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+    }
+
+    .hero-visual,
+    .visual-box {
+      border-radius: 28px;
+      background: linear-gradient(135deg, #fed7aa, #fecdd3);
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 25px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    }
+
+    .visual-inner {
+      background: rgba(255,255,255,0.78);
+      border-radius: 22px;
+      padding: 28px;
+    }
+
+    .emoji {
+      font-size: 64px;
     }
 
     .highlight {
-      background: #fff3cd;
-      padding: 12px;
-      border-radius: 12px;
+      background: #fff7ed;
+      padding: 14px;
+      border-radius: 14px;
       font-weight: bold;
       color: #7c2d12;
+      border-left: 5px solid #fb923c;
     }
 
     button, .button {
       display: inline-block;
       padding: 11px 14px;
       margin: 6px 0;
-      width: 100%;
-      border-radius: 12px;
+      border-radius: 999px;
       border: none;
-      background: #ffedd5;
-      color: #7c2d12;
+      background: #ea580c;
+      color: white;
       font-weight: bold;
       cursor: pointer;
-      text-align: left;
+      text-align: center;
       text-decoration: none;
       font-size: 15px;
     }
 
     button:hover, .button:hover {
+      background: #c2410c;
+    }
+
+    .soft-button {
+      background: #ffedd5;
+      color: #7c2d12;
+      width: 100%;
+      text-align: left;
+      border-radius: 14px;
+    }
+
+    .soft-button:hover {
       background: #fed7aa;
     }
 
     .small-button {
       width: auto;
-      padding: 10px 14px;
       margin-right: 8px;
-      text-align: center;
-    }
-
-    .correct {
-      background: #bbf7d0 !important;
-      color: #14532d;
-    }
-
-    .wrong {
-      background: #fecaca !important;
-      color: #7f1d1d;
     }
 
     .hidden {
       display: none;
     }
 
-    .reward {
-      font-size: 36px;
-      margin-top: 10px;
+    .correct {
+      background: #bbf7d0 !important;
+      color: #14532d !important;
+    }
+
+    .wrong {
+      background: #fecaca !important;
+      color: #7f1d1d !important;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .video-box {
+      background: #1c1917;
+      color: white;
+      min-height: 260px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .chatbox {
+      border: 2px solid #fed7aa;
+      background: #fff7ed;
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .chat-window {
+      background: white;
+      border-radius: 18px;
+      padding: 15px;
+      min-height: 120px;
+      margin-bottom: 12px;
+      border: 1px solid #ffedd5;
+    }
+
+    .chat-message {
+      background: #ffedd5;
+      padding: 12px;
+      border-radius: 14px;
+      margin: 8px 0;
+      color: #7c2d12;
+      font-weight: bold;
+    }
+
+    .chat-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
     }
 
     .match-grid {
@@ -105,133 +255,257 @@
       border-color: #22c55e;
     }
 
-    .top-link {
-      display: inline-block;
-      margin-bottom: 15px;
+    .reward {
+      font-size: 38px;
+      margin-top: 12px;
       color: #7c2d12;
       font-weight: bold;
-      text-decoration: none;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 28px;
+      background: #431407;
+      color: white;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .hero,
+      .grid,
+      .chat-options,
+      .match-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<a class="top-link" href="index.html">⬅ Back to Home</a>
+<header>
+  <nav>
+    <a href="index.html">⬅ Back to Home</a>
+    <a href="#chatbot">Ask the Lesson Guide</a>
+  </nav>
+</header>
 
-<h1>🌸 Loving God Within Us</h1>
-<p><strong>Goal:</strong> Learn that God lives within us and that kindness, prayer, and truthfulness help us grow spiritually.</p>
+<main class="container">
 
-<div class="card">
-  <h2>🎧 Listen First</h2>
-  <p>Click to hear a simple introduction.</p>
-  <button class="small-button" onclick="speakIntro()">🔊 Play Introduction</button>
-</div>
+  <section class="hero">
+    <div>
+      <span class="pill">Ages 8–12</span>
+      <span class="pill green">Interactive</span>
+      <span class="pill blue">Audio + Visuals</span>
 
-<div class="card">
-  <h3>1. Why Are We Here?</h3>
-  <p class="highlight">We are here to love God, who lives within us.</p>
-  <p>
-    We learn, grow, study, and work so that we can live well.
-    But saints remind us that life becomes meaningful when we remember God and help others.
-  </p>
-  <button class="small-button" onclick="toggleReveal('reveal1')">💭 Think About It</button>
-  <p id="reveal1" class="hidden highlight">
-    Question: What is one kind thing you can do today?
-  </p>
-</div>
+      <h1>🌸 Loving God Within Us</h1>
 
-<div class="card">
-  <h3>2. Thinking About God</h3>
-  <p class="highlight">The more we remember God, the deeper our love grows.</p>
-  <p>
-    Even though we cannot see God with our eyes, we can feel God through kindness, prayer, and love.
-  </p>
-  <button class="small-button" onclick="toggleReveal('reveal2')">✨ Reveal Practice</button>
-  <p id="reveal2" class="hidden highlight">
-    Practice: Sit quietly for 30 seconds and think, “God is within me.”
-  </p>
-</div>
+      <p>
+        Learn why saints teach us to remember God, help others, and grow in
+        love through the childhood stories of Sri Ramakrishna.
+      </p>
 
-<div class="card">
-  <h3>3. Young Sri Ramakrishna</h3>
-  <p class="highlight">Learning about God can be joyful.</p>
-  <p>
-    As a child, Gadadhar loved stories of Sri Ram and Sri Krishna.
-    He acted them out with friends and made learning joyful.
-  </p>
-  <button class="small-button" onclick="toggleReveal('reveal3')">🎭 Class Activity</button>
-  <p id="reveal3" class="hidden highlight">
-    Activity: Act out a short story of Sri Ram or Sri Krishna with your class.
-  </p>
-</div>
+      <button onclick="speakText('Welcome to Loving God Within Us. Today we will learn that God lives within us, and that kindness, prayer, and truthfulness help our love grow.')">
+        🔊 Play Introduction
+      </button>
+    </div>
 
-<div class="card">
-  <h2>🧩 Matching Game</h2>
-  <p>Click a word, then click the meaning that matches it.</p>
+    <div class="hero-visual">
+      <div class="visual-inner">
+        <div class="emoji">🪔</div>
+        <h2>God within us</h2>
+        <p>A lesson about devotion, kindness, joy, and prayer.</p>
+      </div>
+    </div>
+  </section>
 
-  <div class="match-grid">
-    <div class="match-item" onclick="selectMatch(this, 'god')">God within us</div>
-    <div class="match-item" onclick="selectMatch(this, 'god')">Divine presence in the heart</div>
+  <section class="card">
+    <h2>🎬 Video Moment</h2>
+    <p>
+      This is where you can later place a short video: a story narration,
+      an animation, or a class recording.
+    </p>
 
-    <div class="match-item" onclick="selectMatch(this, 'gadadhar')">Gadadhar</div>
-    <div class="match-item" onclick="selectMatch(this, 'gadadhar')">Sri Ramakrishna’s childhood name</div>
+    <div class="video-box">
+      <div>
+        <div class="emoji">▶️</div>
+        <h3 style="color:white;">Video Placeholder</h3>
+        <p>Later we can replace this box with an actual video file.</p>
+      </div>
+    </div>
+  </section>
 
-    <div class="match-item" onclick="selectMatch(this, 'satsang')">Satsang</div>
-    <div class="match-item" onclick="selectMatch(this, 'satsang')">Holy company or spiritual gathering</div>
-  </div>
+  <section id="chatbot" class="card">
+    <h2>🤖 Lesson Guide</h2>
+    <p>
+      This is a safe guided chatbot. It only gives approved lesson responses.
+    </p>
 
-  <p id="match-message" class="highlight hidden"></p>
-</div>
+    <div class="chatbox">
+      <div id="chat-window" class="chat-window">
+        <div class="chat-message">
+          Namaste! I am your lesson guide. What would you like to explore?
+        </div>
+      </div>
 
-<div class="card">
-  <h2>✅ Quiz</h2>
-  <p id="score">Score: 0 / 3</p>
+      <div class="chat-options">
+        <button class="soft-button" onclick="guide('story')">Tell me the story</button>
+        <button class="soft-button" onclick="guide('word')">Explain a word</button>
+        <button class="soft-button" onclick="guide('question')">Ask me a question</button>
+        <button class="soft-button" onclick="guide('practice')">Give me a practice</button>
+      </div>
+    </div>
+  </section>
 
-  <h3>1. Where does God live?</h3>
-  <button onclick="checkAnswer(this, true)">Within us</button>
-  <button onclick="checkAnswer(this, false)">Only in temples</button>
-  <button onclick="checkAnswer(this, false)">Only in books</button>
+  <section class="card">
+    <h2>1. Why Are We Here?</h2>
+    <p class="highlight">We are here to love God, who lives within us.</p>
+    <p>
+      We learn, grow, study, and work so that we can live well.
+      But saints remind us that life becomes meaningful when we remember God,
+      help others, and grow in love.
+    </p>
 
-  <h3>2. What was Sri Ramakrishna’s childhood name?</h3>
-  <button onclick="checkAnswer(this, true)">Gadadhar</button>
-  <button onclick="checkAnswer(this, false)">Hanuman</button>
-  <button onclick="checkAnswer(this, false)">Narendra</button>
+    <button class="small-button" onclick="toggleReveal('reveal1')">💭 Think About It</button>
+    <button class="small-button" onclick="speakText('We are here to love God, who lives within us.')">🔊 Listen</button>
 
-  <h3>3. What helps our love for God grow?</h3>
-  <button onclick="checkAnswer(this, true)">Remembering God every day</button>
-  <button onclick="checkAnswer(this, false)">Finding faults in others</button>
-  <button onclick="checkAnswer(this, false)">Showing off</button>
-</div>
+    <p id="reveal1" class="hidden highlight">
+      What is one kind thing you can do today?
+    </p>
+  </section>
 
-<div class="card">
-  <h2>⭐ Completion Reward</h2>
-  <p>Click when you have read the lesson and tried the activity.</p>
-  <button class="small-button" onclick="completeLesson()">I completed this lesson</button>
-  <div id="reward" class="reward hidden">🌟 Great job! You earned a star.</div>
-</div>
+  <section class="grid">
+    <div class="card">
+      <h2>2. Thinking About God</h2>
+      <p class="highlight">The more we remember God, the deeper our love grows.</p>
+      <p>
+        Even though we cannot see God with our eyes, we can feel God through
+        kindness, prayer, and love.
+      </p>
+      <button class="small-button" onclick="toggleReveal('reveal2')">✨ Reveal Practice</button>
+      <p id="reveal2" class="hidden highlight">
+        Sit quietly for 30 seconds and think: “God is within me.”
+      </p>
+    </div>
 
-<div class="card">
-  <h2>🧘 Reflection</h2>
-  <p>
-    Sit quietly for one minute and think:
-    “God is within me. May I be kind and truthful.”
-  </p>
-</div>
+    <div class="visual-box">
+      <div class="visual-inner">
+        <div class="emoji">🧘</div>
+        <h3>Quiet Prayer</h3>
+        <p>This could become a real illustration later.</p>
+      </div>
+    </div>
+  </section>
 
-<a class="top-link" href="index.html">⬅ Back to Home</a>
+  <section class="grid">
+    <div class="visual-box">
+      <div class="visual-inner">
+        <div class="emoji">🎭</div>
+        <h3>Young Gadadhar</h3>
+        <p>Children can act out stories joyfully.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Young Sri Ramakrishna</h2>
+      <p class="highlight">Learning about God can be joyful.</p>
+      <p>
+        As a child, Gadadhar loved stories of Sri Ram and Sri Krishna.
+        He acted them out with friends and made learning joyful.
+      </p>
+      <button class="small-button" onclick="toggleReveal('reveal3')">🎭 Class Activity</button>
+      <p id="reveal3" class="hidden highlight">
+        Act out a short story of Sri Ram or Sri Krishna with your class.
+      </p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🧩 Matching Game</h2>
+    <p>Click a word, then click the meaning that matches it.</p>
+
+    <div class="match-grid">
+      <div class="match-item" onclick="selectMatch(this, 'god')">God within us</div>
+      <div class="match-item" onclick="selectMatch(this, 'god')">Divine presence in the heart</div>
+
+      <div class="match-item" onclick="selectMatch(this, 'gadadhar')">Gadadhar</div>
+      <div class="match-item" onclick="selectMatch(this, 'gadadhar')">Sri Ramakrishna’s childhood name</div>
+
+      <div class="match-item" onclick="selectMatch(this, 'satsang')">Satsang</div>
+      <div class="match-item" onclick="selectMatch(this, 'satsang')">Holy company or spiritual gathering</div>
+    </div>
+
+    <p id="match-message" class="hidden highlight"></p>
+  </section>
+
+  <section class="card">
+    <h2>✅ Quiz</h2>
+    <p id="score">Score: 0 / 3</p>
+
+    <h3>1. Where does God live?</h3>
+    <button class="soft-button" onclick="checkAnswer(this, true)">Within us</button>
+    <button class="soft-button" onclick="checkAnswer(this, false)">Only in temples</button>
+    <button class="soft-button" onclick="checkAnswer(this, false)">Only in books</button>
+
+    <h3>2. What was Sri Ramakrishna’s childhood name?</h3>
+    <button class="soft-button" onclick="checkAnswer(this, true)">Gadadhar</button>
+    <button class="soft-button" onclick="checkAnswer(this, false)">Hanuman</button>
+    <button class="soft-button" onclick="checkAnswer(this, false)">Narendra</button>
+
+    <h3>3. What helps our love for God grow?</h3>
+    <button class="soft-button" onclick="checkAnswer(this, true)">Remembering God every day</button>
+    <button class="soft-button" onclick="checkAnswer(this, false)">Finding faults in others</button>
+    <button class="soft-button" onclick="checkAnswer(this, false)">Showing off</button>
+  </section>
+
+  <section class="card">
+    <h2>⭐ Completion Reward</h2>
+    <p>Click when you have read the lesson and tried the activity.</p>
+    <button onclick="completeLesson()">I completed this lesson</button>
+    <div id="reward" class="reward hidden">🌟 Great job! You earned a star.</div>
+  </section>
+
+  <section class="card">
+    <h2>🧘 Reflection</h2>
+    <p>
+      Sit quietly for one minute and think:
+      “God is within me. May I be kind and truthful.”
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  🌸 Dharma Kids — Loving God Within Us
+</footer>
 
 <script>
   let score = 0;
-  let answered = 0;
   let selectedMatch = null;
   let matchedPairs = 0;
 
-  function speakIntro() {
-    const text = "Welcome to Loving God Within Us. In this lesson, we learn that God lives within us, and that kindness, prayer, and truthfulness help our love grow.";
+  function speakText(text) {
+    if (!window.speechSynthesis) {
+      alert("Sorry, audio is not supported in this browser.");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
     const message = new SpeechSynthesisUtterance(text);
     message.rate = 0.9;
-    speechSynthesis.speak(message);
+    message.pitch = 1;
+    window.speechSynthesis.speak(message);
   }
 
   function toggleReveal(id) {
@@ -239,11 +513,33 @@
     item.classList.toggle("hidden");
   }
 
+  function guide(type) {
+    const responses = {
+      story:
+        "Young Gadadhar, later known as Sri Ramakrishna, loved stories of Sri Ram and Sri Krishna. He made spiritual learning joyful by acting out these stories with friends.",
+      word:
+        "Gadadhar was Sri Ramakrishna’s childhood name. Satsang means holy company or a spiritual gathering.",
+      question:
+        "Here is a question for you: What is one way you can remember God during your day?",
+      practice:
+        "Try this: sit quietly, place your hand on your heart, and think, God is within me. May I be kind and truthful."
+    };
+
+    const chatWindow = document.getElementById("chat-window");
+    const message = document.createElement("div");
+    message.className = "chat-message";
+    message.textContent = responses[type];
+
+    chatWindow.appendChild(message);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+
+    speakText(responses[type]);
+  }
+
   function checkAnswer(button, correct) {
     if (button.dataset.answered === "true") return;
 
     button.dataset.answered = "true";
-    answered++;
 
     if (correct) {
       score++;
@@ -270,7 +566,9 @@
       return;
     }
 
-    if (selectedMatch.getAttribute("onclick").includes(matchId)) {
+    const firstMatch = selectedMatch.getAttribute("onclick").includes("'" + matchId + "'");
+
+    if (firstMatch) {
       selectedMatch.classList.remove("selected");
       selectedMatch.classList.add("matched");
       element.classList.add("matched");
@@ -287,6 +585,7 @@
       const message = document.getElementById("match-message");
       message.classList.remove("hidden");
       message.textContent = "Try another match.";
+
       selectedMatch.classList.remove("selected");
       selectedMatch = null;
     }
