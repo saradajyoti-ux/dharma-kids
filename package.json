@@ -1,8 +1,0 @@
-{
-  "name": "dharma-kids",
-  "private": true,
-  "scripts": {
-    "build": "echo 'no build step'",
-    "start": "npx serve ."
-  }
-}
