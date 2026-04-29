@@ -6,6 +6,18 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
 });
 
+function readPdfAsPart(filename) {
+  const pdfPath = path.join(process.cwd(), "sources", filename);
+  const pdfBuffer = fs.readFileSync(pdfPath);
+
+  return {
+    inlineData: {
+      mimeType: "application/pdf",
+      data: pdfBuffer.toString("base64")
+    }
+  };
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -22,10 +34,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const pdfPath = path.join(process.cwd(), "sources", "gospel.pdf");
-    const pdfBuffer = fs.readFileSync(pdfPath);
-
-    const base64Pdf = pdfBuffer.toString("base64");
+    const gospelPart1 = readPdfAsPart("gospel-part-1.pdf");
+    const gospelPart2 = readPdfAsPart("gospel-part-2.pdf");
 
     const prompt = `
 You are a warm Sri Ramakrishna guide for children.
@@ -36,10 +46,10 @@ Age: ${childAge || "Unknown"}
 Level: ${childLevel || "General"}
 
 Rules:
-- Answer ONLY from the PDF provided.
+- Answer ONLY from the PDF sources provided in this request.
 - Do not use outside knowledge.
 - Keep answers short, gentle, and suitable for the child's age.
-- If the answer is not clearly in the PDF, say exactly:
+- If the answer is not clearly in the PDFs, say exactly:
 "I do not know from the materials I have. Please ask your teacher."
 
 Child question:
@@ -49,12 +59,8 @@ ${question}
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-lite",
       contents: [
-        {
-          inlineData: {
-            mimeType: "application/pdf",
-            data: base64Pdf
-          }
-        },
+        gospelPart1,
+        gospelPart2,
         prompt
       ]
     });
