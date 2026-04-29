@@ -1,0 +1,8 @@
+{
+  "name": "dharma-kids",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@google/genai": "latest"
+  }
+}
