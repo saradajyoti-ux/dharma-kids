@@ -21,7 +21,6 @@ header {
   background: rgba(255,255,255,0.95);
   border-bottom: 1px solid #fed7aa;
   padding: 14px 20px;
-  z-index: 10;
 }
 
 nav {
@@ -29,10 +28,9 @@ nav {
   margin: auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
-nav a, nav strong {
+nav a {
   color: #7c2d12;
   text-decoration: none;
   font-weight: bold;
@@ -44,85 +42,19 @@ nav a, nav strong {
   padding: 28px 20px;
 }
 
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: center;
-}
-
 .card {
   background: white;
-  border: 1px solid #ffedd5;
   border-radius: 24px;
   padding: 22px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+  border: 1px solid #ffedd5;
   margin-bottom: 18px;
-}
-
-h1 {
-  color: #431407;
-  font-size: 46px;
-  margin-bottom: 8px;
-}
-
-h2, h3 {
-  color: #7c2d12;
-}
-
-p {
-  line-height: 1.6;
 }
 
 .soul-image {
   width: 100%;
-  height: 360px;
+  height: 320px;
   object-fit: cover;
   border-radius: 24px;
-  background: #ffedd5;
-}
-
-.pill {
-  display: inline-block;
-  background: #ffedd5;
-  color: #9a3412;
-  padding: 7px 12px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: bold;
-  margin: 4px 4px 8px 0;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.timeline-item {
-  border-left: 6px solid #fb923c;
-}
-
-.button, button {
-  display: inline-block;
-  padding: 11px 15px;
-  margin: 5px;
-  border-radius: 999px;
-  border: none;
-  background: #ea580c;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.button:hover, button:hover {
-  background: #c2410c;
-}
-
-button.secondary, .button.secondary {
-  background: #ffedd5;
-  color: #7c2d12;
 }
 
 .chat-window {
@@ -137,65 +69,43 @@ button.secondary, .button.secondary {
 }
 
 .message {
-  padding: 12px 14px;
+  padding: 12px;
   border-radius: 16px;
-  margin: 9px 0;
-  line-height: 1.5;
+  margin: 8px 0;
 }
 
 .guide {
   background: white;
   border: 1px solid #fed7aa;
   color: #7c2d12;
-  font-weight: bold;
 }
 
 .child {
   background: #dcfce7;
-  color: #14532d;
-  margin-left: 28px;
+  margin-left: 20px;
 }
 
 input {
   width: 100%;
-  padding: 13px;
+  padding: 12px;
   border-radius: 16px;
   border: 1px solid #fed7aa;
-  font-size: 16px;
-  margin-bottom: 8px;
 }
 
-.notice {
-  background: #fff7ed;
-  border: 1px dashed #fb923c;
-  padding: 14px;
-  border-radius: 18px;
-  color: #7c2d12;
-  font-weight: bold;
-}
-
-footer {
-  margin-top: 40px;
-  padding: 24px;
-  background: #431407;
+button {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #ea580c;
   color: white;
-  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-@media (max-width: 850px) {
-  .hero, .grid {
-    grid-template-columns: 1fr;
-  }
-
-  h1 {
-    font-size: 36px;
-  }
-
-  nav {
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
-  }
+button.secondary {
+  background: #ffedd5;
+  color: #7c2d12;
 }
 </style>
 </head>
@@ -204,123 +114,37 @@ footer {
 
 <header>
   <nav>
-    <a href="index.html">⬅ Back to Home</a>
-    <strong>🌸 Dharma Kids</strong>
+    <a href="index.html">⬅ Home</a>
+    <a href="lesson1.html">Start Lesson</a>
   </nav>
 </header>
 
 <main class="container">
 
-<section class="hero">
-  <div>
-    <span class="pill">Great Soul</span>
-    <span class="pill">Sri Ramakrishna</span>
-    <span class="pill">Devotion</span>
-
-    <h1>Sri Ramakrishna</h1>
-
-    <p>
-      Sri Ramakrishna was a great spiritual teacher who loved God deeply.
-      As a child, he was known as Gadadhar. He loved divine stories,
-      worship, music, drama, and joyful spiritual life.
-    </p>
-
-    <p>
-      This page helps children first meet Sri Ramakrishna before beginning
-      lessons inspired by his life.
-    </p>
-
-    <a class="button" href="lesson1.html">Start Lesson: Loving God Within Us</a>
-  </div>
-
-  <div>
-    <img class="soul-image" src="images/sri-ramakrishna.jpg" alt="Sri Ramakrishna">
-  </div>
-</section>
-
-<section class="card">
-  <h2>🌸 Short Biography</h2>
+<div class="card">
+  <h1>🌸 Sri Ramakrishna</h1>
+  <img src="images/sri-ramakrishna.jpg" class="soul-image">
   <p>
-    Sri Ramakrishna was born in a village called Kamarpukur. His childhood name
-    was Gadadhar. From a young age, he loved hearing stories of Sri Ram, Sri Krishna,
-    and other forms of God.
+    Sri Ramakrishna was a great spiritual teacher who loved God deeply.
+    As a child, he was called Gadadhar and enjoyed stories of Sri Ram and Sri Krishna.
   </p>
-  <p>
-    He grew up to become a great saint and teacher. He showed that God can be loved,
-    remembered, and experienced through sincerity, devotion, prayer, and purity of heart.
-  </p>
-</section>
+</div>
 
-<section>
-  <h2>✨ Key Moments for Children</h2>
-
-  <div class="grid">
-    <div class="card timeline-item">
-      <h3>Childhood Joy</h3>
-      <p>
-        Young Gadadhar loved stories of God and enjoyed acting them out with friends.
-      </p>
-    </div>
-
-    <div class="card timeline-item">
-      <h3>Deep Devotion</h3>
-      <p>
-        He prayed with great sincerity and became absorbed in thoughts of the Divine.
-      </p>
-    </div>
-
-    <div class="card timeline-item">
-      <h3>Teaching Through Love</h3>
-      <p>
-        Sri Ramakrishna helped others feel that spiritual life can be joyful and real.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="card">
+<div class="card">
   <h2>🤖 Ask the Sri Ramakrishna Guide</h2>
-
-  <p class="notice">
-    This guide should answer only from approved Sri Ramakrishna source material.
-    For now, it uses a short approved starter source. Later we can connect your PDFs.
-  </p>
 
   <div id="chat" class="chat-window"></div>
 
   <input id="question" placeholder="Ask about Sri Ramakrishna..." />
 
   <button onclick="askGuide()">Ask Guide</button>
-  <button class="secondary" onclick="quickQuestion('Who was Gadadhar?')">Who was Gadadhar?</button>
-  <button class="secondary" onclick="quickQuestion('What can children learn from Sri Ramakrishna?')">What can children learn?</button>
-</section>
-
-<section class="card">
-  <h2>📚 Lessons Connected to Sri Ramakrishna</h2>
-  <p>
-    Begin with a guided chatbot lesson based on his childhood and teachings.
-  </p>
-
-  <a class="button" href="lesson1.html">Loving God Within Us</a>
-</section>
+  <button class="secondary" onclick="quick('Who was Gadadhar?')">Who was Gadadhar?</button>
+  <button class="secondary" onclick="quick('What did he teach?')">What did he teach?</button>
+</div>
 
 </main>
 
-<footer>
-  🌸 Dharma Kids — Sri Ramakrishna
-</footer>
-
 <script>
-const approvedSource = `
-Sri Ramakrishna was a great spiritual teacher.
-His childhood name was Gadadhar.
-He was born in Kamarpukur.
-As a child, Gadadhar loved stories of Sri Ram and Sri Krishna.
-He enjoyed acting out divine stories with friends.
-He loved God deeply and taught through devotion, sincerity, purity, and joy.
-Children can learn kindness, prayer, truthfulness, joy, and love for God from his life.
-`;
-
 function addMessage(text, type) {
   const chat = document.getElementById("chat");
   const msg = document.createElement("div");
@@ -330,8 +154,8 @@ function addMessage(text, type) {
   chat.scrollTop = chat.scrollHeight;
 }
 
-function quickQuestion(text) {
-  document.getElementById("question").value = text;
+function quick(q) {
+  document.getElementById("question").value = q;
   askGuide();
 }
 
@@ -340,39 +164,45 @@ async function askGuide() {
   const question = input.value.trim();
 
   if (!question) {
-    addMessage("Please type a question first.", "guide");
+    addMessage("Please type a question.", "guide");
     return;
   }
 
   addMessage(question, "child");
   input.value = "";
 
-  addMessage("Let me check the approved Sri Ramakrishna material...", "guide");
+  addMessage("Let me think about what Sri Ramakrishna taught...", "guide");
+
+  const childName = localStorage.getItem("dkName");
+  const childAge = localStorage.getItem("dkAge");
+  const childLevel = localStorage.getItem("dkLevel");
 
   try {
-    const response = await fetch("/api/chat", {
+    const res = await fetch("/api/ramakrishna-chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        lessonTitle: "Sri Ramakrishna Biography",
-        question:
-          "Use ONLY this approved source. If the answer is not here, say: I do not know from the materials I have. Please ask your teacher.\\n\\n" +
-          approvedSource +
-          "\\n\\nQuestion: " +
-          question
+        question,
+        childName,
+        childAge,
+        childLevel
       })
     });
 
-    const data = await response.json();
-    addMessage(data.answer || "I do not know from the materials I have. Please ask your teacher.", "guide");
-  } catch (error) {
+    const data = await res.json();
+
+    addMessage(
+      data.answer || "I do not know from the materials I have. Please ask your teacher.",
+      "guide"
+    );
+  } catch (err) {
     addMessage("Sorry, I could not answer right now.", "guide");
   }
 }
 
-addMessage("Namaste! Ask me a question about Sri Ramakrishna.", "guide");
+addMessage("Namaste! Ask me about Sri Ramakrishna.", "guide");
 </script>
 
 </body>
