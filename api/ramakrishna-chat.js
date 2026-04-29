@@ -6,7 +6,7 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
 });
 
-function readPdfAsPart(filename) {
+function readPdf(filename) {
   const pdfPath = path.join(process.cwd(), "sources", filename);
   const pdfBuffer = fs.readFileSync(pdfPath);
 
@@ -34,8 +34,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const gospelPart1 = readPdfAsPart("gospel-part-1.pdf");
-    const gospelPart2 = readPdfAsPart("gospel-part-2.pdf");
+    const gospelPart1 = readPdf("gospel-part-1.pdf");
+    const gospelPart2 = readPdf("gospel-part-2.pdf");
 
     const prompt = `
 You are a warm Sri Ramakrishna guide for children.
@@ -46,9 +46,9 @@ Age: ${childAge || "Unknown"}
 Level: ${childLevel || "General"}
 
 Rules:
-- Answer ONLY from the PDF sources provided in this request.
+- Answer ONLY from the PDF sources provided.
 - Do not use outside knowledge.
-- Keep answers short, gentle, and suitable for the child's age.
+- Keep answers short, gentle, and age-appropriate.
 - If the answer is not clearly in the PDFs, say exactly:
 "I do not know from the materials I have. Please ask your teacher."
 
