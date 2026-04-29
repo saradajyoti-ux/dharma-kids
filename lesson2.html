@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Courage Like Hanumanji</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial;
+      background: #fff7ed;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 { color: #7c2d12; }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .highlight {
+      background: #fff3cd;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+      background: #eee;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ffd699;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🛕 Courage Like Hanumanji</h1>
+
+<div class="card">
+  <h3>Who Is Hanumanji?</h3>
+  <p class="highlight">Hanumanji teaches courage, devotion, and service.</p>
+  <p>
+    Hanumanji is loved for his strength and humility. He used his power to help others and serve Sri Ram.
+  </p>
+</div>
+
+<div class="card">
+  <h3>True Courage</h3>
+  <p class="highlight">Courage means doing what is right even when we feel afraid.</p>
+  <p>
+    Hanumanji crossed the ocean with faith and courage. When we remember God, we can overcome fear.
+  </p>
+</div>
+
+<div class="card">
+  <h3>Strength with Kindness</h3>
+  <p class="highlight">Real strength is gentle and helpful.</p>
+  <p>
+    Hanumanji never showed off. He used his strength to protect and serve others.
+  </p>
+</div>
+
+<div class="card">
+  <h3>Quiz</h3>
+
+  <p>What does Hanumanji teach us?</p>
+  <button onclick="answer(this,true)">Courage and service</button>
+  <button onclick="answer(this,false)">Pride</button>
+
+  <p>What is true courage?</p>
+  <button onclick="answer(this,true)">Doing what is right even when afraid</button>
+  <button onclick="answer(this,false)">Never feeling afraid</button>
+
+</div>
+
+<a href="index.html">⬅ Back to Home</a>
+
+<script>
+function answer(button, correct) {
+  if (correct) {
+    button.style.background = "#c8e6c9";
+    alert("Correct! 😊");
+  } else {
+    button.style.background = "#ffcdd2";
+    alert("Try again!");
+  }
+}
+</script>
+
+</body>
+</html>
