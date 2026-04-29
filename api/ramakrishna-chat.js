@@ -1,4 +1,10 @@
-import { ramakrishnaSource } from "../sources/ramakrishna-source.js";
+import { GoogleGenAI } from "@google/genai";
+import fs from "fs";
+import path from "path";
+
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY
+});
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -16,44 +22,51 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "gpt-4.1-mini",
-        input: [
-          {
-            role: "developer",
-            content:
-              "You are a warm Sri Ramakrishna guide for children. You must answer ONLY from the approved source provided. Do not use outside knowledge. Keep answers short, gentle, and age-appropriate. If the answer is not clearly in the approved source, say exactly: I do not know from the materials I have. Please ask your teacher."
-          },
-          {
-            role: "user",
-            content:
-              "Child profile:\n" +
-              "Name: " + (childName || "Guest") + "\n" +
-              "Age: " + (childAge || "Unknown") + "\n" +
-              "Level: " + (childLevel || "General") + "\n\n" +
-              "APPROVED SOURCE:\n" +
-              ramakrishnaSource +
-              "\n\nChild question:\n" +
-              question
+    const pdfPath = path.join(process.cwd(), "sources", "gospel.pdf");
+    const pdfBuffer = fs.readFileSync(pdfPath);
+
+    const base64Pdf = pdfBuffer.toString("base64");
+
+    const prompt = `
+You are a warm Sri Ramakrishna guide for children.
+
+Child profile:
+Name: ${childName || "Guest"}
+Age: ${childAge || "Unknown"}
+Level: ${childLevel || "General"}
+
+Rules:
+- Answer ONLY from the PDF provided.
+- Do not use outside knowledge.
+- Keep answers short, gentle, and suitable for the child's age.
+- If the answer is not clearly in the PDF, say exactly:
+"I do not know from the materials I have. Please ask your teacher."
+
+Child question:
+${question}
+`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: [
+        {
+          inlineData: {
+            mimeType: "application/pdf",
+            data: base64Pdf
           }
-        ]
-      })
+        },
+        prompt
+      ]
     });
 
-    const data = await response.json();
-
-    const answer =
-      data.output_text ||
-      "I do not know from the materials I have. Please ask your teacher.";
-
-    return res.status(200).json({ answer });
+    return res.status(200).json({
+      answer:
+        response.text ||
+        "I do not know from the materials I have. Please ask your teacher."
+    });
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       answer: "Sorry, I could not answer right now."
     });
