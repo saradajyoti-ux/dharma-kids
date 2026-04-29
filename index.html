@@ -78,20 +78,9 @@ nav a {
   margin: 4px;
 }
 
-.pill.green {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.pill.blue {
-  background: #e0f2fe;
-  color: #075985;
-}
-
-.pill.purple {
-  background: #f3e8ff;
-  color: #6b21a8;
-}
+.pill.green { background: #dcfce7; color: #166534; }
+.pill.blue { background: #e0f2fe; color: #075985; }
+.pill.purple { background: #f3e8ff; color: #6b21a8; }
 
 .app-layout {
   display: grid;
@@ -315,6 +304,7 @@ footer {
     <div class="quick-buttons">
       <button onclick="send()">Send</button>
       <button class="secondary" onclick="recommend()">Recommend for me</button>
+      <button class="secondary" onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
       <button class="secondary" onclick="explainSouls()">Who are the Great Souls?</button>
       <button class="secondary" onclick="resetProfile()">Reset profile</button>
     </div>
@@ -325,7 +315,7 @@ footer {
       <div class="emoji">🪔</div>
       <h3>Today’s Path</h3>
       <p id="today-path">Tell the guide your name and age to begin.</p>
-      <a id="start-link" class="button" href="sri-ramakrishna.html">Start Featured Lesson</a>
+      <a id="start-link" class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
     </div>
 
     <div class="card profile-box">
@@ -352,7 +342,7 @@ footer {
         Sri Ramakrishna loved God deeply and taught that sincere spiritual
         practice leads us closer to the Divine. His childhood name was Gadadhar.
       </p>
-      <a class="button" href="sri-ramakrishna.html">Begin with Sri Ramakrishna</a>
+      <a class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
     </div>
 
     <div class="card soul-card" id="sarada">
@@ -394,11 +384,38 @@ let childName = "";
 let childAge = "";
 let childLevel = "";
 
+const mostRecentLessons = {
+  "Ages 5–7": {
+    title: "Loving God Within Us",
+    url: "lesson1.html",
+    note: "This is best done with a grown-up for younger children."
+  },
+  "Ages 8–12": {
+    title: "Loving God Within Us",
+    url: "lesson1.html",
+    note: "This is the newest guided chatbot lesson for your age group."
+  },
+  "Ages 13–15": {
+    title: "Loving God Within Us",
+    url: "lesson1.html",
+    note: "Use this lesson for deeper reflection on devotion, truthfulness, and service."
+  }
+};
+
 function add(text, type) {
   const chat = document.getElementById("chat");
   const msg = document.createElement("div");
   msg.className = "message " + type;
   msg.textContent = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function addButtonMessage(buttonsHtml) {
+  const chat = document.getElementById("chat");
+  const msg = document.createElement("div");
+  msg.className = "message guide";
+  msg.innerHTML = buttonsHtml;
   chat.appendChild(msg);
   chat.scrollTop = chat.scrollHeight;
 }
@@ -409,8 +426,9 @@ function updateProfile() {
   document.getElementById("level").textContent = childLevel || "Not set";
 
   if (childLevel) {
+    const recent = mostRecentLessons[childLevel];
     document.getElementById("today-path").textContent =
-      "Recommended for " + childLevel + ": begin with Sri Ramakrishna.";
+      "Recommended for " + childLevel + ": " + recent.title + ".";
   }
 }
 
@@ -442,7 +460,7 @@ function start() {
   if (childName && childAge && childLevel) {
     step = 3;
     add("Namaste " + childName + "! Welcome back. I remember you are " + childAge + ".", "guide");
-    add("Would you like a recommendation, or would you like to meet the Great Souls?", "guide");
+    add("Would you like a recommendation, the most recent lesson for your age group, or to meet the Great Souls?", "guide");
   } else {
     step = 0;
     add("Namaste! I am your Dharma Kids guide. What is your name?", "guide");
@@ -489,21 +507,23 @@ function handle(text) {
     updateProfile();
 
     add("Thank you, " + childName + ". I will guide you at the " + childLevel + " level.", "guide");
+    add("Would you like the most recent lesson for your age group? Type yes, or click the button below.", "guide");
 
-    if (childLevel === "Ages 5–7") {
-      add("For younger children, I recommend short stories, pictures, songs, and simple kindness activities. Some lessons are coming soon, but you may begin with Sri Ramakrishna with an adult.", "guide");
-    } else if (childLevel === "Ages 8–12") {
-      add("I recommend starting with Sri Ramakrishna: Loving God Within Us. It has a guided lesson, quiz, and reflection.", "guide");
-    } else {
-      add("For older children, I recommend deeper reflection on devotion, courage, service, and meditation. You can still begin with Sri Ramakrishna.", "guide");
-    }
+    addButtonMessage(`
+      <button onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
+      <button class="secondary" onclick="recommend()">Recommend for me</button>
+    `);
 
-    add("Would you like to begin, or meet the Great Souls first?", "guide");
+    return;
+  }
+
+  if (lower.includes("recent") || lower.includes("new") || lower.includes("latest") || lower.includes("yes")) {
+    goToMostRecentLesson();
     return;
   }
 
   if (lower.includes("begin") || lower.includes("start") || lower.includes("lesson")) {
-    add("Wonderful. Click the Start Featured Lesson button, or the Sri Ramakrishna card below.", "guide");
+    goToMostRecentLesson();
     return;
   }
 
@@ -519,40 +539,66 @@ function handle(text) {
 
   if (lower.includes("ramakrishna") || lower.includes("gadadhar")) {
     add("Sri Ramakrishna loved God deeply. As a child he was called Gadadhar, and he loved divine stories and worship.", "guide");
-    document.getElementById("ramakrishna").scrollIntoView({ behavior: "smooth" });
+    addButtonMessage(`
+      <a class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
+      <a class="button secondary" href="lesson1.html">Start Lesson 1</a>
+    `);
     return;
   }
 
   if (lower.includes("sarada") || lower.includes("mother")) {
-    add("Sri Sarada Devi is Holy Mother. She teaches kindness, patience, purity, forgiveness, and universal love.", "guide");
+    add("Sri Sarada Devi is Holy Mother. She teaches kindness, patience, purity, forgiveness, and universal love. Her page is coming soon.", "guide");
     document.getElementById("sarada").scrollIntoView({ behavior: "smooth" });
     return;
   }
 
   if (lower.includes("vivekananda") || lower.includes("swami")) {
-    add("Swami Vivekananda teaches courage, strength, service, discipline, and faith in oneself.", "guide");
+    add("Swami Vivekananda teaches courage, strength, service, discipline, and faith in oneself. His page is coming soon.", "guide");
     document.getElementById("vivekananda").scrollIntoView({ behavior: "smooth" });
     return;
   }
 
-  add("I can help you with recommendations, Sri Ramakrishna, Sri Sarada Devi, Swami Vivekananda, or starting a lesson.", "guide");
+  add("I can help you get the most recent lesson, meet Sri Ramakrishna, or learn about the Great Souls.", "guide");
 }
 
 function recommend() {
   if (!childLevel) {
-    add("Please tell me your name and age first, then I can recommend a lesson.", "guide");
+    add("Please tell me your name and age first, then I can recommend where to begin.", "guide");
     return;
   }
 
   if (childLevel === "Ages 5–7") {
-    add(childName + ", I recommend picture stories and simple kindness activities. For now, begin with Sri Ramakrishna with an adult.", "guide");
+    add(childName + ", I recommend beginning with a grown-up: first meet Sri Ramakrishna, then try the simple parts of Loving God Within Us.", "guide");
   } else if (childLevel === "Ages 8–12") {
-    add(childName + ", I recommend Loving God Within Us. It is interactive and guided by a chatbot.", "guide");
+    add(childName + ", I recommend starting with Sri Ramakrishna’s background page. Then begin the chatbot lesson Loving God Within Us.", "guide");
   } else {
-    add(childName + ", I recommend beginning with Sri Ramakrishna, then later exploring Swami Vivekananda for courage and service.", "guide");
+    add(childName + ", I recommend reading Sri Ramakrishna’s background page first, then using the lesson for deeper reflection.", "guide");
   }
 
-  document.getElementById("ramakrishna").scrollIntoView({ behavior: "smooth" });
+  add("Use these buttons:", "guide");
+
+  addButtonMessage(`
+    <a class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
+    <a class="button secondary" href="lesson1.html">Start Lesson 1</a>
+    <button class="secondary" onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
+  `);
+}
+
+function goToMostRecentLesson() {
+  if (!childLevel) {
+    add("Please tell me your name and age first, then I can find the most recent lesson for you.", "guide");
+    return;
+  }
+
+  const recent = mostRecentLessons[childLevel];
+
+  add("The most recent lesson for " + childLevel + " is: " + recent.title + ".", "guide");
+  add(recent.note, "guide");
+
+  addButtonMessage(`
+    <a class="button" href="${recent.url}">Go to Most Recent Lesson</a>
+    <a class="button secondary" href="sri-ramakrishna.html">Meet Sri Ramakrishna First</a>
+  `);
 }
 
 function explainSouls() {
