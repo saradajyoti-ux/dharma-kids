@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loving God Within Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial;
+      background: #fff7ed;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 { color: #7c2d12; }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .highlight {
+      background: #fff3cd;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .audio {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #ffe0b2;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+      background: #eee;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ffd699;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🌸 Loving God Within Us</h1>
+
+<div class="card">
+  <h3>Why Are We Here?</h3>
+  <p class="highlight">We are here to love God, who lives within us.</p>
+  <p>
+    We learn, grow, study, and work so that we can live well.
+    But saints remind us that life becomes meaningful when we remember God and help others.
+  </p>
+  <div class="audio" onclick="speak('We are here to love God who lives within us.')">🔊 Listen</div>
+</div>
+
+<div class="card">
+  <h3>Thinking About God</h3>
+  <p class="highlight">The more we remember God, the deeper our love grows.</p>
+  <p>
+    Even though we cannot see God with our eyes, we can feel God through kindness, prayer, and love.
+  </p>
+  <div class="audio" onclick="speak('The more we remember God, the deeper our love grows.')">🔊 Listen</div>
+</div>
+
+<div class="card">
+  <h3>Young Sri Ramakrishna</h3>
+  <p class="highlight">Learning about God can be joyful.</p>
+  <p>
+    As a child, Gadadhar loved stories of Sri Ram and Sri Krishna.
+    He acted them out with friends and made learning joyful.
+  </p>
+</div>
+
+<div class="card">
+  <h3>Activity</h3>
+  <p>
+    Act out a story of Sri Ram or Krishna with your friends or family.
+  </p>
+</div>
+
+<div class="card">
+  <h3>Reflection</h3>
+  <p>
+    Sit quietly for one minute and think:
+    “God is within me. May I be kind and truthful.”
+  </p>
+</div>
+
+<div class="card">
+  <h3>Quiz</h3>
+
+  <p>Where does God live?</p>
+  <button onclick="answer(this, true)">Within us</button>
+  <button onclick="answer(this, false)">Only in temples</button>
+
+  <p>What was Sri Ramakrishna’s childhood name?</p>
+  <button onclick="answer(this, true)">Gadadhar</button>
+  <button onclick="answer(this, false)">Hanuman</button>
+
+</div>
+
+<a href="index.html">⬅ Back to Home</a>
+
+<script>
+function answer(button, correct) {
+  if (correct) {
+    button.style.background = "#c8e6c9";
+    alert("Correct! 😊");
+  } else {
+    button.style.background = "#ffcdd2";
+    alert("Try again!");
+  }
+}
+
+function speak(text) {
+  const msg = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(msg);
+}
+</script>
+
+</body>
+</html>
