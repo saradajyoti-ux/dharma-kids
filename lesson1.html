@@ -46,7 +46,7 @@ nav a {
 
 .hero {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .hero h1 {
@@ -62,7 +62,7 @@ nav a {
 
 .layout {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 280px 1fr;
   gap: 22px;
   align-items: start;
 }
@@ -73,11 +73,11 @@ nav a {
   border-radius: 24px;
   padding: 22px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+  margin-bottom: 18px;
 }
 
-.steps {
-  position: sticky;
-  top: 80px;
+.profile-card {
+  background: #fff7ed;
 }
 
 .step {
@@ -93,17 +93,13 @@ nav a {
   background: #fed7aa;
 }
 
-.chatbox {
-  min-height: 520px;
-}
-
 .chat-window {
   background: #fff7ed;
   border: 1px solid #fed7aa;
   border-radius: 20px;
   padding: 16px;
-  min-height: 340px;
-  max-height: 460px;
+  min-height: 360px;
+  max-height: 480px;
   overflow-y: auto;
   margin-bottom: 14px;
 }
@@ -119,6 +115,7 @@ nav a {
   background: white;
   border: 1px solid #fed7aa;
   color: #7c2d12;
+  font-weight: bold;
 }
 
 .child {
@@ -127,7 +124,17 @@ nav a {
   margin-left: 30px;
 }
 
-button {
+input {
+  width: 100%;
+  padding: 13px;
+  border-radius: 16px;
+  border: 1px solid #fed7aa;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+button, .button {
+  display: inline-block;
   border: none;
   border-radius: 999px;
   padding: 12px 16px;
@@ -136,9 +143,11 @@ button {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
 }
 
-button:hover {
+button:hover, .button:hover {
   background: #c2410c;
 }
 
@@ -149,15 +158,6 @@ button.secondary {
 
 button.secondary:hover {
   background: #fed7aa;
-}
-
-input {
-  width: 100%;
-  padding: 13px;
-  border-radius: 16px;
-  border: 1px solid #fed7aa;
-  font-size: 16px;
-  margin-bottom: 8px;
 }
 
 .quick-buttons {
@@ -186,10 +186,6 @@ input {
   margin-top: 12px;
 }
 
-.lesson-notes {
-  margin-top: 24px;
-}
-
 details {
   background: white;
   border: 1px solid #ffedd5;
@@ -209,10 +205,6 @@ summary {
     grid-template-columns: 1fr;
   }
 
-  .steps {
-    position: static;
-  }
-
   .hero h1 {
     font-size: 34px;
   }
@@ -225,20 +217,28 @@ summary {
 <header>
   <nav>
     <a href="index.html">⬅ Back to Home</a>
-    <strong>🌸 Dharma Kids</strong>
+    <a href="lessons.html">All Lessons</a>
   </nav>
 </header>
 
 <main class="container">
 
-  <section class="hero">
-    <h1>🌸 Loving God Within Us</h1>
-    <p>Your lesson guide will teach you step by step.</p>
-  </section>
+<section class="hero">
+  <h1>🌸 Loving God Within Us</h1>
+  <p id="hero-subtitle">A guided lesson inspired by Sri Ramakrishna’s childhood.</p>
+</section>
 
-  <section class="layout">
+<section class="layout">
 
-    <aside class="card steps">
+  <aside>
+    <div class="card profile-card">
+      <h3>👧 Learner Profile</h3>
+      <p><strong>Name:</strong> <span id="profile-name">Guest</span></p>
+      <p><strong>Age:</strong> <span id="profile-age">Not set</span></p>
+      <p><strong>Level:</strong> <span id="profile-level">General</span></p>
+    </div>
+
+    <div class="card">
       <h3>Lesson Journey</h3>
       <div id="step-0" class="step active">1. Welcome</div>
       <div id="step-1" class="step">2. God Within Us</div>
@@ -252,61 +252,117 @@ summary {
         <h3>Today’s idea</h3>
         <p>God lives within us. We grow closer through kindness, prayer, and truthfulness.</p>
       </div>
-    </aside>
+    </div>
+  </aside>
 
-    <section class="card chatbox">
-      <h2>🤖 Lesson Guide</h2>
+  <section class="card">
+    <h2>🤖 Lesson Guide</h2>
 
-      <div id="chat-window" class="chat-window"></div>
+    <div id="chat-window" class="chat-window"></div>
 
-      <input id="child-input" placeholder="Type your answer here..." />
+    <input id="child-input" placeholder="Type your answer here..." />
 
-      <div class="quick-buttons">
-        <button onclick="sendChildInput()">Send</button>
-        <button class="secondary" onclick="startLesson()">Start Lesson</button>
-        <button class="secondary" onclick="askAIQuestion()">Ask My Own Question</button>
-        <button class="secondary" onclick="speakLastGuideMessage()">🔊 Listen</button>
-      </div>
+    <div class="quick-buttons">
+      <button onclick="sendChildInput()">Send</button>
+      <button class="secondary" onclick="restartLesson()">Restart Lesson</button>
+      <button class="secondary" onclick="askAIQuestion()">Ask My Own Question</button>
+      <button class="secondary" onclick="speakLastGuideMessage()">🔊 Listen</button>
+    </div>
 
-      <div id="reward" class="reward">🌟 Wonderful! You completed the lesson.</div>
-    </section>
-
+    <div id="reward" class="reward">🌟 Wonderful! You completed the lesson.</div>
   </section>
 
-  <section class="lesson-notes">
-    <h2>📖 Read the lesson notes</h2>
+</section>
 
-    <details>
-      <summary>Why are we here?</summary>
-      <p>We learn, grow, study, and work so that we can live well. But saints remind us that life becomes meaningful when we remember God, help others, and grow in love.</p>
-    </details>
+<section>
+  <h2>📖 Read the lesson notes</h2>
 
-    <details>
-      <summary>Thinking about God</summary>
-      <p>The more we remember God, the deeper our love grows. We may not see God with our physical eyes, but we can feel God through kindness, prayer, and love.</p>
-    </details>
+  <details>
+    <summary>Why are we here?</summary>
+    <p>
+      We learn, grow, study, and work so that we can live well. But saints remind us
+      that life becomes meaningful when we remember God, help others, and grow in love.
+    </p>
+  </details>
 
-    <details>
-      <summary>Young Sri Ramakrishna</summary>
-      <p>As a child, Sri Ramakrishna was known as Gadadhar. He loved stories of Sri Ram and Sri Krishna, and he acted them out with friends.</p>
-    </details>
-  </section>
+  <details>
+    <summary>Thinking about God</summary>
+    <p>
+      The more we remember God, the deeper our love grows. We may not see God with our
+      physical eyes, but we can feel God through kindness, prayer, and love.
+    </p>
+  </details>
+
+  <details>
+    <summary>Young Sri Ramakrishna</summary>
+    <p>
+      As a child, Sri Ramakrishna was known as Gadadhar. He loved stories of Sri Ram and
+      Sri Krishna, and he acted them out with friends.
+    </p>
+  </details>
+</section>
 
 </main>
 
 <script>
 let childName = "";
-let step = 0;
+let childAge = "";
+let childLevel = "";
+let lessonStep = 0;
 let lastGuideMessage = "";
 let quizScore = 0;
 
 const lessonFacts = `
 Lesson: Loving God Within Us.
-Main idea: God lives within us. We remember God through kindness, prayer, truthfulness, and helping others.
+Main idea: God lives within us.
+We remember God through kindness, prayer, truthfulness, and helping others.
 Sri Ramakrishna was known as Gadadhar when he was young.
 Young Gadadhar loved stories of Sri Ram and Sri Krishna.
 Saints advise us to think about God every day.
 `;
+
+function loadProfile() {
+  childName = localStorage.getItem("dkName") || localStorage.getItem("dharmaChildName") || "";
+  childAge = localStorage.getItem("dkAge") || localStorage.getItem("dharmaChildAge") || "";
+  childLevel = localStorage.getItem("dkLevel") || localStorage.getItem("dharmaChildLevel") || "";
+
+  if (!childLevel && childAge) {
+    childLevel = getLevelFromAge(childAge);
+  }
+
+  document.getElementById("profile-name").textContent = childName || "Guest";
+  document.getElementById("profile-age").textContent = childAge || "Not set";
+  document.getElementById("profile-level").textContent = childLevel || "General";
+
+  if (childName) {
+    document.getElementById("hero-subtitle").textContent =
+      "Welcome, " + childName + ". Your guide will teach this lesson at your level.";
+  }
+}
+
+function getLevelFromAge(age) {
+  const number = parseInt(age, 10);
+  if (isNaN(number)) return "General";
+  if (number <= 7) return "Ages 5–7";
+  if (number <= 12) return "Ages 8–12";
+  return "Ages 13–15";
+}
+
+function ageStyleText() {
+  if (childLevel === "Ages 5–7") {
+    return "I will keep this very simple, gentle, and story-like.";
+  }
+
+  if (childLevel === "Ages 8–12") {
+    return "I will guide you with stories, questions, and short reflections.";
+  }
+
+  if (childLevel === "Ages 13–15") {
+    return "I will include deeper reflection and ask you to think about how this applies to daily life.";
+  }
+
+  return "I will guide you gently through the lesson.";
+}
 
 function addMessage(text, sender) {
   const chat = document.getElementById("chat-window");
@@ -322,19 +378,28 @@ function addMessage(text, sender) {
 }
 
 function setStep(newStep) {
-  step = newStep;
+  lessonStep = newStep;
+
   for (let i = 0; i <= 5; i++) {
     const item = document.getElementById("step-" + i);
     if (item) item.classList.remove("active");
   }
+
   const active = document.getElementById("step-" + newStep);
   if (active) active.classList.add("active");
 }
 
-function startLesson() {
+function restartLesson() {
   document.getElementById("chat-window").innerHTML = "";
+  document.getElementById("reward").style.display = "none";
+  quizScore = 0;
   setStep(0);
-  addMessage("Namaste! I am your lesson guide. What is your name?", "guide");
+
+  const nameText = childName ? childName : "friend";
+
+  addMessage("Namaste " + nameText + "! Welcome to Loving God Within Us.", "guide");
+  addMessage(ageStyleText(), "guide");
+  addMessage("To begin: What do you think it means when we say God lives within us?", "guide");
 }
 
 function sendChildInput() {
@@ -349,82 +414,108 @@ function sendChildInput() {
   addMessage(text, "child");
   input.value = "";
 
-  handleStep(text);
+  handleLessonStep(text);
 }
 
-function handleStep(text) {
-  if (step === 0) {
-    childName = text;
+function handleLessonStep(text) {
+  if (lessonStep === 0) {
     setStep(1);
-    addMessage("Nice to meet you, " + childName + "! Today we will learn that God lives within us. What do you think it means when we say God is within us?", "guide");
-    return;
-  }
 
-  if (step === 1) {
-    setStep(2);
-    addMessage("That is a thoughtful answer. In this lesson, we learn that God is present in our heart, and we feel close to God through kindness, prayer, and truthfulness.", "guide");
-    setTimeout(() => {
+    if (childLevel === "Ages 5–7") {
+      addMessage("That is a sweet answer. In this lesson, we can think: God is close to me and helps me be kind.", "guide");
+    } else if (childLevel === "Ages 13–15") {
+      addMessage("That is a thoughtful answer. In this lesson, 'God within us' means the Divine presence can be felt through purity, love, truthfulness, and service.", "guide");
+    } else {
+      addMessage("That is a thoughtful answer. In this lesson, we learn that God is present in our heart, and we feel close to God through kindness, prayer, and truthfulness.", "guide");
+    }
+
+    setTimeout(function() {
       addMessage("Now let us learn about young Sri Ramakrishna, who was called Gadadhar. He loved stories of Sri Ram and Sri Krishna. What kind of stories do you enjoy?", "guide");
     }, 600);
+
     return;
   }
 
-  if (step === 2) {
-    setStep(3);
-    addMessage("Lovely. Stories can teach us values in a joyful way. Gadadhar acted out divine stories with his friends, and this made learning about God happy and alive.", "guide");
-    setTimeout(() => {
-      addMessage(childName + ", can you tell me one kind thing you can do today?", "guide");
+  if (lessonStep === 1) {
+    setStep(2);
+    addMessage("Lovely. Stories can teach us values in a joyful way.", "guide");
+
+    if (childLevel === "Ages 13–15") {
+      addMessage("For older students, stories are not only entertainment. They can become meditation: we reflect on qualities like compassion, courage, truth, and devotion.", "guide");
+    } else {
+      addMessage("Gadadhar acted out divine stories with his friends. This made learning about God happy and alive.", "guide");
+    }
+
+    setTimeout(function() {
+      const nameText = childName ? childName : "friend";
+      addMessage(nameText + ", can you tell me one kind thing you can do today?", "guide");
     }, 600);
+
     return;
   }
 
-  if (step === 3) {
-    setStep(4);
+  if (lessonStep === 2) {
+    setStep(3);
     addMessage("That is beautiful. Doing kind things is one way we remember God within us.", "guide");
-    setTimeout(() => {
+
+    if (childLevel === "Ages 5–7") {
+      addMessage("Your practice: smile, help, and say a small prayer.", "guide");
+    } else if (childLevel === "Ages 13–15") {
+      addMessage("Your reflection: When you serve someone without expecting praise, how does that change your mind?", "guide");
+    } else {
+      addMessage("Your practice: before sleeping, sit quietly and think, 'God is within me. May I be kind and truthful.'", "guide");
+    }
+
+    setTimeout(function() {
+      setStep(4);
       addMessage("Quiz time! Question 1: Where does God live? Type: within us, only in temples, or only in books.", "guide");
     }, 600);
+
     return;
   }
 
-  if (step === 4) {
+  if (lessonStep === 4) {
     const answer = text.toLowerCase();
 
     if (answer.includes("within")) {
       quizScore++;
       addMessage("Correct! God lives within us.", "guide");
-      setTimeout(() => {
+      setTimeout(function() {
         addMessage("Question 2: What was Sri Ramakrishna’s childhood name? Type: Gadadhar, Hanuman, or Narendra.", "guide");
       }, 600);
-      step = 41;
-      return;
-    } else {
-      addMessage("Good try. The lesson teaches that God lives within us. Try typing: within us.", "guide");
+      lessonStep = 41;
       return;
     }
+
+    addMessage("Good try. The lesson teaches that God lives within us. Try typing: within us.", "guide");
+    return;
   }
 
-  if (step === 41) {
+  if (lessonStep === 41) {
     const answer = text.toLowerCase();
 
     if (answer.includes("gadadhar")) {
       quizScore++;
       setStep(5);
+      const nameText = childName ? childName : "friend";
       addMessage("Correct! Sri Ramakrishna’s childhood name was Gadadhar.", "guide");
-      setTimeout(() => {
-        addMessage("You scored " + quizScore + " out of 2. Wonderful work, " + childName + "! Click the reward button when you are ready.", "guide");
+
+      setTimeout(function() {
+        addMessage("You scored " + quizScore + " out of 2. Wonderful work, " + nameText + "!", "guide");
         showReward();
       }, 600);
-      return;
-    } else {
-      addMessage("Good try. The answer is Gadadhar. Type Gadadhar to continue.", "guide");
+
       return;
     }
+
+    addMessage("Good try. The answer is Gadadhar. Type Gadadhar to continue.", "guide");
+    return;
   }
 }
 
 function showReward() {
   document.getElementById("reward").style.display = "block";
+  localStorage.setItem("lesson1Complete", "true");
 }
 
 function speakLastGuideMessage() {
@@ -453,8 +544,7 @@ async function askAIQuestion() {
   addMessage(question, "child");
   input.value = "";
 
-  const loadingText = "Let me think about that...";
-  addMessage(loadingText, "guide");
+  addMessage("Let me think about that...", "guide");
 
   try {
     const res = await fetch("/api/chat", {
@@ -464,12 +554,16 @@ async function askAIQuestion() {
       },
       body: JSON.stringify({
         lessonTitle: "Loving God Within Us",
-        question: lessonFacts + "\\nChild asks: " + question
+        question:
+          lessonFacts +
+          "\\nChild profile: name=" + (childName || "Guest") +
+          ", age=" + (childAge || "unknown") +
+          ", level=" + (childLevel || "General") +
+          "\\nChild asks: " + question
       })
     });
 
     const data = await res.json();
-
     addMessage(data.answer || "That is a good question for your teacher.", "guide");
   } catch (error) {
     addMessage("Sorry, I could not answer right now. Please ask your teacher.", "guide");
@@ -482,7 +576,13 @@ document.getElementById("child-input").addEventListener("keydown", function(even
   }
 });
 
-startLesson();
+loadProfile();
+
+if (localStorage.getItem("lesson1Complete") === "true") {
+  document.getElementById("reward").style.display = "block";
+}
+
+restartLesson();
 </script>
 
 </body>
