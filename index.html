@@ -37,13 +37,6 @@ nav strong {
   font-size: 20px;
 }
 
-nav a {
-  color: #7c2d12;
-  text-decoration: none;
-  font-weight: bold;
-  margin-left: 16px;
-}
-
 .container {
   max-width: 1100px;
   margin: auto;
@@ -52,152 +45,84 @@ nav a {
 
 .hero {
   text-align: center;
-  padding: 35px 0 20px;
+  padding: 30px 0;
 }
 
 .hero h1 {
-  font-size: 48px;
+  font-size: 44px;
   color: #431407;
-  margin-bottom: 10px;
 }
 
 .hero p {
-  font-size: 18px;
   color: #57534e;
-  line-height: 1.6;
 }
 
 .app-layout {
   display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 22px;
-  align-items: start;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
 }
 
 .card {
   background: white;
+  border-radius: 22px;
+  padding: 20px;
   border: 1px solid #ffedd5;
-  border-radius: 24px;
-  padding: 22px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-  margin-bottom: 18px;
-}
-
-.chat-card {
-  min-height: 560px;
 }
 
 .chat-window {
   background: #fff7ed;
-  border: 1px solid #fed7aa;
-  border-radius: 20px;
-  padding: 16px;
-  min-height: 330px;
-  max-height: 440px;
+  border-radius: 18px;
+  padding: 15px;
+  min-height: 300px;
+  max-height: 420px;
   overflow-y: auto;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .message {
-  padding: 12px 14px;
-  border-radius: 16px;
-  margin: 10px 0;
-  line-height: 1.5;
+  padding: 10px;
+  border-radius: 12px;
+  margin: 8px 0;
 }
 
 .guide {
-  background: white;
+  background: #fff;
   border: 1px solid #fed7aa;
   color: #7c2d12;
-  font-weight: bold;
 }
 
 .child {
   background: #dcfce7;
-  color: #14532d;
-  margin-left: 30px;
+  margin-left: 25px;
 }
 
 input {
   width: 100%;
-  padding: 13px;
-  border-radius: 16px;
+  padding: 12px;
+  border-radius: 12px;
   border: 1px solid #fed7aa;
-  font-size: 16px;
   margin-bottom: 8px;
 }
 
-button, .button {
-  display: inline-block;
-  border: none;
+button {
+  padding: 10px;
   border-radius: 999px;
-  padding: 12px 16px;
-  margin: 5px;
+  border: none;
   background: #ea580c;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  text-decoration: none;
-  text-align: center;
 }
 
-button:hover, .button:hover {
+button:hover {
   background: #c2410c;
-}
-
-button.secondary, .button.secondary {
-  background: #ffedd5;
-  color: #7c2d12;
-}
-
-button.secondary:hover, .button.secondary:hover {
-  background: #fed7aa;
-}
-
-.quick-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.pill {
-  display: inline-block;
-  background: #ffedd5;
-  color: #9a3412;
-  padding: 6px 11px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  margin-right: 6px;
-}
-
-.pill.green {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.pill.blue {
-  background: #e0f2fe;
-  color: #075985;
-}
-
-.pill.purple {
-  background: #f3e8ff;
-  color: #6b21a8;
-}
-
-.profile-box {
-  background: #fff7ed;
-  border-radius: 18px;
-  padding: 15px;
-  border: 1px solid #fed7aa;
 }
 
 .section-title {
   color: #7c2d12;
   font-size: 30px;
-  margin-top: 34px;
+  margin-top: 30px;
 }
 
 .grid {
@@ -206,43 +131,17 @@ button.secondary:hover, .button.secondary:hover {
   gap: 18px;
 }
 
-.bio-card {
-  border-left: 6px solid #fb923c;
-}
-
-.bio-card h3 {
-  color: #431407;
-  margin-top: 0;
-}
-
-.bio-card p {
-  color: #57534e;
-  line-height: 1.55;
-}
-
-.visual-box {
-  background: linear-gradient(135deg, #fed7aa, #fecdd3);
-  border-radius: 22px;
-  padding: 24px;
-  text-align: center;
-  margin-bottom: 14px;
-}
-
-.emoji {
-  font-size: 56px;
-}
-
-.path-card {
-  border-left: 6px solid #fbbf24;
-}
-
-.hidden {
-  display: none;
+.soul-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 12px;
 }
 
 footer {
-  margin-top: 55px;
-  padding: 30px;
+  margin-top: 40px;
+  padding: 20px;
   background: #431407;
   color: white;
   text-align: center;
@@ -253,21 +152,6 @@ footer {
   .grid {
     grid-template-columns: 1fr;
   }
-
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  nav a {
-    margin-left: 0;
-    margin-right: 14px;
-  }
 }
 </style>
 </head>
@@ -277,323 +161,112 @@ footer {
 <header>
   <nav>
     <strong>🌸 Dharma Kids</strong>
-    <div>
-      <a href="#guide">Guide</a>
-      <a href="#great-souls">Great Souls</a>
-      <a href="#paths">Learning Paths</a>
-    </div>
   </nav>
 </header>
 
 <main class="container">
 
-  <section class="hero">
-    <span class="pill">Chatbot-led learning</span>
-    <span class="pill green">Age aware</span>
-    <span class="pill blue">Stories + Values</span>
+<section class="hero">
+  <h1>Your Spiritual Guide</h1>
+  <p>Learn through stories, conversation, and reflection</p>
+</section>
 
-    <h1>Your spiritual learning guide</h1>
-    <p>
-      Meet Sri Ramakrishna, Sri Sarada Devi, and Swami Vivekananda through
-      stories, reflection, activities, and gentle guided conversation.
-    </p>
-  </section>
+<section class="app-layout">
 
-  <section id="guide" class="app-layout">
+<div class="card">
+<h2>🤖 Guide</h2>
 
-    <div class="card chat-card">
-      <h2>🤖 Dharma Kids Guide</h2>
+<div id="chat" class="chat-window"></div>
 
-      <div id="chat-window" class="chat-window"></div>
+<input id="input" placeholder="Type here..." />
+<button onclick="send()">Send</button>
+</div>
 
-      <input id="child-input" placeholder="Type your answer here..." />
+<aside class="card">
+<h3>👧 Profile</h3>
+<p>Name: <span id="name">-</span></p>
+<p>Age: <span id="age">-</span></p>
+</aside>
 
-      <div class="quick-buttons">
-        <button onclick="sendInput()">Send</button>
-        <button class="secondary" onclick="startGuide()">Restart Guide</button>
-        <button class="secondary" onclick="showGreatSouls()">Meet the Great Souls</button>
-        <button class="secondary" onclick="resetProfile()">Reset My Name/Age</button>
-      </div>
-    </div>
+</section>
 
-    <aside>
-      <div class="card visual-box">
-        <div class="emoji">🪔</div>
-        <h3>New this week</h3>
-        <p><strong>Loving God Within Us</strong></p>
-        <p>A guided lesson inspired by Sri Ramakrishna’s childhood.</p>
-        <a class="button" href="lesson1.html">Begin Lesson</a>
-      </div>
+<section>
+<h2 class="section-title">🌟 Meet the Great Souls</h2>
 
-      <div class="card profile-box">
-        <h3>👧 My Profile</h3>
-        <p><strong>Name:</strong> <span id="profile-name">Not set</span></p>
-        <p><strong>Age:</strong> <span id="profile-age">Not set</span></p>
-        <p><strong>Level:</strong> <span id="profile-level">Not set</span></p>
-      </div>
-    </aside>
+<div class="grid">
 
-  </section>
+<div class="card">
+<img class="soul-image" src="images/sri-ramakrishna.jpg">
+<h3>Sri Ramakrishna</h3>
+<p>Teaches joy, devotion, and love for God.</p>
+<a href="lesson1.html"><button>Begin</button></a>
+</div>
 
-  <section id="great-souls">
-    <h2 class="section-title">🌟 Meet the Great Souls</h2>
+<div class="card">
+<img class="soul-image" src="images/sri-sarada-devi.jpg">
+<h3>Sri Sarada Devi</h3>
+<p>Teaches kindness, patience, and love.</p>
+<button onclick="alert('Coming soon')">Coming Soon</button>
+</div>
 
-    <div class="grid">
+<div class="card">
+<img class="soul-image" src="images/swami-vivekananda.jpg">
+<h3>Swami Vivekananda</h3>
+<p>Teaches courage and strength.</p>
+<button onclick="alert('Coming soon')">Coming Soon</button>
+</div>
 
-      <div class="card bio-card">
-        <div class="visual-box">
-          <div class="emoji">🌸</div>
-          <h3>Sri Ramakrishna</h3>
-        </div>
-        <span class="pill">Joy</span>
-        <span class="pill green">Devotion</span>
-        <p>
-          Sri Ramakrishna loved God deeply and taught that all sincere paths can
-          lead us toward the Divine. His childhood name was Gadadhar.
-        </p>
-        <p>
-          Children can learn from his joy, simplicity, prayer, and love for God.
-        </p>
-        <a class="button" href="lesson1.html">Begin with Sri Ramakrishna</a>
-      </div>
-
-      <div class="card bio-card">
-        <div class="visual-box">
-          <div class="emoji">🤍</div>
-          <h3>Sri Sarada Devi</h3>
-        </div>
-        <span class="pill">Holy Mother</span>
-        <span class="pill blue">Kindness</span>
-        <p>
-          Sri Sarada Devi is lovingly known as Holy Mother. Her life teaches
-          purity, patience, compassion, and universal love.
-        </p>
-        <p>
-          Children can learn how to be gentle, helpful, forgiving, and loving.
-        </p>
-        <button class="secondary" onclick="comingSoon('Sri Sarada Devi')">Coming Soon</button>
-      </div>
-
-      <div class="card bio-card">
-        <div class="visual-box">
-          <div class="emoji">🦁</div>
-          <h3>Swami Vivekananda</h3>
-        </div>
-        <span class="pill">Strength</span>
-        <span class="pill purple">Service</span>
-        <p>
-          Swami Vivekananda taught courage, fearlessness, service, and faith in
-          oneself. He inspired people around the world.
-        </p>
-        <p>
-          Children can learn confidence, discipline, truthfulness, and service.
-        </p>
-        <button class="secondary" onclick="comingSoon('Swami Vivekananda')">Coming Soon</button>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="paths">
-    <h2 class="section-title">🧭 Choose a Learning Path</h2>
-
-    <div class="grid">
-
-      <div class="card path-card">
-        <span class="pill">Ages 5–7</span>
-        <h3>Little Devotees</h3>
-        <p>
-          Simple stories, colouring, songs, movement, kindness practice,
-          and short reflections.
-        </p>
-        <button class="secondary" onclick="comingSoon('Little Devotees')">Coming Soon</button>
-      </div>
-
-      <div class="card path-card">
-        <span class="pill">Ages 8–12</span>
-        <h3>Stories and Values</h3>
-        <p>
-          Guided chatbot lessons, quizzes, matching games, reflection,
-          activities, and biographical stories.
-        </p>
-        <a class="button" href="lesson1.html">Start Path</a>
-      </div>
-
-      <div class="card path-card">
-        <span class="pill">Ages 13–15</span>
-        <h3>Reflection and Strength</h3>
-        <p>
-          Deeper discussion, journaling, scripture ideas, meditation practice,
-          and values in daily life.
-        </p>
-        <button class="secondary" onclick="comingSoon('Reflection and Strength')">Coming Soon</button>
-      </div>
-
-    </div>
-  </section>
+</div>
+</section>
 
 </main>
 
 <footer>
-  🌸 Dharma Kids — Guided Stories, Values, Devotion
+Dharma Kids
 </footer>
 
 <script>
-let guideStep = 0;
-let childName = "";
-let childAge = "";
-let childLevel = "";
+let step = 0;
+let name = "";
+let age = "";
 
-function addMessage(text, sender) {
-  const chat = document.getElementById("chat-window");
-  const div = document.createElement("div");
-  div.className = "message " + sender;
-  div.textContent = text;
-  chat.appendChild(div);
+function add(text, type) {
+  const chat = document.getElementById("chat");
+  const msg = document.createElement("div");
+  msg.className = "message " + type;
+  msg.textContent = text;
+  chat.appendChild(msg);
   chat.scrollTop = chat.scrollHeight;
 }
 
-function updateProfileBox() {
-  document.getElementById("profile-name").textContent = childName || "Not set";
-  document.getElementById("profile-age").textContent = childAge || "Not set";
-  document.getElementById("profile-level").textContent = childLevel || "Not set";
-}
-
-function saveProfile() {
-  localStorage.setItem("dharmaChildName", childName);
-  localStorage.setItem("dharmaChildAge", childAge);
-  localStorage.setItem("dharmaChildLevel", childLevel);
-}
-
-function loadProfile() {
-  childName = localStorage.getItem("dharmaChildName") || "";
-  childAge = localStorage.getItem("dharmaChildAge") || "";
-  childLevel = localStorage.getItem("dharmaChildLevel") || "";
-  updateProfileBox();
-}
-
-function getLevelFromAge(age) {
-  const number = parseInt(age, 10);
-
-  if (isNaN(number)) return "";
-  if (number <= 7) return "Ages 5–7";
-  if (number <= 12) return "Ages 8–12";
-  return "Ages 13–15";
-}
-
-function startGuide() {
-  document.getElementById("chat-window").innerHTML = "";
-  loadProfile();
-
-  if (childName && childAge && childLevel) {
-    guideStep = 3;
-    addMessage("Namaste " + childName + "! Welcome back. Would you like to meet the Great Souls or continue your learning path?", "guide");
-  } else {
-    guideStep = 0;
-    addMessage("Namaste! I am your Dharma Kids guide. What is your name?", "guide");
-  }
-}
-
-function sendInput() {
-  const input = document.getElementById("child-input");
+function send() {
+  const input = document.getElementById("input");
   const text = input.value.trim();
+  if (!text) return;
 
-  if (!text) {
-    addMessage("Please type something first.", "guide");
-    return;
-  }
-
-  addMessage(text, "child");
+  add(text, "child");
   input.value = "";
 
-  handleGuide(text);
+  if (step === 0) {
+    name = text;
+    document.getElementById("name").textContent = name;
+    add("Nice to meet you " + name + "! How old are you?", "guide");
+    step = 1;
+    return;
+  }
+
+  if (step === 1) {
+    age = text;
+    document.getElementById("age").textContent = age;
+    add("Wonderful. You can now explore the great souls below.", "guide");
+    step = 2;
+    return;
+  }
+
+  add("You can explore Sri Ramakrishna, Sarada Devi, or Vivekananda.", "guide");
 }
 
-function handleGuide(text) {
-  const lower = text.toLowerCase();
-
-  if (guideStep === 0) {
-    childName = text;
-    guideStep = 1;
-    updateProfileBox();
-    addMessage("Nice to meet you, " + childName + "! How old are you?", "guide");
-    return;
-  }
-
-  if (guideStep === 1) {
-    childAge = text;
-    childLevel = getLevelFromAge(childAge);
-
-    if (!childLevel) {
-      addMessage("Please type your age as a number, like 8 or 11.", "guide");
-      return;
-    }
-
-    guideStep = 2;
-    saveProfile();
-    updateProfileBox();
-
-    addMessage("Thank you, " + childName + ". I will guide you at the " + childLevel + " level.", "guide");
-    addMessage("Would you like to meet Sri Ramakrishna, Sri Sarada Devi, and Swami Vivekananda? Type yes or no.", "guide");
-    return;
-  }
-
-  if (lower.includes("yes") || lower.includes("great") || lower.includes("soul")) {
-    showGreatSouls();
-    return;
-  }
-
-  if (lower.includes("ramakrishna") || lower.includes("gadadhar")) {
-    addMessage("Sri Ramakrishna, whose childhood name was Gadadhar, loved God deeply and made spiritual learning joyful. You can begin with his lesson now.", "guide");
-    document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
-    return;
-  }
-
-  if (lower.includes("sarada") || lower.includes("mother")) {
-    addMessage("Sri Sarada Devi is lovingly known as Holy Mother. Her life teaches kindness, patience, and universal love. Her lessons are coming soon.", "guide");
-    document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
-    return;
-  }
-
-  if (lower.includes("vivekananda") || lower.includes("swami")) {
-    addMessage("Swami Vivekananda teaches courage, strength, service, and faith in oneself. His lessons are coming soon.", "guide");
-    document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
-    return;
-  }
-
-  addMessage("You can ask me about Sri Ramakrishna, Sri Sarada Devi, Swami Vivekananda, or your learning path.", "guide");
-}
-
-function showGreatSouls() {
-  addMessage("Let us meet three great souls: Sri Ramakrishna, Sri Sarada Devi, and Swami Vivekananda. Each one teaches us a beautiful way to grow.", "guide");
-  document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
-}
-
-function resetProfile() {
-  localStorage.removeItem("dharmaChildName");
-  localStorage.removeItem("dharmaChildAge");
-  localStorage.removeItem("dharmaChildLevel");
-
-  childName = "";
-  childAge = "";
-  childLevel = "";
-  guideStep = 0;
-
-  updateProfileBox();
-  startGuide();
-}
-
-function comingSoon(name) {
-  alert(name + " lessons are coming soon.");
-}
-
-document.getElementById("child-input").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    sendInput();
-  }
-});
-
-startGuide();
+add("Namaste! What is your name?", "guide");
 </script>
 
 </body>
