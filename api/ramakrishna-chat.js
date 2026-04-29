@@ -18,6 +18,36 @@ function readPdf(filename) {
   };
 }
 
+async function askPdf(filename, question, childName, childAge, childLevel) {
+  const pdf = readPdf(filename);
+
+  const prompt = `
+You are a warm Sri Ramakrishna guide for children.
+
+Child profile:
+Name: ${childName || "Guest"}
+Age: ${childAge || "Unknown"}
+Level: ${childLevel || "General"}
+
+Rules:
+- Answer ONLY from this PDF.
+- Do not use outside knowledge.
+- Keep answers short, gentle, and age-appropriate.
+- If the answer is not clearly in this PDF, say exactly:
+"I do not know from the materials I have. Please ask your teacher."
+
+Child question:
+${question}
+`;
+
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash-lite",
+    contents: [pdf, prompt]
+  });
+
+  return response.text || "";
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -34,40 +64,30 @@ export default async function handler(req, res) {
   }
 
   try {
-    const gospelPart1 = readPdf("gospel-part-1.pdf");
-    const gospelPart2 = readPdf("gospel-part-2.pdf");
+    let answer = await askPdf(
+      "gospel-part-1.pdf",
+      question,
+      childName,
+      childAge,
+      childLevel
+    );
 
-    const prompt = `
-You are a warm Sri Ramakrishna guide for children.
-
-Child profile:
-Name: ${childName || "Guest"}
-Age: ${childAge || "Unknown"}
-Level: ${childLevel || "General"}
-
-Rules:
-- Answer ONLY from the PDF sources provided.
-- Do not use outside knowledge.
-- Keep answers short, gentle, and age-appropriate.
-- If the answer is not clearly in the PDFs, say exactly:
-"I do not know from the materials I have. Please ask your teacher."
-
-Child question:
-${question}
-`;
-
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash-lite",
-      contents: [
-        gospelPart1,
-        gospelPart2,
-        prompt
-      ]
-    });
+    if (
+      !answer ||
+      answer.includes("I do not know from the materials I have")
+    ) {
+      answer = await askPdf(
+        "gospel-part-2.pdf",
+        question,
+        childName,
+        childAge,
+        childLevel
+      );
+    }
 
     return res.status(200).json({
       answer:
-        response.text ||
+        answer ||
         "I do not know from the materials I have. Please ask your teacher."
     });
   } catch (error) {
