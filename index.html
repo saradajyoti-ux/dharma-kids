@@ -6,9 +6,7 @@
   <title>Dharma Kids</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -21,7 +19,7 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255,255,255,0.95);
       border-bottom: 1px solid #fed7aa;
       padding: 14px 20px;
     }
@@ -84,9 +82,7 @@
       margin-top: 10px;
     }
 
-    .button:hover {
-      background: #c2410c;
-    }
+    .button:hover { background: #c2410c; }
 
     .button.secondary {
       background: white;
@@ -117,9 +113,15 @@
     }
 
     .section-title {
-      margin-top: 40px;
+      margin-top: 45px;
       color: #7c2d12;
       font-size: 34px;
+    }
+
+    .age-note {
+      color: #57534e;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
 
     .grid {
@@ -147,6 +149,17 @@
       color: #57534e;
     }
 
+    .visual-box {
+      height: 160px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffedd5, #fecdd3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+      margin-bottom: 16px;
+    }
+
     .pill {
       display: inline-block;
       background: #ffedd5;
@@ -155,7 +168,23 @@
       border-radius: 999px;
       font-size: 13px;
       font-weight: bold;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      margin-right: 6px;
+    }
+
+    .pill.green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .pill.blue {
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .pill.purple {
+      background: #f3e8ff;
+      color: #6b21a8;
     }
 
     .features {
@@ -163,6 +192,10 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       margin-top: 30px;
+    }
+
+    .coming-soon {
+      opacity: 0.75;
     }
 
     footer {
@@ -200,93 +233,156 @@
 
 <body>
 
-  <header>
-    <nav>
-      <strong>🌸 Dharma Kids</strong>
-      <div>
-        <a href="#lessons">Lessons</a>
-        <a href="#features">Features</a>
+<header>
+  <nav>
+    <strong>🌸 Dharma Kids</strong>
+    <div>
+      <a href="#ages-5-7">Ages 5–7</a>
+      <a href="#ages-8-12">Ages 8–12</a>
+      <a href="#ages-13-15">Ages 13–15</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div>
+      <span class="pill">Children’s Hinduism Classes</span>
+      <span class="pill green">Stories</span>
+      <span class="pill blue">Activities</span>
+
+      <h1>A joyful place for children to learn spiritual values</h1>
+
+      <p>
+        Age-based Hinduism lessons with stories, visuals, videos, quizzes,
+        reflection, narration, and interactive activities.
+      </p>
+
+      <a class="button" href="#ages-8-12">Browse Lessons</a>
+      <a class="button secondary" href="lesson1.html">Start First Lesson</a>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-inner">
+        <div class="emoji">🪔</div>
+        <h2>Interactive Learning</h2>
+        <p>Children can listen, watch, answer, reflect, create, and learn with joy.</p>
       </div>
-    </nav>
-  </header>
+    </div>
+  </section>
 
-  <main class="container">
+  <section id="features">
+    <h2 class="section-title">✨ What lessons can include</h2>
 
-    <section class="hero">
-      <div>
-        <span class="pill">Children’s Hinduism Classes</span>
-        <h1>A joyful place for children to learn spiritual values</h1>
+    <div class="features">
+      <div class="card">
+        <h3>🎧 Narration</h3>
+        <p>Audio support for stories, reflections, and important Sanskrit/Hindi/Bengali terms.</p>
+      </div>
+
+      <div class="card">
+        <h3>🎬 Videos</h3>
+        <p>Short clips, storytelling videos, class recordings, or devotional visuals.</p>
+      </div>
+
+      <div class="card">
+        <h3>🎮 Interaction</h3>
+        <p>Quizzes, matching games, reveal questions, class activities, and reward stars.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ages-5-7">
+    <h2 class="section-title">🌼 Ages 5–7</h2>
+    <p class="age-note">
+      Simple stories, colouring, songs, movement, kindness practice, and short activities.
+    </p>
+
+    <div class="grid">
+      <div class="card coming-soon">
+        <div class="visual-box">🌸</div>
+        <span class="pill">Coming Soon</span>
+        <h3>God Lives in My Heart</h3>
+        <p>A very gentle introduction to prayer, kindness, and love.</p>
+      </div>
+
+      <div class="card coming-soon">
+        <div class="visual-box">🐒</div>
+        <span class="pill">Coming Soon</span>
+        <h3>Hanumanji Helps</h3>
+        <p>A simple story about helping, courage, and being kind.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ages-8-12">
+    <h2 class="section-title">🪔 Ages 8–12</h2>
+    <p class="age-note">
+      Story-based lessons with quizzes, reflection, glossary, video/audio support,
+      and interactive classroom activities.
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="visual-box">🌸</div>
+        <span class="pill">Ages 8–12</span>
+        <span class="pill green">Interactive</span>
+        <span class="pill blue">Audio</span>
+        <h3>Loving God Within Us</h3>
         <p>
-          Stories, devotion, kindness, courage, reflection, quizzes, and activities
-          for children learning about Hinduism in a warm and engaging way.
+          A lesson inspired by Sri Ramakrishna’s childhood,
+          helping children understand devotion, kindness, and God within.
         </p>
-        <a class="button" href="#lessons">Browse Lessons</a>
-        <a class="button secondary" href="lesson1.html">Start First Lesson</a>
+        <a class="button" href="lesson1.html">Open Lesson</a>
       </div>
 
-      <div class="hero-card">
-        <div class="hero-card-inner">
-          <div class="emoji">🪔</div>
-          <h2>Loving God Within Us</h2>
-          <p>Be cheerful, kind, truthful, and remember God.</p>
-        </div>
+      <div class="card">
+        <div class="visual-box">🐒</div>
+        <span class="pill">Ages 8–12</span>
+        <span class="pill green">Quiz</span>
+        <span class="pill purple">Activity</span>
+        <h3>Courage Like Hanumanji</h3>
+        <p>
+          A lesson about courage, strength, devotion, humility,
+          and using our gifts to help others.
+        </p>
+        <a class="button" href="lesson2.html">Open Lesson</a>
       </div>
-    </section>
 
-    <section id="lessons">
-      <h2 class="section-title">📚 Lesson Library</h2>
+    </div>
+  </section>
 
-      <div class="grid">
+  <section id="ages-13-15">
+    <h2 class="section-title">📖 Ages 13–15</h2>
+    <p class="age-note">
+      Deeper discussion, scripture reflection, values in daily life, meditation practice,
+      and guided debate or journaling.
+    </p>
 
-        <div class="card">
-          <span class="pill">Ages 8–12</span>
-          <h3>Loving God Within Us</h3>
-          <p>
-            A gentle lesson inspired by Sri Ramakrishna’s childhood,
-            helping children understand devotion, kindness, and God within.
-          </p>
-          <a class="button" href="lesson1.html">Open Lesson</a>
-        </div>
-
-        <div class="card">
-          <span class="pill">Ages 8–12</span>
-          <h3>Courage Like Hanumanji</h3>
-          <p>
-            A lesson about courage, strength, devotion, humility,
-            and using our gifts to help others.
-          </p>
-          <a class="button" href="lesson2.html">Open Lesson</a>
-        </div>
-
+    <div class="grid">
+      <div class="card coming-soon">
+        <div class="visual-box">📖</div>
+        <span class="pill">Coming Soon</span>
+        <h3>What Is Devotion?</h3>
+        <p>A deeper discussion lesson on bhakti, practice, and spiritual discipline.</p>
       </div>
-    </section>
 
-    <section id="features">
-      <h2 class="section-title">✨ What children can do</h2>
-
-      <div class="features">
-        <div class="card">
-          <h3>🎧 Listen</h3>
-          <p>Lessons can include narration and pronunciation guidance.</p>
-        </div>
-
-        <div class="card">
-          <h3>🎮 Interact</h3>
-          <p>Children can answer quizzes, reflect, and take part in activities.</p>
-        </div>
-
-        <div class="card">
-          <h3>🎨 Create</h3>
-          <p>Lessons can include drawing, acting, storytelling, and class exercises.</p>
-        </div>
+      <div class="card coming-soon">
+        <div class="visual-box">🧘</div>
+        <span class="pill">Coming Soon</span>
+        <h3>Meditation and the Mind</h3>
+        <p>A reflective lesson about calming the mind and remembering the Divine.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+</main>
 
-  <footer>
-    🌸 Dharma Kids — Stories, Values, Devotion
-  </footer>
+<footer>
+  🌸 Dharma Kids — Stories, Values, Devotion
+</footer>
 
 </body>
 </html>
