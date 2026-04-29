@@ -1,0 +1,27 @@
+{
+  "types": [
+    {
+      "name": "lesson",
+      "title": "Lesson",
+      "type": "document",
+      "fields": [
+        { "name": "title", "type": "string", "title": "Lesson Title" },
+        { "name": "description", "type": "text", "title": "Short Description" },
+        {
+          "name": "sections",
+          "title": "Lesson Sections",
+          "type": "array",
+          "of": [
+            {
+              "type": "object",
+              "fields": [
+                { "name": "heading", "type": "string", "title": "Heading" },
+                { "name": "content", "type": "text", "title": "Content" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
