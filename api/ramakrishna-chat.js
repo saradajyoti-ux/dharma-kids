@@ -6,6 +6,13 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
 });
 
+const PDF_FILES = [
+  "gospel-part-1.pdf",
+  "gospel-part-2.pdf",
+  "gospel-part-3.pdf",
+  "gospel-part-4.pdf"
+];
+
 function readPdf(filename) {
   const pdfPath = path.join(process.cwd(), "sources", filename);
   const pdfBuffer = fs.readFileSync(pdfPath);
@@ -48,6 +55,13 @@ ${question}
   return response.text || "";
 }
 
+function isUnknown(answer) {
+  return (
+    !answer ||
+    answer.toLowerCase().includes("i do not know from the materials i have")
+  );
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -64,31 +78,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    let answer = await askPdf(
-      "gospel-part-1.pdf",
-      question,
-      childName,
-      childAge,
-      childLevel
-    );
-
-    if (
-      !answer ||
-      answer.includes("I do not know from the materials I have")
-    ) {
-      answer = await askPdf(
-        "gospel-part-2.pdf",
+    for (const file of PDF_FILES) {
+      const answer = await askPdf(
+        file,
         question,
         childName,
         childAge,
         childLevel
       );
+
+      if (!isUnknown(answer)) {
+        return res.status(200).json({ answer });
+      }
     }
 
     return res.status(200).json({
-      answer:
-        answer ||
-        "I do not know from the materials I have. Please ask your teacher."
+      answer: "I do not know from the materials I have. Please ask your teacher."
     });
   } catch (error) {
     console.error(error);
