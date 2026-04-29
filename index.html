@@ -303,8 +303,8 @@ footer {
 
     <div class="quick-buttons">
       <button onclick="send()">Send</button>
-      <button class="secondary" onclick="recommend()">Recommend for me</button>
       <button class="secondary" onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
+      <button class="secondary" onclick="recommend()">Recommend for me</button>
       <button class="secondary" onclick="explainSouls()">Who are the Great Souls?</button>
       <button class="secondary" onclick="resetProfile()">Reset profile</button>
     </div>
@@ -429,6 +429,9 @@ function updateProfile() {
     const recent = mostRecentLessons[childLevel];
     document.getElementById("today-path").textContent =
       "Recommended for " + childLevel + ": " + recent.title + ".";
+  } else {
+    document.getElementById("today-path").textContent =
+      "Tell the guide your name and age to begin.";
   }
 }
 
@@ -461,6 +464,10 @@ function start() {
     step = 3;
     add("Namaste " + childName + "! Welcome back. I remember you are " + childAge + ".", "guide");
     add("Would you like a recommendation, the most recent lesson for your age group, or to meet the Great Souls?", "guide");
+    addButtonMessage(`
+      <button onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
+      <button class="secondary" onclick="recommend()">Recommend for me</button>
+    `);
   } else {
     step = 0;
     add("Namaste! I am your Dharma Kids guide. What is your name?", "guide");
