@@ -187,31 +187,6 @@ button.secondary:hover, .button.secondary:hover {
   color: #6b21a8;
 }
 
-.lesson-card {
-  border-left: 6px solid #fb923c;
-}
-
-.lesson-card h3 {
-  color: #431407;
-  margin-top: 0;
-}
-
-.lesson-card p {
-  color: #57534e;
-  line-height: 1.5;
-}
-
-.visual {
-  text-align: center;
-  background: linear-gradient(135deg, #fed7aa, #fecdd3);
-  border-radius: 22px;
-  padding: 22px;
-}
-
-.emoji {
-  font-size: 56px;
-}
-
 .profile-box {
   background: #fff7ed;
   border-radius: 18px;
@@ -223,6 +198,42 @@ button.secondary:hover, .button.secondary:hover {
   color: #7c2d12;
   font-size: 30px;
   margin-top: 34px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.bio-card {
+  border-left: 6px solid #fb923c;
+}
+
+.bio-card h3 {
+  color: #431407;
+  margin-top: 0;
+}
+
+.bio-card p {
+  color: #57534e;
+  line-height: 1.55;
+}
+
+.visual-box {
+  background: linear-gradient(135deg, #fed7aa, #fecdd3);
+  border-radius: 22px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.emoji {
+  font-size: 56px;
+}
+
+.path-card {
+  border-left: 6px solid #fbbf24;
 }
 
 .hidden {
@@ -237,8 +248,9 @@ footer {
   text-align: center;
 }
 
-@media (max-width: 850px) {
-  .app-layout {
+@media (max-width: 900px) {
+  .app-layout,
+  .grid {
     grid-template-columns: 1fr;
   }
 
@@ -267,7 +279,8 @@ footer {
     <strong>🌸 Dharma Kids</strong>
     <div>
       <a href="#guide">Guide</a>
-      <a href="#lessons">Lessons</a>
+      <a href="#great-souls">Great Souls</a>
+      <a href="#paths">Learning Paths</a>
     </div>
   </nav>
 </header>
@@ -277,12 +290,12 @@ footer {
   <section class="hero">
     <span class="pill">Chatbot-led learning</span>
     <span class="pill green">Age aware</span>
-    <span class="pill blue">Interactive</span>
+    <span class="pill blue">Stories + Values</span>
 
     <h1>Your spiritual learning guide</h1>
     <p>
-      The guide learns your name and age, recommends lessons, and helps you learn
-      with stories, questions, activities, and reflection.
+      Meet Sri Ramakrishna, Sri Sarada Devi, and Swami Vivekananda through
+      stories, reflection, activities, and gentle guided conversation.
     </p>
   </section>
 
@@ -298,18 +311,18 @@ footer {
       <div class="quick-buttons">
         <button onclick="sendInput()">Send</button>
         <button class="secondary" onclick="startGuide()">Restart Guide</button>
-        <button class="secondary" onclick="showRecommendedLessons()">Show My Lessons</button>
+        <button class="secondary" onclick="showGreatSouls()">Meet the Great Souls</button>
         <button class="secondary" onclick="resetProfile()">Reset My Name/Age</button>
       </div>
     </div>
 
     <aside>
-      <div class="card visual">
+      <div class="card visual-box">
         <div class="emoji">🪔</div>
         <h3>New this week</h3>
-        <p><strong>Courage Like Hanumanji</strong></p>
-        <p>A lesson about courage, humility, and service.</p>
-        <a class="button" href="lesson2.html">Open New Lesson</a>
+        <p><strong>Loving God Within Us</strong></p>
+        <p>A guided lesson inspired by Sri Ramakrishna’s childhood.</p>
+        <a class="button" href="lesson1.html">Begin Lesson</a>
       </div>
 
       <div class="card profile-box">
@@ -322,44 +335,107 @@ footer {
 
   </section>
 
-  <section id="lessons">
-    <h2 class="section-title">📚 Lesson Library</h2>
+  <section id="great-souls">
+    <h2 class="section-title">🌟 Meet the Great Souls</h2>
 
-    <div id="ages-5-7" class="card lesson-card">
-      <span class="pill">Ages 5–7</span>
-      <h3>God Lives in My Heart</h3>
-      <p>Simple stories, colouring, kindness practice, and short guided reflections.</p>
-      <button class="secondary" onclick="notReady()">Coming Soon</button>
+    <div class="grid">
+
+      <div class="card bio-card">
+        <div class="visual-box">
+          <div class="emoji">🌸</div>
+          <h3>Sri Ramakrishna</h3>
+        </div>
+        <span class="pill">Joy</span>
+        <span class="pill green">Devotion</span>
+        <p>
+          Sri Ramakrishna loved God deeply and taught that all sincere paths can
+          lead us toward the Divine. His childhood name was Gadadhar.
+        </p>
+        <p>
+          Children can learn from his joy, simplicity, prayer, and love for God.
+        </p>
+        <a class="button" href="lesson1.html">Begin with Sri Ramakrishna</a>
+      </div>
+
+      <div class="card bio-card">
+        <div class="visual-box">
+          <div class="emoji">🤍</div>
+          <h3>Sri Sarada Devi</h3>
+        </div>
+        <span class="pill">Holy Mother</span>
+        <span class="pill blue">Kindness</span>
+        <p>
+          Sri Sarada Devi is lovingly known as Holy Mother. Her life teaches
+          purity, patience, compassion, and universal love.
+        </p>
+        <p>
+          Children can learn how to be gentle, helpful, forgiving, and loving.
+        </p>
+        <button class="secondary" onclick="comingSoon('Sri Sarada Devi')">Coming Soon</button>
+      </div>
+
+      <div class="card bio-card">
+        <div class="visual-box">
+          <div class="emoji">🦁</div>
+          <h3>Swami Vivekananda</h3>
+        </div>
+        <span class="pill">Strength</span>
+        <span class="pill purple">Service</span>
+        <p>
+          Swami Vivekananda taught courage, fearlessness, service, and faith in
+          oneself. He inspired people around the world.
+        </p>
+        <p>
+          Children can learn confidence, discipline, truthfulness, and service.
+        </p>
+        <button class="secondary" onclick="comingSoon('Swami Vivekananda')">Coming Soon</button>
+      </div>
+
     </div>
+  </section>
 
-    <div id="ages-8-12" class="card lesson-card">
-      <span class="pill">Ages 8–12</span>
-      <span class="pill green">Interactive</span>
-      <h3>Loving God Within Us</h3>
-      <p>A guided chatbot lesson inspired by Sri Ramakrishna’s childhood.</p>
-      <a class="button" href="lesson1.html">Open Lesson</a>
-    </div>
+  <section id="paths">
+    <h2 class="section-title">🧭 Choose a Learning Path</h2>
 
-    <div class="card lesson-card">
-      <span class="pill">Ages 8–12</span>
-      <span class="pill blue">New</span>
-      <h3>Courage Like Hanumanji</h3>
-      <p>A lesson about courage, humility, devotion, and helping others.</p>
-      <a class="button" href="lesson2.html">Open Lesson</a>
-    </div>
+    <div class="grid">
 
-    <div id="ages-13-15" class="card lesson-card">
-      <span class="pill">Ages 13–15</span>
-      <h3>What Is Devotion?</h3>
-      <p>Deeper reflection, discussion, scripture ideas, and journaling.</p>
-      <button class="secondary" onclick="notReady()">Coming Soon</button>
+      <div class="card path-card">
+        <span class="pill">Ages 5–7</span>
+        <h3>Little Devotees</h3>
+        <p>
+          Simple stories, colouring, songs, movement, kindness practice,
+          and short reflections.
+        </p>
+        <button class="secondary" onclick="comingSoon('Little Devotees')">Coming Soon</button>
+      </div>
+
+      <div class="card path-card">
+        <span class="pill">Ages 8–12</span>
+        <h3>Stories and Values</h3>
+        <p>
+          Guided chatbot lessons, quizzes, matching games, reflection,
+          activities, and biographical stories.
+        </p>
+        <a class="button" href="lesson1.html">Start Path</a>
+      </div>
+
+      <div class="card path-card">
+        <span class="pill">Ages 13–15</span>
+        <h3>Reflection and Strength</h3>
+        <p>
+          Deeper discussion, journaling, scripture ideas, meditation practice,
+          and values in daily life.
+        </p>
+        <button class="secondary" onclick="comingSoon('Reflection and Strength')">Coming Soon</button>
+      </div>
+
     </div>
   </section>
 
 </main>
 
 <footer>
-  🌸 Dharma Kids — Chatbot-led Stories, Values, Devotion
+  🌸 Dharma Kids — Guided Stories, Values, Devotion
 </footer>
 
 <script>
@@ -411,8 +487,7 @@ function startGuide() {
 
   if (childName && childAge && childLevel) {
     guideStep = 3;
-    addMessage("Namaste " + childName + "! Welcome back. I remember that you are " + childAge + " years old.", "guide");
-    addMessage("Would you like me to show lessons for " + childLevel + "? Type yes, or type a question.", "guide");
+    addMessage("Namaste " + childName + "! Welcome back. Would you like to meet the Great Souls or continue your learning path?", "guide");
   } else {
     guideStep = 0;
     addMessage("Namaste! I am your Dharma Kids guide. What is your name?", "guide");
@@ -435,6 +510,8 @@ function sendInput() {
 }
 
 function handleGuide(text) {
+  const lower = text.toLowerCase();
+
   if (guideStep === 0) {
     childName = text;
     guideStep = 1;
@@ -457,48 +534,39 @@ function handleGuide(text) {
     updateProfileBox();
 
     addMessage("Thank you, " + childName + ". I will guide you at the " + childLevel + " level.", "guide");
-    addMessage("A new lesson is available: Courage Like Hanumanji. Would you like to see your recommended lessons? Type yes or no.", "guide");
+    addMessage("Would you like to meet Sri Ramakrishna, Sri Sarada Devi, and Swami Vivekananda? Type yes or no.", "guide");
     return;
   }
 
-  if (guideStep >= 2) {
-    const lower = text.toLowerCase();
-
-    if (lower.includes("yes") || lower.includes("lesson")) {
-      showRecommendedLessons();
-      return;
-    }
-
-    if (lower.includes("hanuman")) {
-      addMessage("Great choice! Courage Like Hanumanji is a new lesson about courage, humility, and service. Click the lesson card or use the New Lesson button.", "guide");
-      return;
-    }
-
-    if (lower.includes("ramakrishna") || lower.includes("god") || lower.includes("within")) {
-      addMessage("I recommend Loving God Within Us. It teaches that God lives within us and we grow closer through kindness, prayer, and truthfulness.", "guide");
-      return;
-    }
-
-    addMessage("I can help you choose a lesson. Try typing: show my lessons, Hanumanji, or God within us.", "guide");
+  if (lower.includes("yes") || lower.includes("great") || lower.includes("soul")) {
+    showGreatSouls();
+    return;
   }
+
+  if (lower.includes("ramakrishna") || lower.includes("gadadhar")) {
+    addMessage("Sri Ramakrishna, whose childhood name was Gadadhar, loved God deeply and made spiritual learning joyful. You can begin with his lesson now.", "guide");
+    document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (lower.includes("sarada") || lower.includes("mother")) {
+    addMessage("Sri Sarada Devi is lovingly known as Holy Mother. Her life teaches kindness, patience, and universal love. Her lessons are coming soon.", "guide");
+    document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (lower.includes("vivekananda") || lower.includes("swami")) {
+    addMessage("Swami Vivekananda teaches courage, strength, service, and faith in oneself. His lessons are coming soon.", "guide");
+    document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  addMessage("You can ask me about Sri Ramakrishna, Sri Sarada Devi, Swami Vivekananda, or your learning path.", "guide");
 }
 
-function showRecommendedLessons() {
-  if (!childLevel) {
-    addMessage("Please tell me your name and age first, then I can recommend lessons.", "guide");
-    return;
-  }
-
-  if (childLevel === "Ages 5–7") {
-    addMessage(childName + ", I recommend simple story lessons. The Ages 5–7 lessons are coming soon. For now, you may try Loving God Within Us with an adult.", "guide");
-    document.getElementById("ages-5-7").scrollIntoView({ behavior: "smooth" });
-  } else if (childLevel === "Ages 8–12") {
-    addMessage(childName + ", I recommend Loving God Within Us and Courage Like Hanumanji. They have quizzes, activities, and guided reflection.", "guide");
-    document.getElementById("ages-8-12").scrollIntoView({ behavior: "smooth" });
-  } else {
-    addMessage(childName + ", I recommend deeper reflection lessons. Ages 13–15 lessons are coming soon. For now, you may begin with Loving God Within Us.", "guide");
-    document.getElementById("ages-13-15").scrollIntoView({ behavior: "smooth" });
-  }
+function showGreatSouls() {
+  addMessage("Let us meet three great souls: Sri Ramakrishna, Sri Sarada Devi, and Swami Vivekananda. Each one teaches us a beautiful way to grow.", "guide");
+  document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
 }
 
 function resetProfile() {
@@ -515,8 +583,8 @@ function resetProfile() {
   startGuide();
 }
 
-function notReady() {
-  alert("This lesson is coming soon.");
+function comingSoon(name) {
+  alert(name + " lessons are coming soon.");
 }
 
 document.getElementById("child-input").addEventListener("keydown", function(event) {
