@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dharma Kids</title>
+  <script src="lessons.js"></script>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -15,7 +16,7 @@
     header {
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       border-bottom: 1px solid #fed7aa;
       padding: 14px 22px;
       z-index: 10;
@@ -65,6 +66,8 @@
       text-decoration: none;
       font-weight: bold;
       margin: 8px 8px 8px 0;
+      border: none;
+      cursor: pointer;
     }
     .button.secondary {
       background: white;
@@ -87,9 +90,7 @@
       border-radius: 28px;
       padding: 30px;
     }
-    .emoji {
-      font-size: 64px;
-    }
+    .emoji { font-size: 64px; }
     .section-title {
       margin-top: 40px;
       color: #7c2d12;
@@ -107,7 +108,6 @@
       padding: 22px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.04);
     }
-    .lesson-card h3,
     .card h3 {
       margin-top: 0;
       color: #431407;
@@ -159,9 +159,7 @@
       cursor: pointer;
       font-size: 15px;
     }
-    .quiz button:hover {
-      background: #ffedd5;
-    }
+    .quiz button:hover { background: #ffedd5; }
     footer {
       margin-top: 50px;
       padding: 30px;
@@ -170,12 +168,8 @@
       text-align: center;
     }
     @media (max-width: 800px) {
-      .hero, .grid, .glossary {
-        grid-template-columns: 1fr;
-      }
-      .hero h1 {
-        font-size: 38px;
-      }
+      .hero, .grid, .glossary { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 38px; }
       nav {
         align-items: flex-start;
         gap: 10px;
@@ -195,7 +189,7 @@
       <strong>🌸 Dharma Kids</strong>
       <div>
         <a href="#library">Lessons</a>
-        <a href="#lesson">Today’s Lesson</a>
+        <a href="#lesson">Lesson</a>
         <a href="#glossary">Glossary</a>
         <a href="#quiz">Quiz</a>
       </div>
@@ -205,20 +199,20 @@
   <main class="container">
     <section class="hero">
       <div>
-        <span class="pill">Ages 8–12</span>
+        <span class="pill">Children’s Hinduism Classes</span>
         <h1>A joyful place for children’s Hinduism classes</h1>
         <p>
           Stories, values, devotion, pronunciation support, activities,
           reflection, and child-friendly lessons.
         </p>
-        <a class="button" href="#lesson">Start Today’s Lesson</a>
+        <a class="button" href="#lesson">Start Lesson</a>
         <a class="button secondary" href="#library">View Lessons</a>
       </div>
 
       <div class="hero-card">
         <div class="hero-card-inner">
           <div class="emoji">🪔</div>
-          <h2>Loving God Within Us</h2>
+          <h2 id="featured-title">Loading lesson...</h2>
           <p>Be cheerful, kind, truthful, and remember God.</p>
         </div>
       </div>
@@ -226,121 +220,18 @@
 
     <section id="library">
       <h2 class="section-title">Lesson Library</h2>
-      <div class="grid">
-        <div class="card lesson-card">
-          <span class="pill">Published</span>
-          <h3>Loving God Within Us</h3>
-          <p>A lesson inspired by Sri Ramakrishna’s childhood.</p>
-          <a class="button" href="#lesson">Open Lesson</a>
-        </div>
-        <div class="card lesson-card">
-          <span class="pill">Coming Soon</span>
-          <h3>Courage Like Hanumanji</h3>
-          <p>Learning fearlessness, strength, and service.</p>
-        </div>
-        <div class="card lesson-card">
-          <span class="pill">Coming Soon</span>
-          <h3>Kindness in the Ramayana</h3>
-          <p>Stories that teach compassion and patience.</p>
-        </div>
-      </div>
+      <div id="lesson-library" class="grid"></div>
     </section>
 
     <section id="lesson">
-      <h2 class="section-title">Today’s Lesson: Loving God Within Us</h2>
-
-      <div class="card lesson-section">
-        <h3>1. Why Are We Here?</h3>
-        <p class="highlight">We are here to love God, who lives within us.</p>
-        <p>
-          We learn, grow, study, and work so that we can live well.
-          But saints remind us that life becomes truly meaningful when
-          we remember God, help others, and grow in love.
-        </p>
-        <span class="audio">🔊 Listen</span>
-      </div>
-
-      <div class="card lesson-section">
-        <h3>2. Thinking About God</h3>
-        <p class="highlight">The more we remember God, the deeper our love grows.</p>
-        <p>
-          Our saints and scriptures advise us to meditate on the Divine every day.
-          This can be difficult because we cannot see God with our physical eyes,
-          but we can feel God through love, prayer, and goodness.
-        </p>
-        <span class="audio">🔊 Listen</span>
-      </div>
-
-      <div class="card lesson-section">
-        <h3>3. Choosing a Beloved Form of God</h3>
-        <p class="highlight">A chosen deity helps the mind focus with love.</p>
-        <p>
-          Sri Ramakrishna taught that we may love all names and forms of God,
-          while choosing one form that feels especially close to our heart.
-          Sri Ram inspires compassion and patience. Hanumanji inspires courage,
-          strength, and service.
-        </p>
-        <span class="audio">🔊 Listen</span>
-      </div>
-
-      <div class="card lesson-section">
-        <h3>4. Young Gadadhar’s Joyful Devotion</h3>
-        <p class="highlight">Learning about God can be joyful and creative.</p>
-        <p>
-          As a young boy, Sri Ramakrishna was known as Gadadhar.
-          He loved listening to stories of Sri Ram and Sri Krishna.
-          He and his friends acted out these stories in a mango grove.
-        </p>
-        <span class="audio">🔊 Listen</span>
-      </div>
-
-      <div class="card lesson-section">
-        <h3>5. The Maha Shivaratri Play</h3>
-        <p class="highlight">Deep concentration can make worship come alive.</p>
-        <p>
-          During Maha Shivaratri, Gadadhar was asked to play Lord Shiva.
-          When dressed with matted hair, ashes, and beads, he became so absorbed
-          in Lord Shiva that everyone felt they were seeing Shiva Himself.
-        </p>
-        <span class="audio">🔊 Listen</span>
-      </div>
-
-      <div class="card lesson-section">
-        <h3>6. Creativity as Worship</h3>
-        <p class="highlight">Creative work can help us express devotion.</p>
-        <p>
-          Gadadhar painted, modeled small images of deities, made dolls,
-          and learned brickwork. His life teaches us to be cheerful,
-          truthful, creative, and useful.
-        </p>
-        <span class="audio">🔊 Listen</span>
-      </div>
+      <h2 id="lesson-title" class="section-title"></h2>
+      <p id="lesson-description"></p>
+      <div id="lesson-sections"></div>
     </section>
 
     <section id="glossary">
       <h2 class="section-title">Pronunciation Glossary</h2>
-      <div class="glossary">
-        <div class="card">
-          <h3>Sri Ramakrishna</h3>
-          <p><strong>Pronunciation:</strong> Shree Ra-ma-krish-na</p>
-          <p>A great saint revered by many as an incarnation of God.</p>
-        </div>
-        <div class="card">
-          <h3>Gadadhar</h3>
-          <p><strong>Pronunciation:</strong> Ga-daa-dhar</p>
-          <p>Sri Ramakrishna’s childhood name.</p>
-        </div>
-        <div class="card">
-          <h3>Maha Shivaratri</h3>
-          <p><strong>Pronunciation:</strong> Ma-haa Shi-va-raa-tree</p>
-          <p>A sacred night of worship dedicated to Lord Shiva.</p>
-        </div>
-        <div class="card">
-          <h3>Ishta Devata</h3>
-          <p><strong>Pronunciation:</strong> Ish-ta De-va-taa</p>
-          <p>A chosen form of God loved deeply by a devotee.</p>
-        </div>
-      </div>
+      <div id="glossary-list" class="glossary"></div>
     </section>
 
     <section>
@@ -348,50 +239,123 @@
       <div class="grid">
         <div class="card">
           <h3>🎨 Activity</h3>
-          <p>
-            Draw your chosen deity, or act out a short story from the life
-            of Sri Ramakrishna with your class.
-          </p>
+          <p>Draw your chosen deity, or act out a short story from the lesson.</p>
         </div>
         <div class="card">
           <h3>🧘 Reflection</h3>
-          <p>
-            Before sleeping, sit quietly for one minute and think:
-            “God is within me. May I be kind and truthful.”
-          </p>
+          <p id="reflection-text"></p>
         </div>
         <div class="card">
           <h3>💛 Practice</h3>
-          <p>
-            Do one kind action today without expecting anything in return.
-          </p>
+          <p>Do one kind action today without expecting anything in return.</p>
         </div>
       </div>
     </section>
 
     <section id="quiz">
       <h2 class="section-title">Quiz</h2>
-      <div class="card quiz">
-        <h3>1. Where does God live?</h3>
-        <button onclick="alert('Correct!')">Within us</button>
-        <button onclick="alert('Try again')">Only in books</button>
-        <button onclick="alert('Try again')">Only in temples</button>
-
-        <h3>2. What was Sri Ramakrishna’s childhood name?</h3>
-        <button onclick="alert('Correct!')">Gadadhar</button>
-        <button onclick="alert('Try again')">Narendra</button>
-        <button onclick="alert('Try again')">Hanuman</button>
-
-        <h3>3. What does a chosen deity help us do?</h3>
-        <button onclick="alert('Correct!')">Focus our love and prayer</button>
-        <button onclick="alert('Try again')">Stop learning</button>
-        <button onclick="alert('Try again')">Avoid helping others</button>
-      </div>
+      <div id="quiz-list" class="card quiz"></div>
     </section>
   </main>
 
   <footer>
     <p>🌸 Dharma Kids — Stories, Values, Devotion</p>
   </footer>
+
+  <script>
+    let selectedLessonIndex = 0;
+
+    function renderLibrary() {
+      const library = document.getElementById("lesson-library");
+      library.innerHTML = "";
+
+      lessons.forEach((lesson, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <span class="pill">${lesson.ageGroup || "Lesson"}</span>
+          <h3>${lesson.title}</h3>
+          <p>${lesson.description || ""}</p>
+          <button class="button" onclick="selectLesson(${index})">Open Lesson</button>
+        `;
+
+        library.appendChild(card);
+      });
+    }
+
+    function renderLesson() {
+      const lesson = lessons[selectedLessonIndex];
+
+      document.getElementById("featured-title").textContent = lesson.title;
+      document.getElementById("lesson-title").textContent = lesson.title;
+      document.getElementById("lesson-description").textContent = lesson.description || "";
+      document.getElementById("reflection-text").textContent = lesson.reflection || "";
+
+      const sectionsContainer = document.getElementById("lesson-sections");
+      sectionsContainer.innerHTML = "";
+
+      lesson.sections.forEach((section, index) => {
+        const sectionCard = document.createElement("div");
+        sectionCard.className = "card lesson-section";
+
+        sectionCard.innerHTML = `
+          <h3>${index + 1}. ${section.heading}</h3>
+          <p class="highlight">${section.keyIdea || ""}</p>
+          <p>${section.content}</p>
+          <span class="audio">🔊 Listen</span>
+        `;
+
+        sectionsContainer.appendChild(sectionCard);
+      });
+
+      const glossaryContainer = document.getElementById("glossary-list");
+      glossaryContainer.innerHTML = "";
+
+      (lesson.glossary || []).forEach((item) => {
+        const glossaryCard = document.createElement("div");
+        glossaryCard.className = "card";
+
+        glossaryCard.innerHTML = `
+          <h3>${item.term}</h3>
+          <p><strong>Pronunciation:</strong> ${item.pronunciation}</p>
+          <p>${item.meaning}</p>
+        `;
+
+        glossaryContainer.appendChild(glossaryCard);
+      });
+
+      const quizContainer = document.getElementById("quiz-list");
+      quizContainer.innerHTML = "";
+
+      (lesson.quiz || []).forEach((question, index) => {
+        const questionTitle = document.createElement("h3");
+        questionTitle.textContent = `${index + 1}. ${question.question}`;
+        quizContainer.appendChild(questionTitle);
+
+        question.options.forEach((option) => {
+          const button = document.createElement("button");
+          button.textContent = option;
+          button.onclick = function () {
+            if (option === question.correct) {
+              alert("Correct!");
+            } else {
+              alert("Try again");
+            }
+          };
+          quizContainer.appendChild(button);
+        });
+      });
+    }
+
+    function selectLesson(index) {
+      selectedLessonIndex = index;
+      renderLesson();
+      document.getElementById("lesson").scrollIntoView({ behavior: "smooth" });
+    }
+
+    renderLibrary();
+    renderLesson();
+  </script>
 </body>
 </html>
