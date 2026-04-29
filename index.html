@@ -1,234 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dharma Kids</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dharma Kids</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
-      color: #292524;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+  color: #292524;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(255,255,255,0.95);
-      border-bottom: 1px solid #fed7aa;
-      padding: 14px 20px;
-    }
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid #fed7aa;
+  padding: 14px 20px;
+  z-index: 10;
+}
 
-    nav {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+nav {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    nav strong {
-      color: #7c2d12;
-      font-size: 20px;
-    }
+nav strong {
+  color: #7c2d12;
+  font-size: 20px;
+}
 
-    nav a {
-      color: #7c2d12;
-      text-decoration: none;
-      font-weight: bold;
-      margin-left: 16px;
-    }
+nav a {
+  color: #7c2d12;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 16px;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 30px 20px;
-    }
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 28px 20px;
+}
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 32px;
-      align-items: center;
-      padding: 45px 0;
-    }
+.hero {
+  text-align: center;
+  padding: 35px 0 20px;
+}
 
-    .hero h1 {
-      font-size: 52px;
-      line-height: 1.05;
-      margin: 0;
-      color: #431407;
-    }
+.hero h1 {
+  font-size: 48px;
+  color: #431407;
+  margin-bottom: 10px;
+}
 
-    .hero p {
-      font-size: 19px;
-      line-height: 1.7;
-      color: #57534e;
-    }
+.hero p {
+  font-size: 18px;
+  color: #57534e;
+  line-height: 1.6;
+}
 
-    .button {
-      display: inline-block;
-      background: #ea580c;
-      color: white;
-      padding: 13px 20px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-    }
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 22px;
+  align-items: start;
+}
 
-    .button:hover { background: #c2410c; }
+.card {
+  background: white;
+  border: 1px solid #ffedd5;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+  margin-bottom: 18px;
+}
 
-    .button.secondary {
-      background: white;
-      color: #7c2d12;
-      border: 1px solid #fdba74;
-    }
+.chat-card {
+  min-height: 560px;
+}
 
-    .hero-card {
-      background: linear-gradient(135deg, #fed7aa, #fecdd3);
-      border-radius: 34px;
-      padding: 30px;
-      min-height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
-    }
+.chat-window {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 20px;
+  padding: 16px;
+  min-height: 330px;
+  max-height: 440px;
+  overflow-y: auto;
+  margin-bottom: 14px;
+}
 
-    .hero-card-inner {
-      background: rgba(255,255,255,0.78);
-      border-radius: 28px;
-      padding: 32px;
-    }
+.message {
+  padding: 12px 14px;
+  border-radius: 16px;
+  margin: 10px 0;
+  line-height: 1.5;
+}
 
-    .emoji {
-      font-size: 64px;
-    }
+.guide {
+  background: white;
+  border: 1px solid #fed7aa;
+  color: #7c2d12;
+  font-weight: bold;
+}
 
-    .section-title {
-      margin-top: 45px;
-      color: #7c2d12;
-      font-size: 34px;
-    }
+.child {
+  background: #dcfce7;
+  color: #14532d;
+  margin-left: 30px;
+}
 
-    .age-note {
-      color: #57534e;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
+input {
+  width: 100%;
+  padding: 13px;
+  border-radius: 16px;
+  border: 1px solid #fed7aa;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
+button, .button {
+  display: inline-block;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 16px;
+  margin: 5px;
+  background: #ea580c;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
 
-    .card {
-      background: white;
-      border: 1px solid #ffedd5;
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-    }
+button:hover, .button:hover {
+  background: #c2410c;
+}
 
-    .card h3 {
-      margin-top: 0;
-      color: #431407;
-      font-size: 24px;
-    }
+button.secondary, .button.secondary {
+  background: #ffedd5;
+  color: #7c2d12;
+}
 
-    .card p {
-      line-height: 1.6;
-      color: #57534e;
-    }
+button.secondary:hover, .button.secondary:hover {
+  background: #fed7aa;
+}
 
-    .visual-box {
-      height: 160px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #ffedd5, #fecdd3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 52px;
-      margin-bottom: 16px;
-    }
+.quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
 
-    .pill {
-      display: inline-block;
-      background: #ffedd5;
-      color: #9a3412;
-      padding: 6px 11px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 8px;
-      margin-right: 6px;
-    }
+.pill {
+  display: inline-block;
+  background: #ffedd5;
+  color: #9a3412;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  margin-right: 6px;
+}
 
-    .pill.green {
-      background: #dcfce7;
-      color: #166534;
-    }
+.pill.green {
+  background: #dcfce7;
+  color: #166534;
+}
 
-    .pill.blue {
-      background: #e0f2fe;
-      color: #075985;
-    }
+.pill.blue {
+  background: #e0f2fe;
+  color: #075985;
+}
 
-    .pill.purple {
-      background: #f3e8ff;
-      color: #6b21a8;
-    }
+.pill.purple {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 30px;
-    }
+.lesson-card {
+  border-left: 6px solid #fb923c;
+}
 
-    .coming-soon {
-      opacity: 0.75;
-    }
+.lesson-card h3 {
+  color: #431407;
+  margin-top: 0;
+}
 
-    footer {
-      margin-top: 55px;
-      padding: 30px;
-      background: #431407;
-      color: white;
-      text-align: center;
-    }
+.lesson-card p {
+  color: #57534e;
+  line-height: 1.5;
+}
 
-    @media (max-width: 800px) {
-      .hero,
-      .grid,
-      .features {
-        grid-template-columns: 1fr;
-      }
+.visual {
+  text-align: center;
+  background: linear-gradient(135deg, #fed7aa, #fecdd3);
+  border-radius: 22px;
+  padding: 22px;
+}
 
-      .hero h1 {
-        font-size: 38px;
-      }
+.emoji {
+  font-size: 56px;
+}
 
-      nav {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 10px;
-      }
+.profile-box {
+  background: #fff7ed;
+  border-radius: 18px;
+  padding: 15px;
+  border: 1px solid #fed7aa;
+}
 
-      nav a {
-        margin-left: 0;
-        margin-right: 14px;
-      }
-    }
-  </style>
+.section-title {
+  color: #7c2d12;
+  font-size: 30px;
+  margin-top: 34px;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  margin-top: 55px;
+  padding: 30px;
+  background: #431407;
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 850px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  nav a {
+    margin-left: 0;
+    margin-right: 14px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -237,9 +266,8 @@
   <nav>
     <strong>🌸 Dharma Kids</strong>
     <div>
-      <a href="#ages-5-7">Ages 5–7</a>
-      <a href="#ages-8-12">Ages 8–12</a>
-      <a href="#ages-13-15">Ages 13–15</a>
+      <a href="#guide">Guide</a>
+      <a href="#lessons">Lessons</a>
     </div>
   </nav>
 </header>
@@ -247,142 +275,258 @@
 <main class="container">
 
   <section class="hero">
-    <div>
-      <span class="pill">Children’s Hinduism Classes</span>
-      <span class="pill green">Stories</span>
-      <span class="pill blue">Activities</span>
+    <span class="pill">Chatbot-led learning</span>
+    <span class="pill green">Age aware</span>
+    <span class="pill blue">Interactive</span>
 
-      <h1>A joyful place for children to learn spiritual values</h1>
+    <h1>Your spiritual learning guide</h1>
+    <p>
+      The guide learns your name and age, recommends lessons, and helps you learn
+      with stories, questions, activities, and reflection.
+    </p>
+  </section>
 
-      <p>
-        Age-based Hinduism lessons with stories, visuals, videos, quizzes,
-        reflection, narration, and interactive activities.
-      </p>
+  <section id="guide" class="app-layout">
 
-      <a class="button" href="#ages-8-12">Browse Lessons</a>
-      <a class="button secondary" href="lesson1.html">Start First Lesson</a>
+    <div class="card chat-card">
+      <h2>🤖 Dharma Kids Guide</h2>
+
+      <div id="chat-window" class="chat-window"></div>
+
+      <input id="child-input" placeholder="Type your answer here..." />
+
+      <div class="quick-buttons">
+        <button onclick="sendInput()">Send</button>
+        <button class="secondary" onclick="startGuide()">Restart Guide</button>
+        <button class="secondary" onclick="showRecommendedLessons()">Show My Lessons</button>
+        <button class="secondary" onclick="resetProfile()">Reset My Name/Age</button>
+      </div>
     </div>
 
-    <div class="hero-card">
-      <div class="hero-card-inner">
+    <aside>
+      <div class="card visual">
         <div class="emoji">🪔</div>
-        <h2>Interactive Learning</h2>
-        <p>Children can listen, watch, answer, reflect, create, and learn with joy.</p>
+        <h3>New this week</h3>
+        <p><strong>Courage Like Hanumanji</strong></p>
+        <p>A lesson about courage, humility, and service.</p>
+        <a class="button" href="lesson2.html">Open New Lesson</a>
       </div>
-    </div>
+
+      <div class="card profile-box">
+        <h3>👧 My Profile</h3>
+        <p><strong>Name:</strong> <span id="profile-name">Not set</span></p>
+        <p><strong>Age:</strong> <span id="profile-age">Not set</span></p>
+        <p><strong>Level:</strong> <span id="profile-level">Not set</span></p>
+      </div>
+    </aside>
+
   </section>
 
-  <section id="features">
-    <h2 class="section-title">✨ What lessons can include</h2>
+  <section id="lessons">
+    <h2 class="section-title">📚 Lesson Library</h2>
 
-    <div class="features">
-      <div class="card">
-        <h3>🎧 Narration</h3>
-        <p>Audio support for stories, reflections, and important Sanskrit/Hindi/Bengali terms.</p>
-      </div>
-
-      <div class="card">
-        <h3>🎬 Videos</h3>
-        <p>Short clips, storytelling videos, class recordings, or devotional visuals.</p>
-      </div>
-
-      <div class="card">
-        <h3>🎮 Interaction</h3>
-        <p>Quizzes, matching games, reveal questions, class activities, and reward stars.</p>
-      </div>
+    <div id="ages-5-7" class="card lesson-card">
+      <span class="pill">Ages 5–7</span>
+      <h3>God Lives in My Heart</h3>
+      <p>Simple stories, colouring, kindness practice, and short guided reflections.</p>
+      <button class="secondary" onclick="notReady()">Coming Soon</button>
     </div>
-  </section>
 
-  <section id="ages-5-7">
-    <h2 class="section-title">🌼 Ages 5–7</h2>
-    <p class="age-note">
-      Simple stories, colouring, songs, movement, kindness practice, and short activities.
-    </p>
-
-    <div class="grid">
-      <div class="card coming-soon">
-        <div class="visual-box">🌸</div>
-        <span class="pill">Coming Soon</span>
-        <h3>God Lives in My Heart</h3>
-        <p>A very gentle introduction to prayer, kindness, and love.</p>
-      </div>
-
-      <div class="card coming-soon">
-        <div class="visual-box">🐒</div>
-        <span class="pill">Coming Soon</span>
-        <h3>Hanumanji Helps</h3>
-        <p>A simple story about helping, courage, and being kind.</p>
-      </div>
+    <div id="ages-8-12" class="card lesson-card">
+      <span class="pill">Ages 8–12</span>
+      <span class="pill green">Interactive</span>
+      <h3>Loving God Within Us</h3>
+      <p>A guided chatbot lesson inspired by Sri Ramakrishna’s childhood.</p>
+      <a class="button" href="lesson1.html">Open Lesson</a>
     </div>
-  </section>
 
-  <section id="ages-8-12">
-    <h2 class="section-title">🪔 Ages 8–12</h2>
-    <p class="age-note">
-      Story-based lessons with quizzes, reflection, glossary, video/audio support,
-      and interactive classroom activities.
-    </p>
-
-    <div class="grid">
-
-      <div class="card">
-        <div class="visual-box">🌸</div>
-        <span class="pill">Ages 8–12</span>
-        <span class="pill green">Interactive</span>
-        <span class="pill blue">Audio</span>
-        <h3>Loving God Within Us</h3>
-        <p>
-          A lesson inspired by Sri Ramakrishna’s childhood,
-          helping children understand devotion, kindness, and God within.
-        </p>
-        <a class="button" href="lesson1.html">Open Lesson</a>
-      </div>
-
-      <div class="card">
-        <div class="visual-box">🐒</div>
-        <span class="pill">Ages 8–12</span>
-        <span class="pill green">Quiz</span>
-        <span class="pill purple">Activity</span>
-        <h3>Courage Like Hanumanji</h3>
-        <p>
-          A lesson about courage, strength, devotion, humility,
-          and using our gifts to help others.
-        </p>
-        <a class="button" href="lesson2.html">Open Lesson</a>
-      </div>
-
+    <div class="card lesson-card">
+      <span class="pill">Ages 8–12</span>
+      <span class="pill blue">New</span>
+      <h3>Courage Like Hanumanji</h3>
+      <p>A lesson about courage, humility, devotion, and helping others.</p>
+      <a class="button" href="lesson2.html">Open Lesson</a>
     </div>
-  </section>
 
-  <section id="ages-13-15">
-    <h2 class="section-title">📖 Ages 13–15</h2>
-    <p class="age-note">
-      Deeper discussion, scripture reflection, values in daily life, meditation practice,
-      and guided debate or journaling.
-    </p>
-
-    <div class="grid">
-      <div class="card coming-soon">
-        <div class="visual-box">📖</div>
-        <span class="pill">Coming Soon</span>
-        <h3>What Is Devotion?</h3>
-        <p>A deeper discussion lesson on bhakti, practice, and spiritual discipline.</p>
-      </div>
-
-      <div class="card coming-soon">
-        <div class="visual-box">🧘</div>
-        <span class="pill">Coming Soon</span>
-        <h3>Meditation and the Mind</h3>
-        <p>A reflective lesson about calming the mind and remembering the Divine.</p>
-      </div>
+    <div id="ages-13-15" class="card lesson-card">
+      <span class="pill">Ages 13–15</span>
+      <h3>What Is Devotion?</h3>
+      <p>Deeper reflection, discussion, scripture ideas, and journaling.</p>
+      <button class="secondary" onclick="notReady()">Coming Soon</button>
     </div>
   </section>
 
 </main>
 
 <footer>
-  🌸 Dharma Kids — Stories, Values, Devotion
+  🌸 Dharma Kids — Chatbot-led Stories, Values, Devotion
 </footer>
+
+<script>
+let guideStep = 0;
+let childName = "";
+let childAge = "";
+let childLevel = "";
+
+function addMessage(text, sender) {
+  const chat = document.getElementById("chat-window");
+  const div = document.createElement("div");
+  div.className = "message " + sender;
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function updateProfileBox() {
+  document.getElementById("profile-name").textContent = childName || "Not set";
+  document.getElementById("profile-age").textContent = childAge || "Not set";
+  document.getElementById("profile-level").textContent = childLevel || "Not set";
+}
+
+function saveProfile() {
+  localStorage.setItem("dharmaChildName", childName);
+  localStorage.setItem("dharmaChildAge", childAge);
+  localStorage.setItem("dharmaChildLevel", childLevel);
+}
+
+function loadProfile() {
+  childName = localStorage.getItem("dharmaChildName") || "";
+  childAge = localStorage.getItem("dharmaChildAge") || "";
+  childLevel = localStorage.getItem("dharmaChildLevel") || "";
+  updateProfileBox();
+}
+
+function getLevelFromAge(age) {
+  const number = parseInt(age, 10);
+
+  if (isNaN(number)) return "";
+  if (number <= 7) return "Ages 5–7";
+  if (number <= 12) return "Ages 8–12";
+  return "Ages 13–15";
+}
+
+function startGuide() {
+  document.getElementById("chat-window").innerHTML = "";
+  loadProfile();
+
+  if (childName && childAge && childLevel) {
+    guideStep = 3;
+    addMessage("Namaste " + childName + "! Welcome back. I remember that you are " + childAge + " years old.", "guide");
+    addMessage("Would you like me to show lessons for " + childLevel + "? Type yes, or type a question.", "guide");
+  } else {
+    guideStep = 0;
+    addMessage("Namaste! I am your Dharma Kids guide. What is your name?", "guide");
+  }
+}
+
+function sendInput() {
+  const input = document.getElementById("child-input");
+  const text = input.value.trim();
+
+  if (!text) {
+    addMessage("Please type something first.", "guide");
+    return;
+  }
+
+  addMessage(text, "child");
+  input.value = "";
+
+  handleGuide(text);
+}
+
+function handleGuide(text) {
+  if (guideStep === 0) {
+    childName = text;
+    guideStep = 1;
+    updateProfileBox();
+    addMessage("Nice to meet you, " + childName + "! How old are you?", "guide");
+    return;
+  }
+
+  if (guideStep === 1) {
+    childAge = text;
+    childLevel = getLevelFromAge(childAge);
+
+    if (!childLevel) {
+      addMessage("Please type your age as a number, like 8 or 11.", "guide");
+      return;
+    }
+
+    guideStep = 2;
+    saveProfile();
+    updateProfileBox();
+
+    addMessage("Thank you, " + childName + ". I will guide you at the " + childLevel + " level.", "guide");
+    addMessage("A new lesson is available: Courage Like Hanumanji. Would you like to see your recommended lessons? Type yes or no.", "guide");
+    return;
+  }
+
+  if (guideStep >= 2) {
+    const lower = text.toLowerCase();
+
+    if (lower.includes("yes") || lower.includes("lesson")) {
+      showRecommendedLessons();
+      return;
+    }
+
+    if (lower.includes("hanuman")) {
+      addMessage("Great choice! Courage Like Hanumanji is a new lesson about courage, humility, and service. Click the lesson card or use the New Lesson button.", "guide");
+      return;
+    }
+
+    if (lower.includes("ramakrishna") || lower.includes("god") || lower.includes("within")) {
+      addMessage("I recommend Loving God Within Us. It teaches that God lives within us and we grow closer through kindness, prayer, and truthfulness.", "guide");
+      return;
+    }
+
+    addMessage("I can help you choose a lesson. Try typing: show my lessons, Hanumanji, or God within us.", "guide");
+  }
+}
+
+function showRecommendedLessons() {
+  if (!childLevel) {
+    addMessage("Please tell me your name and age first, then I can recommend lessons.", "guide");
+    return;
+  }
+
+  if (childLevel === "Ages 5–7") {
+    addMessage(childName + ", I recommend simple story lessons. The Ages 5–7 lessons are coming soon. For now, you may try Loving God Within Us with an adult.", "guide");
+    document.getElementById("ages-5-7").scrollIntoView({ behavior: "smooth" });
+  } else if (childLevel === "Ages 8–12") {
+    addMessage(childName + ", I recommend Loving God Within Us and Courage Like Hanumanji. They have quizzes, activities, and guided reflection.", "guide");
+    document.getElementById("ages-8-12").scrollIntoView({ behavior: "smooth" });
+  } else {
+    addMessage(childName + ", I recommend deeper reflection lessons. Ages 13–15 lessons are coming soon. For now, you may begin with Loving God Within Us.", "guide");
+    document.getElementById("ages-13-15").scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+function resetProfile() {
+  localStorage.removeItem("dharmaChildName");
+  localStorage.removeItem("dharmaChildAge");
+  localStorage.removeItem("dharmaChildLevel");
+
+  childName = "";
+  childAge = "";
+  childLevel = "";
+  guideStep = 0;
+
+  updateProfileBox();
+  startGuide();
+}
+
+function notReady() {
+  alert("This lesson is coming soon.");
+}
+
+document.getElementById("child-input").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    sendInput();
+  }
+});
+
+startGuide();
+</script>
 
 </body>
 </html>
