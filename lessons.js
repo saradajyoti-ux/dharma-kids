@@ -62,78 +62,78 @@ const lessons = [
       "Before sleeping, sit quietly for one minute and think: “God is within me. May I be kind and truthful.”"
   }
   ,
-{
-  title: "Courage Like Hanumanji",
-  ageGroup: "Ages 8–12",
-  description: "A lesson about courage, strength, devotion, and helping others.",
-  sections: [
-    {
-      heading: "Who Is Hanumanji?",
-      keyIdea: "Hanumanji teaches us courage, devotion, and service.",
-      content:
-        "Hanumanji is loved for his strength, humility, and deep devotion to Sri Ram. He used his power not for pride, but to help others and serve God."
-    },
-    {
-      heading: "True Courage",
-      keyIdea: "Courage means doing what is right, even when we feel afraid.",
-      content:
-        "Hanumanji crossed the ocean to help Sri Ram. This teaches us that when we remember God and act with faith, we can overcome fear."
-    },
-    {
-      heading: "Strength with Humility",
-      keyIdea: "Real strength is gentle and helpful.",
-      content:
-        "Hanumanji was very strong, but he was also humble. He never showed off. He used his strength to protect, serve, and comfort others."
-    },
-    {
-      heading: "Hanumanji in Our Hearts",
-      keyIdea: "We can feel brave when we remember Hanumanji.",
-      content:
-        "When we feel nervous or weak, we can quietly remember Hanumanji and pray for courage, focus, and kindness."
-    }
-  ],
-  glossary: [
-    {
-      term: "Hanumanji",
-      pronunciation: "Ha-nu-maan-jee",
-      meaning: "A great devotee of Sri Ram, known for courage, strength, humility, and service."
-    },
-    {
-      term: "Sri Ram",
-      pronunciation: "Shree Raam",
-      meaning: "An incarnation of God, known for righteousness, compassion, and truth."
-    },
-    {
-      term: "Devotion",
-      pronunciation: "De-vo-shun",
-      meaning: "Deep love and dedication toward God."
-    }
-  ],
-  quiz: [
-    {
-      question: "What does Hanumanji teach us?",
-      correct: "Courage and service",
-      options: ["Courage and service", "Pride and anger", "Laziness"]
-    },
-    {
-      question: "What is true courage?",
-      correct: "Doing what is right even when afraid",
-      options: ["Doing what is right even when afraid", "Never feeling afraid", "Showing off"]
-    },
-    {
-      question: "How did Hanumanji use his strength?",
-      correct: "To help and serve",
-      options: ["To help and serve", "To boast", "To scare people"]
-    }
-  ],
-  reflection:
-    "Think of one thing that makes you nervous. Quietly pray to Hanumanji for courage and take one small brave step.",
-  activity:
-    "Act out Hanumanji crossing the ocean. One child can narrate, others can show courage, faith, and service through movement.",
-  discussionQuestions: [
-    "When have you felt afraid but still tried your best?",
-    "How can strength be used kindly?",
-    "Who can you help this week?"
-  ]
-}
+  {
+    title: "Courage Like Hanumanji",
+    ageGroup: "Ages 8–12",
+    description: "A lesson about courage, strength, devotion, and helping others.",
+    sections: [
+      {
+        heading: "Who Is Hanumanji?",
+        keyIdea: "Hanumanji teaches us courage, devotion, and service.",
+        content:
+          "Hanumanji is loved for his strength, humility, and deep devotion to Sri Ram. He used his power not for pride, but to help others and serve God."
+      },
+      {
+        heading: "True Courage",
+        keyIdea: "Courage means doing what is right, even when we feel afraid.",
+        content:
+          "Hanumanji crossed the ocean to help Sri Ram. This teaches us that when we remember God and act with faith, we can overcome fear."
+      },
+      {
+        heading: "Strength with Humility",
+        keyIdea: "Real strength is gentle and helpful.",
+        content:
+          "Hanumanji was very strong, but he was also humble. He never showed off. He used his strength to protect, serve, and comfort others."
+      },
+      {
+        heading: "Hanumanji in Our Hearts",
+        keyIdea: "We can feel brave when we remember Hanumanji.",
+        content:
+          "When we feel nervous or weak, we can quietly remember Hanumanji and pray for courage, focus, and kindness."
+      }
+    ],
+    glossary: [
+      {
+        term: "Hanumanji",
+        pronunciation: "Ha-nu-maan-jee",
+        meaning: "A great devotee of Sri Ram, known for courage, strength, humility, and service."
+      },
+      {
+        term: "Sri Ram",
+        pronunciation: "Shree Raam",
+        meaning: "An incarnation of God, known for righteousness, compassion, and truth."
+      },
+      {
+        term: "Devotion",
+        pronunciation: "De-vo-shun",
+        meaning: "Deep love and dedication toward God."
+      }
+    ],
+    quiz: [
+      {
+        question: "What does Hanumanji teach us?",
+        correct: "Courage and service",
+        options: ["Courage and service", "Pride and anger", "Laziness"]
+      },
+      {
+        question: "What is true courage?",
+        correct: "Doing what is right even when afraid",
+        options: ["Doing what is right even when afraid", "Never feeling afraid", "Showing off"]
+      },
+      {
+        question: "How did Hanumanji use his strength?",
+        correct: "To help and serve",
+        options: ["To help and serve", "To boast", "To scare people"]
+      }
+    ],
+    reflection:
+      "Think of one thing that makes you nervous. Quietly pray to Hanumanji for courage and take one small brave step.",
+    activity:
+      "Act out Hanumanji crossing the ocean. One child can narrate, others can show courage, faith, and service through movement.",
+    discussionQuestions: [
+      "When have you felt afraid but still tried your best?",
+      "How can strength be used kindly?",
+      "Who can you help this week?"
+    ]
+  }
 ];
