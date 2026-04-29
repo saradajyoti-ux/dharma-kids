@@ -6,22 +6,24 @@
   <title>Dharma Kids</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #fff7ed, #ffffff);
+      background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
       color: #292524;
     }
 
     header {
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.95);
-      border-bottom: 1px solid #fed7aa;
-      padding: 14px 22px;
       z-index: 10;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #fed7aa;
+      padding: 14px 20px;
     }
 
     nav {
@@ -30,6 +32,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    nav strong {
+      color: #7c2d12;
+      font-size: 20px;
     }
 
     nav a {
@@ -42,38 +49,43 @@
     .container {
       max-width: 1100px;
       margin: auto;
-      padding: 28px 20px;
+      padding: 30px 20px;
     }
 
     .hero {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 30px;
+      gap: 32px;
       align-items: center;
       padding: 45px 0;
     }
 
     .hero h1 {
-      font-size: 48px;
+      font-size: 52px;
+      line-height: 1.05;
       margin: 0;
       color: #431407;
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: 19px;
+      line-height: 1.7;
       color: #57534e;
-      line-height: 1.6;
     }
 
     .button {
       display: inline-block;
       background: #ea580c;
       color: white;
-      padding: 12px 18px;
+      padding: 13px 20px;
       border-radius: 999px;
       text-decoration: none;
       font-weight: bold;
       margin-top: 10px;
+    }
+
+    .button:hover {
+      background: #c2410c;
     }
 
     .button.secondary {
@@ -84,62 +96,103 @@
 
     .hero-card {
       background: linear-gradient(135deg, #fed7aa, #fecdd3);
-      border-radius: 30px;
+      border-radius: 34px;
       padding: 30px;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    }
+
+    .hero-card-inner {
+      background: rgba(255,255,255,0.78);
+      border-radius: 28px;
+      padding: 32px;
     }
 
     .emoji {
-      font-size: 60px;
+      font-size: 64px;
     }
 
     .section-title {
       margin-top: 40px;
       color: #7c2d12;
-      font-size: 28px;
+      font-size: 34px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
 
     .card {
       background: white;
       border: 1px solid #ffedd5;
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 24px;
+      padding: 24px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.04);
     }
 
     .card h3 {
       margin-top: 0;
       color: #431407;
+      font-size: 24px;
+    }
+
+    .card p {
+      line-height: 1.6;
+      color: #57534e;
     }
 
     .pill {
       display: inline-block;
       background: #ffedd5;
       color: #9a3412;
-      padding: 6px 10px;
+      padding: 6px 11px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
     }
 
     footer {
-      margin-top: 50px;
-      padding: 25px;
+      margin-top: 55px;
+      padding: 30px;
       background: #431407;
       color: white;
       text-align: center;
     }
 
     @media (max-width: 800px) {
-      .hero, .grid {
+      .hero,
+      .grid,
+      .features {
         grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 14px;
       }
     }
   </style>
@@ -147,63 +200,93 @@
 
 <body>
 
-<header>
-  <nav>
-    <strong>🌸 Dharma Kids</strong>
-    <div>
-      <a href="#library">Lessons</a>
-    </div>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <strong>🌸 Dharma Kids</strong>
+      <div>
+        <a href="#lessons">Lessons</a>
+        <a href="#features">Features</a>
+      </div>
+    </nav>
+  </header>
 
-<main class="container">
+  <main class="container">
 
-  <section class="hero">
-    <div>
-      <h1>A joyful place for children’s Hinduism classes</h1>
-      <p>
-        Stories, values, devotion, pronunciation support, and interactive lessons for children.
-      </p>
-
-      <a class="button" href="#library">Browse Lessons</a>
-    </div>
-
-    <div class="hero-card">
-      <div class="emoji">🪔</div>
-      <h2>Loving God Within Us</h2>
-      <p>Be kind, truthful, and remember God.</p>
-    </div>
-  </section>
-
-  <section id="library">
-    <h2 class="section-title">Lesson Library</h2>
-
-    <div class="grid">
-
-      <!-- Lesson 1 -->
-      <div class="card">
-        <span class="pill">Ages 8–12</span>
-        <h3>Loving God Within Us</h3>
-        <p>A lesson inspired by Sri Ramakrishna’s childhood.</p>
-        <a class="button" href="lesson1.html">Open Lesson</a>
+    <section class="hero">
+      <div>
+        <span class="pill">Children’s Hinduism Classes</span>
+        <h1>A joyful place for children to learn spiritual values</h1>
+        <p>
+          Stories, devotion, kindness, courage, reflection, quizzes, and activities
+          for children learning about Hinduism in a warm and engaging way.
+        </p>
+        <a class="button" href="#lessons">Browse Lessons</a>
+        <a class="button secondary" href="lesson1.html">Start First Lesson</a>
       </div>
 
-      <!-- Lesson 2 -->
-      <div class="card">
-        <span class="pill">Ages 8–12</span>
-        <h3>Courage Like Hanumanji</h3>
-        <p>A lesson about courage, strength, and devotion.</p>
-        <a class="button" href="lesson2.html">Open Lesson</a>
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="emoji">🪔</div>
+          <h2>Loving God Within Us</h2>
+          <p>Be cheerful, kind, truthful, and remember God.</p>
+        </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section id="lessons">
+      <h2 class="section-title">📚 Lesson Library</h2>
 
-</main>
+      <div class="grid">
 
-<footer>
-  🌸 Dharma Kids — Stories, Values, Devotion
-</footer>
+        <div class="card">
+          <span class="pill">Ages 8–12</span>
+          <h3>Loving God Within Us</h3>
+          <p>
+            A gentle lesson inspired by Sri Ramakrishna’s childhood,
+            helping children understand devotion, kindness, and God within.
+          </p>
+          <a class="button" href="lesson1.html">Open Lesson</a>
+        </div>
+
+        <div class="card">
+          <span class="pill">Ages 8–12</span>
+          <h3>Courage Like Hanumanji</h3>
+          <p>
+            A lesson about courage, strength, devotion, humility,
+            and using our gifts to help others.
+          </p>
+          <a class="button" href="lesson2.html">Open Lesson</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">✨ What children can do</h2>
+
+      <div class="features">
+        <div class="card">
+          <h3>🎧 Listen</h3>
+          <p>Lessons can include narration and pronunciation guidance.</p>
+        </div>
+
+        <div class="card">
+          <h3>🎮 Interact</h3>
+          <p>Children can answer quizzes, reflect, and take part in activities.</p>
+        </div>
+
+        <div class="card">
+          <h3>🎨 Create</h3>
+          <p>Lessons can include drawing, acting, storytelling, and class exercises.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    🌸 Dharma Kids — Stories, Values, Devotion
+  </footer>
 
 </body>
 </html>
