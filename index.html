@@ -1,75 +1,397 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dharma Kids</title>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dharma Kids</title>
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(#fff7ed, #ffffff);
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #fff7ed, #ffffff);
+      color: #292524;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.9);
+      border-bottom: 1px solid #fed7aa;
+      padding: 14px 22px;
+      z-index: 10;
+    }
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      color: #7c2d12;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 16px;
     }
     .container {
-      max-width: 800px;
+      max-width: 1100px;
       margin: auto;
-      padding: 20px;
+      padding: 28px 20px;
     }
-    h1 {
-      color: #7c2d12;
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+      align-items: center;
+      padding: 45px 0;
     }
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 15px 0;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    .hero h1 {
+      font-size: 52px;
+      line-height: 1.05;
+      margin: 0;
+      color: #431407;
+    }
+    .hero p {
+      font-size: 19px;
+      line-height: 1.7;
+      color: #57534e;
     }
     .button {
       display: inline-block;
-      padding: 10px 15px;
       background: #ea580c;
       color: white;
-      border-radius: 20px;
+      padding: 13px 20px;
+      border-radius: 999px;
       text-decoration: none;
+      font-weight: bold;
+      margin: 8px 8px 8px 0;
+    }
+    .button.secondary {
+      background: white;
+      color: #7c2d12;
+      border: 1px solid #fdba74;
+    }
+    .hero-card {
+      background: linear-gradient(135deg, #fed7aa, #fecdd3);
+      border-radius: 34px;
+      padding: 30px;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    }
+    .hero-card-inner {
+      background: rgba(255,255,255,0.75);
+      border-radius: 28px;
+      padding: 30px;
+    }
+    .emoji {
+      font-size: 64px;
+    }
+    .section-title {
+      margin-top: 40px;
+      color: #7c2d12;
+      font-size: 32px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #ffedd5;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+    }
+    .lesson-card h3,
+    .card h3 {
+      margin-top: 0;
+      color: #431407;
+    }
+    .pill {
+      display: inline-block;
+      background: #ffedd5;
+      color: #9a3412;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .lesson-section {
+      margin: 18px 0;
+      border-left: 6px solid #fb923c;
+    }
+    .highlight {
+      background: #fff7ed;
+      padding: 12px;
+      border-radius: 14px;
+      font-weight: bold;
+      color: #7c2d12;
+    }
+    .audio {
+      display: inline-block;
       margin-top: 10px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid #fdba74;
+      color: #9a3412;
+      background: #fff7ed;
+      font-weight: bold;
+    }
+    .glossary {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .quiz button {
+      width: 100%;
+      text-align: left;
+      padding: 12px;
+      margin: 6px 0;
+      border-radius: 14px;
+      border: 1px solid #e7e5e4;
+      background: #fafaf9;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .quiz button:hover {
+      background: #ffedd5;
+    }
+    footer {
+      margin-top: 50px;
+      padding: 30px;
+      background: #431407;
+      color: white;
+      text-align: center;
+    }
+    @media (max-width: 800px) {
+      .hero, .grid, .glossary {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 38px;
+      }
+      nav {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+      }
+      nav a {
+        margin-left: 0;
+        margin-right: 12px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>🌸 Dharma Kids</h1>
-    <p>A joyful place to learn about God, kindness, and great saints.</p>
+  <header>
+    <nav>
+      <strong>🌸 Dharma Kids</strong>
+      <div>
+        <a href="#library">Lessons</a>
+        <a href="#lesson">Today’s Lesson</a>
+        <a href="#glossary">Glossary</a>
+        <a href="#quiz">Quiz</a>
+      </div>
+    </nav>
+  </header>
 
-    <div class="card">
-      <h2>Loving God Within Us</h2>
-      <p>We are here to love God who lives inside us.</p>
-      <a class="button" href="#lesson">Start Lesson</a>
-    </div>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="pill">Ages 8–12</span>
+        <h1>A joyful place for children’s Hinduism classes</h1>
+        <p>
+          Stories, values, devotion, pronunciation support, activities,
+          reflection, and child-friendly lessons.
+        </p>
+        <a class="button" href="#lesson">Start Today’s Lesson</a>
+        <a class="button secondary" href="#library">View Lessons</a>
+      </div>
 
-    <div id="lesson" class="card">
-      <h2>Why Are We Here?</h2>
-      <p>
-        We live on Earth to learn, grow, and help others.
-        But most importantly, we are here to love God who lives within us.
-      </p>
-    </div>
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="emoji">🪔</div>
+          <h2>Loving God Within Us</h2>
+          <p>Be cheerful, kind, truthful, and remember God.</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>Story: Young Sri Ramakrishna</h2>
-      <p>
-        As a child, Gadadhar loved stories of Sri Ram and Krishna.
-        He acted them out with friends and made learning joyful.
-      </p>
-    </div>
+    <section id="library">
+      <h2 class="section-title">Lesson Library</h2>
+      <div class="grid">
+        <div class="card lesson-card">
+          <span class="pill">Published</span>
+          <h3>Loving God Within Us</h3>
+          <p>A lesson inspired by Sri Ramakrishna’s childhood.</p>
+          <a class="button" href="#lesson">Open Lesson</a>
+        </div>
+        <div class="card lesson-card">
+          <span class="pill">Coming Soon</span>
+          <h3>Courage Like Hanumanji</h3>
+          <p>Learning fearlessness, strength, and service.</p>
+        </div>
+        <div class="card lesson-card">
+          <span class="pill">Coming Soon</span>
+          <h3>Kindness in the Ramayana</h3>
+          <p>Stories that teach compassion and patience.</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>Reflection</h2>
-      <p>
-        Be kind. Be truthful. Remember God.
-      </p>
-    </div>
-  </div>
+    <section id="lesson">
+      <h2 class="section-title">Today’s Lesson: Loving God Within Us</h2>
+
+      <div class="card lesson-section">
+        <h3>1. Why Are We Here?</h3>
+        <p class="highlight">We are here to love God, who lives within us.</p>
+        <p>
+          We learn, grow, study, and work so that we can live well.
+          But saints remind us that life becomes truly meaningful when
+          we remember God, help others, and grow in love.
+        </p>
+        <span class="audio">🔊 Listen</span>
+      </div>
+
+      <div class="card lesson-section">
+        <h3>2. Thinking About God</h3>
+        <p class="highlight">The more we remember God, the deeper our love grows.</p>
+        <p>
+          Our saints and scriptures advise us to meditate on the Divine every day.
+          This can be difficult because we cannot see God with our physical eyes,
+          but we can feel God through love, prayer, and goodness.
+        </p>
+        <span class="audio">🔊 Listen</span>
+      </div>
+
+      <div class="card lesson-section">
+        <h3>3. Choosing a Beloved Form of God</h3>
+        <p class="highlight">A chosen deity helps the mind focus with love.</p>
+        <p>
+          Sri Ramakrishna taught that we may love all names and forms of God,
+          while choosing one form that feels especially close to our heart.
+          Sri Ram inspires compassion and patience. Hanumanji inspires courage,
+          strength, and service.
+        </p>
+        <span class="audio">🔊 Listen</span>
+      </div>
+
+      <div class="card lesson-section">
+        <h3>4. Young Gadadhar’s Joyful Devotion</h3>
+        <p class="highlight">Learning about God can be joyful and creative.</p>
+        <p>
+          As a young boy, Sri Ramakrishna was known as Gadadhar.
+          He loved listening to stories of Sri Ram and Sri Krishna.
+          He and his friends acted out these stories in a mango grove.
+        </p>
+        <span class="audio">🔊 Listen</span>
+      </div>
+
+      <div class="card lesson-section">
+        <h3>5. The Maha Shivaratri Play</h3>
+        <p class="highlight">Deep concentration can make worship come alive.</p>
+        <p>
+          During Maha Shivaratri, Gadadhar was asked to play Lord Shiva.
+          When dressed with matted hair, ashes, and beads, he became so absorbed
+          in Lord Shiva that everyone felt they were seeing Shiva Himself.
+        </p>
+        <span class="audio">🔊 Listen</span>
+      </div>
+
+      <div class="card lesson-section">
+        <h3>6. Creativity as Worship</h3>
+        <p class="highlight">Creative work can help us express devotion.</p>
+        <p>
+          Gadadhar painted, modeled small images of deities, made dolls,
+          and learned brickwork. His life teaches us to be cheerful,
+          truthful, creative, and useful.
+        </p>
+        <span class="audio">🔊 Listen</span>
+      </div>
+    </section>
+
+    <section id="glossary">
+      <h2 class="section-title">Pronunciation Glossary</h2>
+      <div class="glossary">
+        <div class="card">
+          <h3>Sri Ramakrishna</h3>
+          <p><strong>Pronunciation:</strong> Shree Ra-ma-krish-na</p>
+          <p>A great saint revered by many as an incarnation of God.</p>
+        </div>
+        <div class="card">
+          <h3>Gadadhar</h3>
+          <p><strong>Pronunciation:</strong> Ga-daa-dhar</p>
+          <p>Sri Ramakrishna’s childhood name.</p>
+        </div>
+        <div class="card">
+          <h3>Maha Shivaratri</h3>
+          <p><strong>Pronunciation:</strong> Ma-haa Shi-va-raa-tree</p>
+          <p>A sacred night of worship dedicated to Lord Shiva.</p>
+        </div>
+        <div class="card">
+          <h3>Ishta Devata</h3>
+          <p><strong>Pronunciation:</strong> Ish-ta De-va-taa</p>
+          <p>A chosen form of God loved deeply by a devotee.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Activity & Reflection</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>🎨 Activity</h3>
+          <p>
+            Draw your chosen deity, or act out a short story from the life
+            of Sri Ramakrishna with your class.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🧘 Reflection</h3>
+          <p>
+            Before sleeping, sit quietly for one minute and think:
+            “God is within me. May I be kind and truthful.”
+          </p>
+        </div>
+        <div class="card">
+          <h3>💛 Practice</h3>
+          <p>
+            Do one kind action today without expecting anything in return.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <h2 class="section-title">Quiz</h2>
+      <div class="card quiz">
+        <h3>1. Where does God live?</h3>
+        <button onclick="alert('Correct!')">Within us</button>
+        <button onclick="alert('Try again')">Only in books</button>
+        <button onclick="alert('Try again')">Only in temples</button>
+
+        <h3>2. What was Sri Ramakrishna’s childhood name?</h3>
+        <button onclick="alert('Correct!')">Gadadhar</button>
+        <button onclick="alert('Try again')">Narendra</button>
+        <button onclick="alert('Try again')">Hanuman</button>
+
+        <h3>3. What does a chosen deity help us do?</h3>
+        <button onclick="alert('Correct!')">Focus our love and prayer</button>
+        <button onclick="alert('Try again')">Stop learning</button>
+        <button onclick="alert('Try again')">Avoid helping others</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>🌸 Dharma Kids — Stories, Values, Devotion</p>
+  </footer>
 </body>
 </html>
