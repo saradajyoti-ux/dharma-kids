@@ -5,652 +5,176 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dharma Kids</title>
 
-<div style="background:white; border:1px solid #fed7aa; border-radius:20px; padding:20px; margin:20px 0;">
-  <h2>🌞 Today’s Dharma Lesson</h2>
-  <p>Start your day with a small teaching from Sri Ramakrishna.</p>
-  
-  <a href="/daily-lesson.html">
-    <button style="padding:12px 16px; border:none; border-radius:10px; background:#ea580c; color:white; font-weight:bold; cursor:pointer;">
-      Open Today’s Lesson
-    </button>
-  </a>
-</div>
-
 <style>
-* { box-sizing: border-box; }
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+  background: #fff7ed;
   color: #292524;
 }
 
-header {
-  position: sticky;
-  top: 0;
-  background: rgba(255,255,255,0.95);
-  border-bottom: 1px solid #fed7aa;
-  padding: 14px 20px;
-  z-index: 10;
-}
-
-nav {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav strong {
-  color: #7c2d12;
-  font-size: 20px;
-}
-
-nav a {
-  color: #7c2d12;
-  text-decoration: none;
-  font-weight: bold;
-  margin-left: 16px;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 28px 20px;
-}
-
 .hero {
+  background: linear-gradient(135deg, #ffedd5, #ffffff);
+  padding: 40px 20px;
   text-align: center;
-  padding: 30px 0;
+  border-bottom: 1px solid #fed7aa;
 }
 
 .hero h1 {
-  font-size: 46px;
-  color: #431407;
-  margin: 8px 0;
+  margin: 0;
+  font-size: 42px;
+  color: #7c2d12;
 }
 
 .hero p {
-  color: #57534e;
   font-size: 18px;
-  line-height: 1.6;
+  color: #57534e;
 }
 
-.pill {
-  display: inline-block;
-  background: #ffedd5;
-  color: #9a3412;
-  padding: 7px 12px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: bold;
-  margin: 4px;
-}
-
-.pill.green { background: #dcfce7; color: #166534; }
-.pill.blue { background: #e0f2fe; color: #075985; }
-.pill.purple { background: #f3e8ff; color: #6b21a8; }
-
-.app-layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 20px;
-  align-items: start;
-}
-
-.card {
-  background: white;
-  border-radius: 24px;
-  padding: 22px;
-  border: 1px solid #ffedd5;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-  margin-bottom: 18px;
-}
-
-.chat-window {
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
-  border-radius: 20px;
-  padding: 15px;
-  min-height: 340px;
-  max-height: 460px;
-  overflow-y: auto;
-  margin-bottom: 12px;
-}
-
-.message {
-  padding: 12px 14px;
-  border-radius: 16px;
-  margin: 9px 0;
-  line-height: 1.5;
-}
-
-.guide {
-  background: white;
-  border: 1px solid #fed7aa;
-  color: #7c2d12;
-  font-weight: bold;
-}
-
-.child {
-  background: #dcfce7;
-  color: #14532d;
-  margin-left: 28px;
-}
-
-input {
-  width: 100%;
-  padding: 13px;
-  border-radius: 16px;
-  border: 1px solid #fed7aa;
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-button, .button {
-  display: inline-block;
-  padding: 11px 15px;
-  margin: 5px;
-  border-radius: 999px;
-  border: none;
-  background: #ea580c;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-}
-
-button:hover, .button:hover {
-  background: #c2410c;
-}
-
-button.secondary, .button.secondary {
-  background: #ffedd5;
-  color: #7c2d12;
-}
-
-button.secondary:hover, .button.secondary:hover {
-  background: #fed7aa;
-}
-
-.quick-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.profile-box {
-  background: #fff7ed;
-  border-radius: 18px;
-  padding: 15px;
-  border: 1px solid #fed7aa;
-}
-
-.visual-card {
-  text-align: center;
-  background: linear-gradient(135deg, #fed7aa, #fecdd3);
-}
-
-.emoji {
-  font-size: 58px;
-}
-
-.section-title {
-  color: #7c2d12;
-  font-size: 30px;
-  margin-top: 34px;
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 24px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
 }
 
-.soul-card {
-  border-left: 6px solid #fb923c;
+.card {
+  background: white;
+  border: 1px solid #fed7aa;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
-.soul-card h3 {
-  color: #431407;
+.card h2 {
   margin-top: 0;
-}
-
-.soul-card p {
-  color: #57534e;
-  line-height: 1.55;
-}
-
-.soul-image {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 18px;
-  margin-bottom: 12px;
-  background: #ffedd5;
-}
-
-.notice {
-  background: #fff7ed;
-  border: 1px dashed #fb923c;
-  padding: 14px;
-  border-radius: 18px;
   color: #7c2d12;
+}
+
+.card p {
+  color: #57534e;
+  line-height: 1.5;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: #ea580c;
+  color: white;
+  text-decoration: none;
   font-weight: bold;
 }
 
-footer {
-  margin-top: 40px;
-  padding: 24px;
-  background: #431407;
-  color: white;
-  text-align: center;
+.button.secondary {
+  background: #ffedd5;
+  color: #7c2d12;
 }
 
-@media (max-width: 900px) {
-  .app-layout,
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.badge {
+  display: inline-block;
+  background: #ffedd5;
+  color: #7c2d12;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-  .hero h1 {
-    font-size: 36px;
-  }
+.section-title {
+  margin-top: 32px;
+  color: #7c2d12;
+}
 
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  nav a {
-    margin-left: 0;
-    margin-right: 14px;
-  }
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: #78716c;
+  font-size: 14px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <nav>
-    <strong>🌸 Dharma Kids</strong>
-    <div>
-      <a href="#guide">Guide</a>
-      <a href="#great-souls">Great Souls</a>
-    </div>
-  </nav>
-</header>
+<section class="hero">
+  <h1>🪷 Dharma Kids</h1>
+  <p>Simple spiritual lessons, stories, and reflections for children.</p>
+</section>
 
 <main class="container">
 
-<section class="hero">
-  <span class="pill">Chatbot-led</span>
-  <span class="pill green">Age-aware</span>
-  <span class="pill blue">Personalised</span>
-
-  <h1>Your Spiritual Learning Guide</h1>
-  <p>
-    Meet the great souls through stories, questions, reflection, activities,
-    and gentle conversation.
-  </p>
-</section>
-
-<section id="guide" class="app-layout">
-
   <div class="card">
-    <h2>🤖 Dharma Kids Guide</h2>
-    <p class="notice">
-      New this week: Loving God Within Us — inspired by Sri Ramakrishna’s childhood.
+    <span class="badge">Daily Practice</span>
+    <h2>🌞 Today’s Dharma Lesson</h2>
+    <p>
+      Begin with a short teaching, a simple explanation, and one reflection question for the day.
     </p>
-
-    <div id="chat" class="chat-window"></div>
-
-    <input id="input" placeholder="Type your answer or question here..." />
-
-    <div class="quick-buttons">
-      <button onclick="send()">Send</button>
-      <button class="secondary" onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
-      <button class="secondary" onclick="recommend()">Recommend for me</button>
-      <button class="secondary" onclick="explainSouls()">Who are the Great Souls?</button>
-      <button class="secondary" onclick="resetProfile()">Reset profile</button>
-    </div>
+    <a class="button" href="/daily-lesson.html">Open Today’s Lesson</a>
   </div>
 
-  <aside>
-    <div class="card visual-card">
-      <div class="emoji">🪔</div>
-      <h3>Today’s Path</h3>
-      <p id="today-path">Tell the guide your name and age to begin.</p>
-      <a id="start-link" class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
-    </div>
-
-    <div class="card profile-box">
-      <h3>👧 My Profile</h3>
-      <p><strong>Name:</strong> <span id="name">Not set</span></p>
-      <p><strong>Age:</strong> <span id="age">Not set</span></p>
-      <p><strong>Level:</strong> <span id="level">Not set</span></p>
-    </div>
-  </aside>
-
-</section>
-
-<section id="great-souls">
-  <h2 class="section-title">🌟 Meet the Great Souls</h2>
+  <h2 class="section-title">Guides</h2>
 
   <div class="grid">
-
-    <div class="card soul-card" id="ramakrishna">
-      <img class="soul-image" src="images/sri-ramakrishna.jpg" alt="Sri Ramakrishna">
-      <span class="pill">Joy</span>
-      <span class="pill green">Devotion</span>
-      <h3>Sri Ramakrishna</h3>
+    <div class="card">
+      <span class="badge">Available Now</span>
+      <h2>Sri Ramakrishna Guide</h2>
       <p>
-        Sri Ramakrishna loved God deeply and taught that sincere spiritual
-        practice leads us closer to the Divine. His childhood name was Gadadhar.
+        Ask questions about Sri Ramakrishna and learn through simple answers, stories, and quizzes.
       </p>
-      <a class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
+      <a class="button" href="/sri-ramakrishna.html">Open Guide</a>
     </div>
 
-    <div class="card soul-card" id="sarada">
-      <img class="soul-image" src="images/sri-sarada-devi.jpg" alt="Sri Sarada Devi">
-      <span class="pill">Holy Mother</span>
-      <span class="pill blue">Kindness</span>
-      <h3>Sri Sarada Devi</h3>
+    <div class="card">
+      <span class="badge">Coming Soon</span>
+      <h2>Bhagavad Gita Guide</h2>
       <p>
-        Sri Sarada Devi, lovingly called Holy Mother, teaches compassion,
-        patience, purity, forgiveness, and universal love.
+        Learn teachings from the Gita in a child-friendly way.
       </p>
-      <button class="secondary" onclick="comingSoon('Sri Sarada Devi')">Coming Soon</button>
+      <a class="button secondary" href="#">Coming Soon</a>
     </div>
 
-    <div class="card soul-card" id="vivekananda">
-      <img class="soul-image" src="images/swami-vivekananda.jpg" alt="Swami Vivekananda">
-      <span class="pill">Strength</span>
-      <span class="pill purple">Service</span>
-      <h3>Swami Vivekananda</h3>
+    <div class="card">
+      <span class="badge">Coming Soon</span>
+      <h2>Stories & Saints</h2>
       <p>
-        Swami Vivekananda teaches courage, strength, service, truthfulness,
-        discipline, and faith in oneself.
+        Explore inspiring stories from Hindu tradition and the lives of great souls.
       </p>
-      <button class="secondary" onclick="comingSoon('Swami Vivekananda')">Coming Soon</button>
+      <a class="button secondary" href="#">Coming Soon</a>
     </div>
-
   </div>
-</section>
+
+  <h2 class="section-title">Learning Modes</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h2>💬 Explain Simply</h2>
+      <p>Gentle answers in easy words for young learners.</p>
+    </div>
+
+    <div class="card">
+      <h2>📖 Story Mode</h2>
+      <p>Turns teachings into short, warm stories children can understand.</p>
+    </div>
+
+    <div class="card">
+      <h2>🧠 Quiz Mode</h2>
+      <p>Simple questions and answers to help children remember the lesson.</p>
+    </div>
+  </div>
 
 </main>
 
-<footer>
-  🌸 Dharma Kids — Guided Stories, Values, Devotion
-</footer>
-
-<script>
-let step = 0;
-let childName = "";
-let childAge = "";
-let childLevel = "";
-
-const mostRecentLessons = {
-  "Ages 5–7": {
-    title: "Loving God Within Us",
-    url: "lesson1.html",
-    note: "This is best done with a grown-up for younger children."
-  },
-  "Ages 8–12": {
-    title: "Loving God Within Us",
-    url: "lesson1.html",
-    note: "This is the newest guided chatbot lesson for your age group."
-  },
-  "Ages 13–15": {
-    title: "Loving God Within Us",
-    url: "lesson1.html",
-    note: "Use this lesson for deeper reflection on devotion, truthfulness, and service."
-  }
-};
-
-function add(text, type) {
-  const chat = document.getElementById("chat");
-  const msg = document.createElement("div");
-  msg.className = "message " + type;
-  msg.textContent = text;
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function addButtonMessage(buttonsHtml) {
-  const chat = document.getElementById("chat");
-  const msg = document.createElement("div");
-  msg.className = "message guide";
-  msg.innerHTML = buttonsHtml;
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function updateProfile() {
-  document.getElementById("name").textContent = childName || "Not set";
-  document.getElementById("age").textContent = childAge || "Not set";
-  document.getElementById("level").textContent = childLevel || "Not set";
-
-  if (childLevel) {
-    const recent = mostRecentLessons[childLevel];
-    document.getElementById("today-path").textContent =
-      "Recommended for " + childLevel + ": " + recent.title + ".";
-  } else {
-    document.getElementById("today-path").textContent =
-      "Tell the guide your name and age to begin.";
-  }
-}
-
-function saveProfile() {
-  localStorage.setItem("dkName", childName);
-  localStorage.setItem("dkAge", childAge);
-  localStorage.setItem("dkLevel", childLevel);
-}
-
-function loadProfile() {
-  childName = localStorage.getItem("dkName") || "";
-  childAge = localStorage.getItem("dkAge") || "";
-  childLevel = localStorage.getItem("dkLevel") || "";
-  updateProfile();
-}
-
-function levelFromAge(age) {
-  const n = parseInt(age, 10);
-  if (isNaN(n)) return "";
-  if (n <= 7) return "Ages 5–7";
-  if (n <= 12) return "Ages 8–12";
-  return "Ages 13–15";
-}
-
-function start() {
-  document.getElementById("chat").innerHTML = "";
-  loadProfile();
-
-  if (childName && childAge && childLevel) {
-    step = 3;
-    add("Namaste " + childName + "! Welcome back. I remember you are " + childAge + ".", "guide");
-    add("Would you like a recommendation, the most recent lesson for your age group, or to meet the Great Souls?", "guide");
-    addButtonMessage(`
-      <button onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
-      <button class="secondary" onclick="recommend()">Recommend for me</button>
-    `);
-  } else {
-    step = 0;
-    add("Namaste! I am your Dharma Kids guide. What is your name?", "guide");
-  }
-}
-
-function send() {
-  const input = document.getElementById("input");
-  const text = input.value.trim();
-
-  if (!text) {
-    add("Please type something first.", "guide");
-    return;
-  }
-
-  add(text, "child");
-  input.value = "";
-
-  handle(text);
-}
-
-function handle(text) {
-  const lower = text.toLowerCase();
-
-  if (step === 0) {
-    childName = text;
-    step = 1;
-    updateProfile();
-    add("Nice to meet you, " + childName + "! How old are you?", "guide");
-    return;
-  }
-
-  if (step === 1) {
-    childAge = text;
-    childLevel = levelFromAge(childAge);
-
-    if (!childLevel) {
-      add("Please type your age as a number, like 8 or 11.", "guide");
-      return;
-    }
-
-    step = 2;
-    saveProfile();
-    updateProfile();
-
-    add("Thank you, " + childName + ". I will guide you at the " + childLevel + " level.", "guide");
-    add("Would you like the most recent lesson for your age group? Type yes, or click the button below.", "guide");
-
-    addButtonMessage(`
-      <button onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
-      <button class="secondary" onclick="recommend()">Recommend for me</button>
-    `);
-
-    return;
-  }
-
-  if (lower.includes("recent") || lower.includes("new") || lower.includes("latest") || lower.includes("yes")) {
-    goToMostRecentLesson();
-    return;
-  }
-
-  if (lower.includes("begin") || lower.includes("start") || lower.includes("lesson")) {
-    goToMostRecentLesson();
-    return;
-  }
-
-  if (lower.includes("recommend")) {
-    recommend();
-    return;
-  }
-
-  if (lower.includes("great") || lower.includes("soul") || lower.includes("meet")) {
-    explainSouls();
-    return;
-  }
-
-  if (lower.includes("ramakrishna") || lower.includes("gadadhar")) {
-    add("Sri Ramakrishna loved God deeply. As a child he was called Gadadhar, and he loved divine stories and worship.", "guide");
-    addButtonMessage(`
-      <a class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
-      <a class="button secondary" href="lesson1.html">Start Lesson 1</a>
-    `);
-    return;
-  }
-
-  if (lower.includes("sarada") || lower.includes("mother")) {
-    add("Sri Sarada Devi is Holy Mother. She teaches kindness, patience, purity, forgiveness, and universal love. Her page is coming soon.", "guide");
-    document.getElementById("sarada").scrollIntoView({ behavior: "smooth" });
-    return;
-  }
-
-  if (lower.includes("vivekananda") || lower.includes("swami")) {
-    add("Swami Vivekananda teaches courage, strength, service, discipline, and faith in oneself. His page is coming soon.", "guide");
-    document.getElementById("vivekananda").scrollIntoView({ behavior: "smooth" });
-    return;
-  }
-
-  add("I can help you get the most recent lesson, meet Sri Ramakrishna, or learn about the Great Souls.", "guide");
-}
-
-function recommend() {
-  if (!childLevel) {
-    add("Please tell me your name and age first, then I can recommend where to begin.", "guide");
-    return;
-  }
-
-  if (childLevel === "Ages 5–7") {
-    add(childName + ", I recommend beginning with a grown-up: first meet Sri Ramakrishna, then try the simple parts of Loving God Within Us.", "guide");
-  } else if (childLevel === "Ages 8–12") {
-    add(childName + ", I recommend starting with Sri Ramakrishna’s background page. Then begin the chatbot lesson Loving God Within Us.", "guide");
-  } else {
-    add(childName + ", I recommend reading Sri Ramakrishna’s background page first, then using the lesson for deeper reflection.", "guide");
-  }
-
-  add("Use these buttons:", "guide");
-
-  addButtonMessage(`
-    <a class="button" href="sri-ramakrishna.html">Meet Sri Ramakrishna</a>
-    <a class="button secondary" href="lesson1.html">Start Lesson 1</a>
-    <button class="secondary" onclick="goToMostRecentLesson()">Most Recent Lesson for Me</button>
-  `);
-}
-
-function goToMostRecentLesson() {
-  if (!childLevel) {
-    add("Please tell me your name and age first, then I can find the most recent lesson for you.", "guide");
-    return;
-  }
-
-  const recent = mostRecentLessons[childLevel];
-
-  add("The most recent lesson for " + childLevel + " is: " + recent.title + ".", "guide");
-  add(recent.note, "guide");
-
-  addButtonMessage(`
-    <a class="button" href="${recent.url}">Go to Most Recent Lesson</a>
-    <a class="button secondary" href="sri-ramakrishna.html">Meet Sri Ramakrishna First</a>
-  `);
-}
-
-function explainSouls() {
-  add("The Great Souls are spiritual teachers whose lives help us learn values.", "guide");
-  add("Sri Ramakrishna teaches love for God and joy in spiritual life.", "guide");
-  add("Sri Sarada Devi teaches motherly love, kindness, patience, and purity.", "guide");
-  add("Swami Vivekananda teaches courage, strength, service, and confidence.", "guide");
-  document.getElementById("great-souls").scrollIntoView({ behavior: "smooth" });
-}
-
-function resetProfile() {
-  localStorage.removeItem("dkName");
-  localStorage.removeItem("dkAge");
-  localStorage.removeItem("dkLevel");
-  childName = "";
-  childAge = "";
-  childLevel = "";
-  step = 0;
-  updateProfile();
-  start();
-}
-
-function comingSoon(name) {
-  alert(name + " lessons are coming soon.");
-}
-
-document.getElementById("input").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    send();
-  }
-});
-
-start();
-</script>
+<div class="footer">
+  Dharma Kids · Learning with love, reflection, and kindness
+</div>
 
 </body>
 </html>
