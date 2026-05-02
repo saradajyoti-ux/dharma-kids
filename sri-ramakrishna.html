@@ -13,6 +13,18 @@ body {
   color: #292524;
 }
 
+.nav {
+  padding: 12px 20px;
+  border-bottom: 1px solid #fed7aa;
+  background: white;
+}
+
+.nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #ea580c;
+}
+
 .page {
   max-width: 760px;
   margin: 0 auto;
@@ -127,6 +139,11 @@ button.ask {
 </head>
 
 <body>
+
+<div class="nav">
+  <a href="/">← Back to Home</a>
+</div>
+
 <div class="page">
   <div class="card">
     <h1>Sri Ramakrishna Guide</h1>
@@ -179,8 +196,9 @@ function addMessage(text, who) {
   div.className = "message " + who;
   div.innerText = text;
 
-  document.getElementById("chat").appendChild(div);
-  document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+  const chat = document.getElementById("chat");
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
 }
 
 function handleEnter(event) {
@@ -221,7 +239,9 @@ async function ask() {
     const data = await res.json();
 
     const chat = document.getElementById("chat");
-    chat.lastChild.innerText = data.answer || "I do not know from the materials I have. Please ask your teacher.";
+    chat.lastChild.innerText =
+      data.answer ||
+      "I do not know from the materials I have. Please ask your teacher.";
   } catch (err) {
     const chat = document.getElementById("chat");
     chat.lastChild.innerText = "Sorry, I could not answer right now.";
