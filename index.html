@@ -115,6 +115,14 @@ input, select {
   font-size: 14px;
 }
 
+.parent-mode-box {
+  margin-top: 14px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 16px;
+  padding: 12px;
+}
+
 .footer {
   text-align: center;
   padding: 24px;
@@ -150,8 +158,18 @@ input, select {
 
     <button class="button" onclick="saveProfile()">Save Profile</button>
 
+    <div class="parent-mode-box">
+      <label>
+        <input type="checkbox" id="parentModeToggle" onchange="toggleParentMode()" />
+        👨‍👩‍👧 Parent / Teacher Mode
+      </label>
+      <p style="margin-bottom:0;">
+        Adds deeper context and a discussion question to chatbot answers.
+      </p>
+    </div>
+
     <div id="profileSummary" class="profile-summary">
-      Name: Guest · Age: Not set · Level: General
+      Name: Guest · Age: Not set · Level: General · Parent Mode: Off
     </div>
   </div>
 
@@ -220,17 +238,28 @@ function saveProfile() {
   updateProfileSummary();
 }
 
+function toggleParentMode() {
+  const enabled = document.getElementById("parentModeToggle").checked;
+  localStorage.setItem("dkParentMode", enabled ? "true" : "false");
+  updateProfileSummary();
+}
+
 function updateProfileSummary() {
   const name = localStorage.getItem("dkName") || "Guest";
   const age = localStorage.getItem("dkAge") || "Not set";
   const level = localStorage.getItem("dkLevel") || "General";
+  const parentMode = localStorage.getItem("dkParentMode") === "true";
 
   document.getElementById("nameInput").value = name === "Guest" ? "" : name;
   document.getElementById("ageInput").value = age === "Not set" ? "" : age;
   document.getElementById("levelInput").value = level;
+  document.getElementById("parentModeToggle").checked = parentMode;
 
   document.getElementById("profileSummary").innerText =
-    "Name: " + name + " · Age: " + age + " · Level: " + level;
+    "Name: " + name +
+    " · Age: " + age +
+    " · Level: " + level +
+    " · Parent Mode: " + (parentMode ? "On" : "Off");
 }
 
 async function loadLessons() {
