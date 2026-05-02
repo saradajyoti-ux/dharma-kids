@@ -13,18 +13,26 @@ const rawChunks = JSON.parse(
   )
 );
 
-const chunks = rawChunks.filter(chunk => chunk && chunk.text);
+function normalizeChunks(data) {
+  if (Array.isArray(data)) return data;
+
+  if (Array.isArray(data.chunks)) return data.chunks;
+  if (Array.isArray(data.items)) return data.items;
+  if (Array.isArray(data.data)) return data.data;
+
+  return Object.values(data).filter(item => item && typeof item === "object");
+}
+
+const chunks = normalizeChunks(rawChunks).filter(chunk => {
+  return chunk && (chunk.text || chunk.content);
+});
 
 function pickDailyChunks() {
   const day = Math.floor(Date.now() / 86400000);
 
-  if (!chunks.length) {
-    return [];
-  }
-
   return [0, 1, 2, 3, 4, 5]
     .map(i => chunks[(day + i * 23) % chunks.length])
-    .filter(chunk => chunk && chunk.text);
+    .filter(chunk => chunk && (chunk.text || chunk.content));
 }
 
 export default async function handler(req, res) {
@@ -38,7 +46,7 @@ export default async function handler(req, res) {
     }
 
     const context = selectedChunks
-      .map(chunk => chunk.text)
+      .map(chunk => chunk.text || chunk.content)
       .join("\n\n---\n\n");
 
     const prompt = `
