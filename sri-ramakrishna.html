@@ -7,48 +7,161 @@
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 20px;
   background: #fff7ed;
+  color: #292524;
 }
 
-button {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 10px;
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #fed7aa;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.mode-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.mode-btn {
+  padding: 10px 14px;
+  border-radius: 999px;
   border: none;
+  cursor: pointer;
+  background: #e5e7eb;
+  font-weight: bold;
+}
+
+.mode-btn.active {
+  background: #f97316;
+  color: white;
+}
+
+.mode-description {
+  background: #ffedd5;
+  color: #7c2d12;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.chat-box {
+  height: 430px;
+  overflow-y: auto;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.message {
+  max-width: 80%;
+  padding: 12px 14px;
+  border-radius: 18px;
+  margin: 10px 0;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.user {
+  background: #dcfce7;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.bot {
+  background: white;
+  border: 1px solid #fed7aa;
+  color: #7c2d12;
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1;
+  padding: 13px;
+  border-radius: 999px;
+  border: 1px solid #fed7aa;
+  font-size: 15px;
+}
+
+button.ask {
+  padding: 13px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #f97316;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.active {
-  background: orange;
-  color: white;
+.small {
+  font-size: 13px;
+  color: #78716c;
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
+<div class="page">
+  <div class="card">
+    <h1>Sri Ramakrishna Guide</h1>
 
-<h2>Sri Ramakrishna Guide</h2>
+    <div class="mode-row">
+      <button id="simple" class="mode-btn active" onclick="setMode('simple')">Explain Simply</button>
+      <button id="story" class="mode-btn" onclick="setMode('story')">Story</button>
+      <button id="quiz" class="mode-btn" onclick="setMode('quiz')">Quiz</button>
+    </div>
 
-<div>
-  <button id="simple" onclick="setMode('simple')" class="active">Explain Simply</button>
-  <button id="story" onclick="setMode('story')">Story</button>
-  <button id="quiz" onclick="setMode('quiz')">Quiz</button>
+    <div id="modeDescription" class="mode-description">
+      <strong>Explain Simply:</strong> Get a short, gentle answer in simple words.
+    </div>
+
+    <div id="chat" class="chat-box"></div>
+
+    <div class="input-row">
+      <input id="question" placeholder="Ask something about Sri Ramakrishna..." onkeydown="handleEnter(event)" />
+      <button class="ask" onclick="ask()">Ask</button>
+    </div>
+
+    <div class="small">
+      Try: “Who was Sri Ramakrishna?” or “What did he teach about God?”
+    </div>
+  </div>
 </div>
-
-<br>
-
-<div id="chat"></div>
-
-<br>
-
-<input id="question" placeholder="Ask something..." />
-<button onclick="ask()">Ask</button>
 
 <script>
 let mode = "simple";
+
+const descriptions = {
+  simple: "<strong>Explain Simply:</strong> Get a short, gentle answer in simple words.",
+  story: "<strong>Story:</strong> Turn the teaching into a short child-friendly story.",
+  quiz: "<strong>Quiz:</strong> Get 3 simple questions and answers to help you remember."
+};
 
 function setMode(m) {
   mode = m;
@@ -58,34 +171,64 @@ function setMode(m) {
   document.getElementById("quiz").classList.remove("active");
 
   document.getElementById(m).classList.add("active");
+  document.getElementById("modeDescription").innerHTML = descriptions[m];
 }
 
-function add(text) {
+function addMessage(text, who) {
   const div = document.createElement("div");
+  div.className = "message " + who;
   div.innerText = text;
+
   document.getElementById("chat").appendChild(div);
+  document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+}
+
+function handleEnter(event) {
+  if (event.key === "Enter") {
+    ask();
+  }
 }
 
 async function ask() {
-  const q = document.getElementById("question").value;
+  const input = document.getElementById("question");
+  const q = input.value.trim();
 
-  add("You: " + q);
+  if (!q) return;
 
-  const res = await fetch("/api/ramakrishna-chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      question: q,
-      mode: mode
-    })
-  });
+  addMessage(q, "user");
+  input.value = "";
 
-  const data = await res.json();
+  const loadingText = {
+    simple: "Let me explain that simply...",
+    story: "Let me tell that as a story...",
+    quiz: "Let me make a quiz for you..."
+  };
 
-  add("Guide: " + data.answer);
+  addMessage(loadingText[mode], "bot");
+
+  try {
+    const res = await fetch("/api/ramakrishna-chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        question: q,
+        mode: mode
+      })
+    });
+
+    const data = await res.json();
+
+    const chat = document.getElementById("chat");
+    chat.lastChild.innerText = data.answer || "I do not know from the materials I have. Please ask your teacher.";
+  } catch (err) {
+    const chat = document.getElementById("chat");
+    chat.lastChild.innerText = "Sorry, I could not answer right now.";
+  }
 }
+
+addMessage("Namaste! Choose a mode, then ask me about Sri Ramakrishna.", "bot");
 </script>
 
 </body>
