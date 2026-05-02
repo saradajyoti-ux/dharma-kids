@@ -2,7 +2,11 @@
   "name": "dharma-kids",
   "private": true,
   "type": "module",
+  "scripts": {
+    "ingest:ramakrishna": "node scripts/ingest-ramakrishna.js"
+  },
   "dependencies": {
-    "@google/genai": "latest"
+    "@google/genai": "latest",
+    "pdf-parse": "latest"
   }
 }
