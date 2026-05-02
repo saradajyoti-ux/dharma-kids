@@ -6,203 +6,86 @@
 <title>Sri Ramakrishna | Dharma Kids</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
+  font-family: Arial;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
-  color: #292524;
-}
-
-header {
-  position: sticky;
-  top: 0;
-  background: rgba(255,255,255,0.95);
-  border-bottom: 1px solid #fed7aa;
-  padding: 14px 20px;
-}
-
-nav {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-nav a {
-  color: #7c2d12;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 28px 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 24px;
-  padding: 22px;
-  border: 1px solid #ffedd5;
-  margin-bottom: 18px;
-}
-
-.soul-image {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 24px;
-}
-
-.chat-window {
+  padding: 20px;
   background: #fff7ed;
-  border: 1px solid #fed7aa;
-  border-radius: 20px;
-  padding: 15px;
-  min-height: 260px;
-  max-height: 420px;
-  overflow-y: auto;
-  margin-bottom: 12px;
-}
-
-.message {
-  padding: 12px;
-  border-radius: 16px;
-  margin: 8px 0;
-}
-
-.guide {
-  background: white;
-  border: 1px solid #fed7aa;
-  color: #7c2d12;
-}
-
-.child {
-  background: #dcfce7;
-  margin-left: 20px;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 16px;
-  border: 1px solid #fed7aa;
 }
 
 button {
-  margin-top: 8px;
-  padding: 10px 14px;
-  border-radius: 999px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
   border: none;
-  background: #ea580c;
-  color: white;
-  font-weight: bold;
   cursor: pointer;
 }
 
-button.secondary {
-  background: #ffedd5;
-  color: #7c2d12;
+.active {
+  background: orange;
+  color: white;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <nav>
-    <a href="index.html">⬅ Home</a>
-    <a href="lesson1.html">Start Lesson</a>
-  </nav>
-</header>
+<h2>Sri Ramakrishna Guide</h2>
 
-<main class="container">
-
-<div class="card">
-  <h1>🌸 Sri Ramakrishna</h1>
-  <img src="images/sri-ramakrishna.jpg" class="soul-image">
-  <p>
-    Sri Ramakrishna was a great spiritual teacher who loved God deeply.
-    As a child, he was called Gadadhar and enjoyed stories of Sri Ram and Sri Krishna.
-  </p>
+<div>
+  <button id="simple" onclick="setMode('simple')" class="active">Explain Simply</button>
+  <button id="story" onclick="setMode('story')">Story</button>
+  <button id="quiz" onclick="setMode('quiz')">Quiz</button>
 </div>
 
-<div class="card">
-  <h2>🤖 Ask the Sri Ramakrishna Guide</h2>
+<br>
 
-  <div id="chat" class="chat-window"></div>
+<div id="chat"></div>
 
-  <input id="question" placeholder="Ask about Sri Ramakrishna..." />
+<br>
 
-  <button onclick="askGuide()">Ask Guide</button>
-  <button class="secondary" onclick="quick('Who was Gadadhar?')">Who was Gadadhar?</button>
-  <button class="secondary" onclick="quick('What did he teach?')">What did he teach?</button>
-</div>
-
-</main>
+<input id="question" placeholder="Ask something..." />
+<button onclick="ask()">Ask</button>
 
 <script>
-function addMessage(text, type) {
-  const chat = document.getElementById("chat");
-  const msg = document.createElement("div");
-  msg.className = "message " + type;
-  msg.textContent = text;
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
+let mode = "simple";
+
+function setMode(m) {
+  mode = m;
+
+  document.getElementById("simple").classList.remove("active");
+  document.getElementById("story").classList.remove("active");
+  document.getElementById("quiz").classList.remove("active");
+
+  document.getElementById(m).classList.add("active");
 }
 
-function quick(q) {
-  document.getElementById("question").value = q;
-  askGuide();
+function add(text) {
+  const div = document.createElement("div");
+  div.innerText = text;
+  document.getElementById("chat").appendChild(div);
 }
 
-async function askGuide() {
-  const input = document.getElementById("question");
-  const question = input.value.trim();
+async function ask() {
+  const q = document.getElementById("question").value;
 
-  if (!question) {
-    addMessage("Please type a question.", "guide");
-    return;
-  }
+  add("You: " + q);
 
-  addMessage(question, "child");
-  input.value = "";
+  const res = await fetch("/api/ramakrishna-chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      question: q,
+      mode: mode
+    })
+  });
 
-  addMessage("Let me think about what Sri Ramakrishna taught...", "guide");
+  const data = await res.json();
 
-  const childName = localStorage.getItem("dkName");
-  const childAge = localStorage.getItem("dkAge");
-  const childLevel = localStorage.getItem("dkLevel");
-
-  try {
-    const res = await fetch("/api/ramakrishna-chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        question,
-        childName,
-        childAge,
-        childLevel
-      })
-    });
-
-    const data = await res.json();
-
-    addMessage(
-      data.answer || "I do not know from the materials I have. Please ask your teacher.",
-      "guide"
-    );
-  } catch (err) {
-    addMessage("Sorry, I could not answer right now.", "guide");
-  }
+  add("Guide: " + data.answer);
 }
-
-addMessage("Namaste! Ask me about Sri Ramakrishna.", "guide");
 </script>
 
 </body>
