@@ -6,6 +6,10 @@
 <title>Dharma Kids</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -46,12 +50,6 @@ body {
   box-shadow: 0 8px 18px rgba(124, 45, 18, 0.08);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 18px;
-}
-
 h2 {
   color: #7c2d12;
   margin-top: 0;
@@ -66,6 +64,12 @@ h2 {
   font-size: 13px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
 }
 
 button,
@@ -97,36 +101,82 @@ button:hover,
   background: #ffedd5;
 }
 
-.profile-row {
+.profile-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.field {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  margin: 12px 0;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: bold;
+  color: #7c2d12;
+  font-size: 14px;
 }
 
 input,
 select {
-  padding: 10px;
-  border-radius: 10px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
   border: 1px solid #fdba74;
   background: #fffaf5;
+  font-size: 15px;
+}
+
+.parent-mode-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  padding: 14px;
+  border-radius: 14px;
+  margin: 12px 0;
+}
+
+.parent-mode-box input {
+  width: auto;
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#profileSummary {
+  background: #fff7ed;
+  border-radius: 12px;
+  padding: 12px;
+  color: #57534e;
 }
 
 .avatar-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 12px;
-  margin-top: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
 }
 
 .avatar-option {
   border: 2px solid #fed7aa;
   background: #fff7ed;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 14px;
   text-align: center;
   cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.avatar-option:hover {
+  transform: translateY(-3px);
 }
 
 .avatar-option.selected {
@@ -134,13 +184,18 @@ select {
   background: #ffedd5;
 }
 
-.avatar-face {
-  font-size: 42px;
+.avatar-img {
+  width: 100%;
+  max-width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin: auto;
+  display: block;
 }
 
 .avatar-name {
   font-weight: bold;
-  margin-top: 6px;
+  margin-top: 8px;
   color: #7c2d12;
 }
 
@@ -156,11 +211,17 @@ select {
   background: #fff7ed;
   border-radius: 16px;
   padding: 16px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
-.chat-avatar {
-  font-size: 44px;
+.chat-avatar-img {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  background: white;
+  border-radius: 18px;
+  border: 1px solid #fed7aa;
+  padding: 6px;
 }
 
 .chat-bubble {
@@ -181,6 +242,22 @@ select {
   color: #78716c;
   padding: 30px;
 }
+
+@media (max-width: 760px) {
+  .profile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .chat-preview {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
 </style>
 </head>
 
@@ -193,13 +270,23 @@ select {
 
 <main class="container">
 
-  <section class="card">
-    <span class="badge">Child Profile</span>
-    <h2>Who is learning today?</h2>
+<section class="card">
+  <span class="badge">Child Profile</span>
+  <h2>Who is learning today?</h2>
 
-    <div class="profile-row">
-      <input id="childName" type="text" placeholder="Child name" />
-      <input id="childAge" type="number" placeholder="Age" min="3" max="18" />
+  <div class="profile-form">
+    <div class="field">
+      <label for="childName">Child name</label>
+      <input id="childName" type="text" placeholder="Example: Aarav" />
+    </div>
+
+    <div class="field">
+      <label for="childAge">Age</label>
+      <input id="childAge" type="number" placeholder="Example: 8" min="3" max="18" />
+    </div>
+
+    <div class="field">
+      <label for="childLevel">Learning level</label>
       <select id="childLevel">
         <option value="General">General</option>
         <option value="Young Child">Young Child</option>
@@ -207,114 +294,109 @@ select {
         <option value="Teen">Teen</option>
       </select>
     </div>
+  </div>
 
-    <div class="profile-row">
-      <label>
-        <input id="parentMode" type="checkbox" />
-        Parent / Teacher Mode
-      </label>
-    </div>
+  <label class="parent-mode-box">
+    <input id="parentMode" type="checkbox" />
+    <span>Parent / Teacher Mode — adds deeper context and discussion questions.</span>
+  </label>
 
-    <p>Adds deeper context and discussion questions to chatbot answers.</p>
-
+  <div class="profile-actions">
     <button onclick="saveProfile()">Save Profile</button>
     <a class="link-button secondary-button" href="guided-reflections.html">Guided Reflections</a>
+  </div>
 
-    <p id="profileSummary">
-      Name: Guest · Age: Not set · Level: General · Parent Mode: Off
-    </p>
-  </section>
+  <p id="profileSummary">Name: Guest · Age: Not set · Level: General · Parent Mode: Off</p>
+</section>
 
-  <section class="card">
-    <span class="badge">New Feature</span>
-    <h2>Choose Your Dharma Guide Avatar</h2>
-    <p>Pick a guide personality. This changes how the app speaks to the child.</p>
+<section class="card">
+  <span class="badge">Avatar Guide</span>
+  <h2>Choose Your Dharma Guide</h2>
+  <p>Pick a guide. This changes the personality and tone of the learning helper.</p>
 
-    <div class="avatar-grid">
-      <div class="avatar-option" onclick="selectAvatar('ananda')" id="avatar-ananda">
-        <div class="avatar-face">🪷</div>
-        <div class="avatar-name">Ananda</div>
-        <div class="avatar-style">Gentle & calming</div>
-      </div>
-
-      <div class="avatar-option" onclick="selectAvatar('tara')" id="avatar-tara">
-        <div class="avatar-face">🌟</div>
-        <div class="avatar-name">Tara</div>
-        <div class="avatar-style">Cheerful & playful</div>
-      </div>
-
-      <div class="avatar-option" onclick="selectAvatar('vivek')" id="avatar-vivek">
-        <div class="avatar-face">📚</div>
-        <div class="avatar-name">Vivek</div>
-        <div class="avatar-style">Wise & thoughtful</div>
-      </div>
-
-      <div class="avatar-option" onclick="selectAvatar('gopal')" id="avatar-gopal">
-        <div class="avatar-face">🎵</div>
-        <div class="avatar-name">Gopal</div>
-        <div class="avatar-style">Story-based & fun</div>
-      </div>
+  <div class="avatar-grid">
+    <div class="avatar-option" onclick="selectAvatar('vivekananda')" id="avatar-vivekananda">
+      <img class="avatar-img" id="img-vivekananda" alt="Cartoon Swami Vivekananda" />
+      <div class="avatar-name">Vivekananda</div>
+      <div class="avatar-style">Brave, wise, inspiring</div>
     </div>
 
-    <div class="chat-preview">
-      <div class="chat-avatar" id="previewAvatar">🪷</div>
-      <div class="chat-bubble">
-        <strong id="previewName">Ananda</strong>
-        <p id="previewMessage">
-          Let us learn slowly and peacefully. Every kind thought is like a little flower offered to God.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="card">
-    <span class="badge">Daily Practice</span>
-    <h2>Today’s Dharma Lesson</h2>
-    <p>Begin with a short teaching, a simple explanation, and one reflection question for the day.</p>
-    <a class="link-button" href="lesson1.html">Open Today’s Lesson</a>
-  </section>
-
-  <section class="card">
-    <h2>Your Lessons</h2>
-
-    <div class="grid">
-      <div class="card lesson-card">
-        <span class="badge">Lesson 1</span>
-        <h2>Loving God Within Us</h2>
-        <p>Learn how kindness, prayer, and truthfulness help us feel God within.</p>
-        <a class="link-button" href="lesson1.html">Open Lesson</a>
-      </div>
-
-      <div class="card lesson-card">
-        <span class="badge">Lesson 2</span>
-        <h2>Seeing God in Everyone</h2>
-        <p>Practice respect, compassion, and seeing the divine in all beings.</p>
-        <a class="link-button" href="lesson2.html">Open Lesson</a>
-      </div>
+    <div class="avatar-option" onclick="selectAvatar('krishna')" id="avatar-krishna">
+      <img class="avatar-img" id="img-krishna" alt="Cartoon Krishna" />
+      <div class="avatar-name">Krishna</div>
+      <div class="avatar-style">Playful, loving, joyful</div>
     </div>
 
-    <a class="link-button secondary-button" href="lesson1.html">View All Lessons</a>
-  </section>
-
-  <section class="card">
-    <h2>Guides</h2>
-
-    <div class="grid">
-      <div class="card guide-card">
-        <span class="badge">Available Now</span>
-        <h2>Sri Ramakrishna Guide</h2>
-        <p>Ask questions about Sri Ramakrishna and learn through simple answers, stories, and quizzes.</p>
-        <a class="link-button" href="sri-ramakrishna.html">Open Guide</a>
-      </div>
-
-      <div class="card guide-card">
-        <span class="badge">Coming Soon</span>
-        <h2>Bhagavad Gita Guide</h2>
-        <p>Learn teachings from the Gita in a child-friendly way.</p>
-        <button class="secondary-button" disabled>Coming Soon</button>
-      </div>
+    <div class="avatar-option" onclick="selectAvatar('sarada')" id="avatar-sarada">
+      <img class="avatar-img" id="img-sarada" alt="Cartoon Holy Mother Sarada Devi" />
+      <div class="avatar-name">Sarada Devi</div>
+      <div class="avatar-style">Gentle, motherly, kind</div>
     </div>
-  </section>
+
+    <div class="avatar-option" onclick="selectAvatar('ramakrishna')" id="avatar-ramakrishna">
+      <img class="avatar-img" id="img-ramakrishna" alt="Cartoon Sri Ramakrishna" />
+      <div class="avatar-name">Sri Ramakrishna</div>
+      <div class="avatar-style">Simple, devotional, story-based</div>
+    </div>
+  </div>
+
+  <div class="chat-preview">
+    <img class="chat-avatar-img" id="previewAvatar" alt="Selected guide" />
+    <div class="chat-bubble">
+      <strong id="previewName">Vivekananda</strong>
+      <p id="previewMessage">Be brave, be truthful, and remember that strength and kindness can live together in your heart.</p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <span class="badge">Daily Practice</span>
+  <h2>Today’s Dharma Lesson</h2>
+  <p>Begin with a short teaching, a simple explanation, and one reflection question for the day.</p>
+  <a class="link-button" href="lesson1.html">Open Today’s Lesson</a>
+</section>
+
+<section class="card">
+  <h2>Your Lessons</h2>
+
+  <div class="grid">
+    <div class="card lesson-card">
+      <span class="badge">Lesson 1</span>
+      <h2>Loving God Within Us</h2>
+      <p>Learn how kindness, prayer, and truthfulness help us feel God within.</p>
+      <a class="link-button" href="lesson1.html">Open Lesson</a>
+    </div>
+
+    <div class="card lesson-card">
+      <span class="badge">Lesson 2</span>
+      <h2>Seeing God in Everyone</h2>
+      <p>Practice respect, compassion, and seeing the divine in all beings.</p>
+      <a class="link-button" href="lesson2.html">Open Lesson</a>
+    </div>
+  </div>
+
+  <a class="link-button secondary-button" href="lesson1.html">View All Lessons</a>
+</section>
+
+<section class="card">
+  <h2>Guides</h2>
+
+  <div class="grid">
+    <div class="card guide-card">
+      <span class="badge">Available Now</span>
+      <h2>Sri Ramakrishna Guide</h2>
+      <p>Ask questions about Sri Ramakrishna and learn through simple answers, stories, and quizzes.</p>
+      <a class="link-button" href="sri-ramakrishna.html">Open Guide</a>
+    </div>
+
+    <div class="card guide-card">
+      <span class="badge">Coming Soon</span>
+      <h2>Bhagavad Gita Guide</h2>
+      <p>Learn teachings from the Gita in a child-friendly way.</p>
+      <button class="secondary-button" disabled>Coming Soon</button>
+    </div>
+  </div>
+</section>
 
 </main>
 
@@ -323,34 +405,98 @@ select {
 </footer>
 
 <script>
+const avatarImages = {
+  vivekananda: `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" rx="36" fill="#fff7ed"/>
+    <circle cx="100" cy="90" r="48" fill="#f8c7a1"/>
+    <path d="M45 78 C55 34,145 34,155 78 C130 58,75 58,45 78Z" fill="#f97316"/>
+    <path d="M52 74 C65 38,135 38,148 74 C118 62,82 62,52 74Z" fill="#fb923c"/>
+    <circle cx="82" cy="94" r="5" fill="#292524"/>
+    <circle cx="118" cy="94" r="5" fill="#292524"/>
+    <path d="M82 120 Q100 136 118 120" stroke="#7c2d12" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M54 160 C66 132,134 132,146 160 L158 200 L42 200Z" fill="#ea580c"/>
+    <path d="M74 148 Q100 172 126 148" fill="#fed7aa"/>
+  </svg>`,
+
+  krishna: `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" rx="36" fill="#eff6ff"/>
+    <circle cx="100" cy="94" r="48" fill="#93c5fd"/>
+    <path d="M55 74 C65 38,135 38,145 74 C130 58,75 58,55 74Z" fill="#1e3a8a"/>
+    <path d="M129 39 C144 20,166 26,170 51 C151 47,139 49,129 39Z" fill="#22c55e"/>
+    <path d="M147 24 C153 39,153 49,148 62" stroke="#facc15" stroke-width="5" fill="none"/>
+    <circle cx="82" cy="96" r="5" fill="#111827"/>
+    <circle cx="118" cy="96" r="5" fill="#111827"/>
+    <path d="M82 121 Q100 138 119 121" stroke="#1e3a8a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="100" cy="72" r="5" fill="#facc15"/>
+    <path d="M48 162 C65 132,135 132,152 162 L164 200 L36 200Z" fill="#facc15"/>
+    <path d="M68 154 Q100 178 132 154" fill="#60a5fa"/>
+  </svg>`,
+
+  sarada: `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" rx="36" fill="#fdf2f8"/>
+    <circle cx="100" cy="92" r="46" fill="#f7c8a8"/>
+    <path d="M49 84 C56 42,144 42,151 84 C132 62,70 62,49 84Z" fill="#f9a8d4"/>
+    <path d="M54 80 C68 50,132 50,146 80 L134 68 C113 59,86 59,66 68Z" fill="#fbcfe8"/>
+    <circle cx="83" cy="96" r="5" fill="#292524"/>
+    <circle cx="117" cy="96" r="5" fill="#292524"/>
+    <path d="M83 120 Q100 134 117 120" stroke="#831843" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M44 160 C64 130,136 130,156 160 L168 200 L32 200Z" fill="#f9a8d4"/>
+    <path d="M66 148 Q100 172 134 148" fill="#fff1f2"/>
+  </svg>`,
+
+  ramakrishna: `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" rx="36" fill="#fefce8"/>
+    <circle cx="100" cy="92" r="48" fill="#f3c29d"/>
+    <path d="M56 76 C65 42,135 42,144 76 C122 63,78 63,56 76Z" fill="#57534e"/>
+    <path d="M64 72 C78 54,122 54,136 72" stroke="#78716c" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="83" cy="96" r="5" fill="#292524"/>
+    <circle cx="117" cy="96" r="5" fill="#292524"/>
+    <path d="M82 121 Q100 137 118 121" stroke="#7c2d12" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M76 128 Q100 144 124 128" stroke="#a16207" stroke-width="3" fill="none"/>
+    <path d="M44 160 C62 132,138 132,156 160 L170 200 L30 200Z" fill="#ffffff"/>
+    <path d="M66 150 Q100 174 134 150" fill="#fde68a"/>
+  </svg>`
+};
+
 const avatarData = {
-  ananda: {
-    emoji: "🪷",
-    name: "Ananda",
-    personality: "gentle",
-    message: "Let us learn slowly and peacefully. Every kind thought is like a little flower offered to God."
+  vivekananda: {
+    name: "Vivekananda",
+    personality: "inspiring",
+    message: "Be brave, be truthful, and remember that strength and kindness can live together in your heart."
   },
-  tara: {
-    emoji: "🌟",
-    name: "Tara",
+  krishna: {
+    name: "Krishna",
     personality: "playful",
-    message: "Yay, let’s explore! Dharma can be joyful, bright, and full of little discoveries."
+    message: "Let us learn with joy. Even a small act of love can make the whole world brighter."
   },
-  vivek: {
-    emoji: "📚",
-    name: "Vivek",
-    personality: "wise",
-    message: "Let us think carefully. A good question can open the door to wisdom."
+  sarada: {
+    name: "Sarada Devi",
+    personality: "gentle",
+    message: "Speak softly, help others, and keep your heart peaceful like a quiet lamp."
   },
-  gopal: {
-    emoji: "🎵",
-    name: "Gopal",
-    personality: "story",
-    message: "Come, I’ll tell you a story. Sometimes the heart learns best through wonder."
+  ramakrishna: {
+    name: "Sri Ramakrishna",
+    personality: "devotional",
+    message: "God can be loved in many ways. A pure and simple heart is very precious."
   }
 };
 
-let selectedAvatar = localStorage.getItem("dkAvatar") || "ananda";
+let selectedAvatar = localStorage.getItem("dkAvatar") || "vivekananda";
+
+function svgToDataUri(svg) {
+  return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+}
+
+function loadAvatarImages() {
+  Object.keys(avatarImages).forEach(key => {
+    const img = document.getElementById(`img-${key}`);
+    if (img) img.src = svgToDataUri(avatarImages[key]);
+  });
+}
 
 function saveProfile() {
   const name = document.getElementById("childName").value.trim() || "Guest";
@@ -378,7 +524,9 @@ function updateProfileSummary() {
 
 function selectAvatar(key) {
   selectedAvatar = key;
+
   localStorage.setItem("dkAvatar", key);
+  localStorage.setItem("dkAvatarName", avatarData[key].name);
   localStorage.setItem("dkAvatarPersonality", avatarData[key].personality);
 
   Object.keys(avatarData).forEach(id => {
@@ -386,16 +534,17 @@ function selectAvatar(key) {
   });
 
   document.getElementById(`avatar-${key}`).classList.add("selected");
-
-  document.getElementById("previewAvatar").textContent = avatarData[key].emoji;
+  document.getElementById("previewAvatar").src = svgToDataUri(avatarImages[key]);
   document.getElementById("previewName").textContent = avatarData[key].name;
   document.getElementById("previewMessage").textContent = avatarData[key].message;
 }
 
 function loadProfile() {
   document.getElementById("childName").value = localStorage.getItem("dkChildName") || "";
-  document.getElementById("childAge").value =
-    localStorage.getItem("dkChildAge") === "Not set" ? "" : localStorage.getItem("dkChildAge") || "";
+
+  const savedAge = localStorage.getItem("dkChildAge");
+  document.getElementById("childAge").value = savedAge === "Not set" ? "" : savedAge || "";
+
   document.getElementById("childLevel").value = localStorage.getItem("dkChildLevel") || "General";
   document.getElementById("parentMode").checked = localStorage.getItem("dkParentMode") === "on";
 
@@ -403,6 +552,7 @@ function loadProfile() {
   selectAvatar(selectedAvatar);
 }
 
+loadAvatarImages();
 loadProfile();
 </script>
 
