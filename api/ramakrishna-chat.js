@@ -6,60 +6,34 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
 });
 
-const PDF_FILES = [
-  "gospel-part-1.pdf",
-  "gospel-part-2.pdf",
-  "gospel-part-3.pdf",
-  "gospel-part-4.pdf"
-];
+const chunks = JSON.parse(
+  fs.readFileSync(
+    path.join(process.cwd(), "sources", "ramakrishna-chunks.json"),
+    "utf8"
+  )
+);
 
-function readPdf(filename) {
-  const pdfPath = path.join(process.cwd(), "sources", filename);
-  const pdfBuffer = fs.readFileSync(pdfPath);
+function cosine(a, b) {
+  let dot = 0;
+  let magA = 0;
+  let magB = 0;
 
-  return {
-    inlineData: {
-      mimeType: "application/pdf",
-      data: pdfBuffer.toString("base64")
-    }
-  };
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    magA += a[i] * a[i];
+    magB += b[i] * b[i];
+  }
+
+  return dot / (Math.sqrt(magA) * Math.sqrt(magB));
 }
 
-async function askPdf(filename, question, childName, childAge, childLevel) {
-  const pdf = readPdf(filename);
-
-  const prompt = `
-You are a warm Sri Ramakrishna guide for children.
-
-Child profile:
-Name: ${childName || "Guest"}
-Age: ${childAge || "Unknown"}
-Level: ${childLevel || "General"}
-
-Rules:
-- Answer ONLY from this PDF.
-- Do not use outside knowledge.
-- Keep answers short, gentle, and age-appropriate.
-- If the answer is not clearly in this PDF, say exactly:
-"I do not know from the materials I have. Please ask your teacher."
-
-Child question:
-${question}
-`;
-
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash-lite",
-    contents: [pdf, prompt]
+async function embed(text) {
+  const result = await ai.models.embedContent({
+    model: "gemini-embedding-001",
+    contents: text
   });
 
-  return response.text || "";
-}
-
-function isUnknown(answer) {
-  return (
-    !answer ||
-    answer.toLowerCase().includes("i do not know from the materials i have")
-  );
+  return result.embeddings[0].values;
 }
 
 export default async function handler(req, res) {
@@ -78,26 +52,52 @@ export default async function handler(req, res) {
   }
 
   try {
-    for (const file of PDF_FILES) {
-      const answer = await askPdf(
-        file,
-        question,
-        childName,
-        childAge,
-        childLevel
-      );
+    const questionEmbedding = await embed(question);
 
-      if (!isUnknown(answer)) {
-        return res.status(200).json({ answer });
-      }
-    }
+    const topChunks = chunks
+      .map(chunk => ({
+        ...chunk,
+        score: cosine(questionEmbedding, chunk.embedding)
+      }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6);
+
+    const context = topChunks
+      .map(chunk => `Source: ${chunk.source}\n${chunk.text}`)
+      .join("\n\n---\n\n");
+
+    const prompt = `
+You are a warm Sri Ramakrishna guide for children.
+
+Child profile:
+Name: ${childName || "Guest"}
+Age: ${childAge || "Unknown"}
+Level: ${childLevel || "General"}
+
+Rules:
+- Answer only from the Gospel context below.
+- Do not use outside knowledge.
+- Keep answers short, gentle, and age-appropriate.
+- If the context does not clearly answer, say exactly:
+"I do not know from the materials I have. Please ask your teacher."
+
+Gospel context:
+${context}
+
+Child question:
+${question}
+`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash-lite",
+      contents: prompt
+    });
 
     return res.status(200).json({
-      answer: "I do not know from the materials I have. Please ask your teacher."
+      answer: response.text || "I do not know from the materials I have. Please ask your teacher."
     });
   } catch (error) {
     console.error(error);
-
     return res.status(500).json({
       answer: "Sorry, I could not answer right now."
     });
