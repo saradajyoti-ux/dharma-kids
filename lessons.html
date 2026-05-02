@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lesson Library | Dharma Kids</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff7ed;
+  color: #292524;
+}
+
+.nav {
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 1px solid #fed7aa;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #ea580c;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 24px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #fed7aa;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  margin-bottom: 18px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+input, select {
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #fed7aa;
+  font-size: 15px;
+  width: 100%;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.badge {
+  display: inline-block;
+  background: #ffedd5;
+  color: #7c2d12;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: #ea580c;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 650px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <a href="/">← Back to Home</a>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h1>📚 Lesson Library</h1>
+    <p>Search and explore all Dharma Kids lessons.</p>
+
+    <div class="filters">
+      <input id="searchInput" placeholder="Search lessons..." oninput="renderLessons()" />
+      <select id="levelFilter" onchange="renderLessons()">
+        <option value="all">All Levels</option>
+        <option value="Young Child">Young Child</option>
+        <option value="Older Child">Older Child</option>
+        <option value="Teen">Teen</option>
+        <option value="General">General</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="lessonsGrid" class="grid">
+    <div class="card">
+      <h2>Loading lessons...</h2>
+    </div>
+  </div>
+</div>
+
+<script>
+let allLessons = [];
+
+async function loadLessons() {
+  try {
+    const res = await fetch("/lessons.json");
+    allLessons = await res.json();
+    renderLessons();
+  } catch (err) {
+    document.getElementById("lessonsGrid").innerHTML = `
+      <div class="card">
+        <h2>Could not load lessons</h2>
+        <p>Please check lessons.json.</p>
+      </div>
+    `;
+  }
+}
+
+function renderLessons() {
+  const grid = document.getElementById("lessonsGrid");
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const level = document.getElementById("levelFilter").value;
+
+  const filtered = allLessons.filter(lesson => {
+    const matchesStatus = lesson.status === "available";
+    const matchesSearch =
+      lesson.title.toLowerCase().includes(search) ||
+      lesson.description.toLowerCase().includes(search);
+
+    const matchesLevel =
+      level === "all" || lesson.level === level;
+
+    return matchesStatus && matchesSearch && matchesLevel;
+  });
+
+  grid.innerHTML = "";
+
+  if (!filtered.length) {
+    grid.innerHTML = `
+      <div class="card">
+        <h2>No lessons found</h2>
+        <p>Try another search or level.</p>
+      </div>
+    `;
+    return;
+  }
+
+  filtered.forEach((lesson, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <span class="badge">${lesson.level}</span>
+      <h2>${lesson.title}</h2>
+      <p>${lesson.description}</p>
+      <a class="button" href="${lesson.url}">Start Lesson</a>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+loadLessons();
+</script>
+
+</body>
+</html>
