@@ -49,6 +49,7 @@ body {
   border-radius: 24px;
   padding: 22px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  margin-bottom: 18px;
 }
 
 .card h2 {
@@ -70,6 +71,8 @@ body {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
 .button.secondary {
@@ -93,6 +96,25 @@ body {
   color: #7c2d12;
 }
 
+.profile-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+input, select {
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #fed7aa;
+  font-size: 15px;
+}
+
+.profile-summary {
+  margin-top: 12px;
+  color: #57534e;
+  font-size: 14px;
+}
+
 .footer {
   text-align: center;
   padding: 24px;
@@ -112,12 +134,56 @@ body {
 <main class="container">
 
   <div class="card">
+    <span class="badge">Child Profile</span>
+    <h2>Who is learning today?</h2>
+
+    <div class="profile-row">
+      <input id="nameInput" placeholder="Child's name" />
+      <input id="ageInput" placeholder="Age" />
+      <select id="levelInput">
+        <option value="General">General</option>
+        <option value="Young Child">Young Child</option>
+        <option value="Older Child">Older Child</option>
+        <option value="Teen">Teen</option>
+      </select>
+    </div>
+
+    <button class="button" onclick="saveProfile()">Save Profile</button>
+
+    <div id="profileSummary" class="profile-summary">
+      Name: Guest · Age: Not set · Level: General
+    </div>
+  </div>
+
+  <div class="card">
     <span class="badge">Daily Practice</span>
     <h2>🌞 Today’s Dharma Lesson</h2>
     <p>
       Begin with a short teaching, a simple explanation, and one reflection question for the day.
     </p>
     <a class="button" href="/daily-lesson.html">Open Today’s Lesson</a>
+  </div>
+
+  <h2 class="section-title">Your Lessons</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="badge">Lesson 1</span>
+      <h2>Loving God Within Us</h2>
+      <p>
+        A guided lesson inspired by Sri Ramakrishna’s childhood, kindness, prayer, and truthfulness.
+      </p>
+      <a class="button" href="/lesson1.html">Start Lesson</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">Lesson 2</span>
+      <h2>Courage Like Hanumanji</h2>
+      <p>
+        Learn courage, devotion, humility, and service through Hanumanji.
+      </p>
+      <a class="button" href="/lesson2.html">Start Lesson</a>
+    </div>
   </div>
 
   <h2 class="section-title">Guides</h2>
@@ -151,30 +217,40 @@ body {
     </div>
   </div>
 
-  <h2 class="section-title">Learning Modes</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h2>💬 Explain Simply</h2>
-      <p>Gentle answers in easy words for young learners.</p>
-    </div>
-
-    <div class="card">
-      <h2>📖 Story Mode</h2>
-      <p>Turns teachings into short, warm stories children can understand.</p>
-    </div>
-
-    <div class="card">
-      <h2>🧠 Quiz Mode</h2>
-      <p>Simple questions and answers to help children remember the lesson.</p>
-    </div>
-  </div>
-
 </main>
 
 <div class="footer">
   Dharma Kids · Learning with love, reflection, and kindness
 </div>
+
+<script>
+function saveProfile() {
+  const name = document.getElementById("nameInput").value.trim() || "Guest";
+  const age = document.getElementById("ageInput").value.trim() || "Not set";
+  const level = document.getElementById("levelInput").value || "General";
+
+  localStorage.setItem("dkName", name);
+  localStorage.setItem("dkAge", age);
+  localStorage.setItem("dkLevel", level);
+
+  updateProfileSummary();
+}
+
+function updateProfileSummary() {
+  const name = localStorage.getItem("dkName") || "Guest";
+  const age = localStorage.getItem("dkAge") || "Not set";
+  const level = localStorage.getItem("dkLevel") || "General";
+
+  document.getElementById("nameInput").value = name === "Guest" ? "" : name;
+  document.getElementById("ageInput").value = age === "Not set" ? "" : age;
+  document.getElementById("levelInput").value = level;
+
+  document.getElementById("profileSummary").innerText =
+    "Name: " + name + " · Age: " + age + " · Level: " + level;
+}
+
+updateProfileSummary();
+</script>
 
 </body>
 </html>
