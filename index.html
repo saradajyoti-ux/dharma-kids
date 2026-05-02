@@ -133,6 +133,7 @@ input, select {
 
 <main class="container">
 
+  <!-- PROFILE -->
   <div class="card">
     <span class="badge">Child Profile</span>
     <h2>Who is learning today?</h2>
@@ -155,6 +156,7 @@ input, select {
     </div>
   </div>
 
+  <!-- DAILY LESSON -->
   <div class="card">
     <span class="badge">Daily Practice</span>
     <h2>🌞 Today’s Dharma Lesson</h2>
@@ -164,6 +166,7 @@ input, select {
     <a class="button" href="/daily-lesson.html">Open Today’s Lesson</a>
   </div>
 
+  <!-- LESSONS -->
   <h2 class="section-title">Your Lessons</h2>
 
   <div id="lessonsGrid" class="grid">
@@ -173,6 +176,11 @@ input, select {
     </div>
   </div>
 
+  <p>
+    <a class="button secondary" href="/lessons.html">View All Lessons</a>
+  </p>
+
+  <!-- GUIDES -->
   <h2 class="section-title">Guides</h2>
 
   <div class="grid">
@@ -188,9 +196,7 @@ input, select {
     <div class="card">
       <span class="badge">Coming Soon</span>
       <h2>Bhagavad Gita Guide</h2>
-      <p>
-        Learn teachings from the Gita in a child-friendly way.
-      </p>
+      <p>Learn teachings from the Gita in a child-friendly way.</p>
       <a class="button secondary" href="#">Coming Soon</a>
     </div>
   </div>
@@ -234,7 +240,7 @@ async function loadLessons() {
     const res = await fetch("/lessons.json");
     const lessons = await res.json();
 
-    const availableLessons = lessons.filter(lesson => lesson.status === "available");
+    const availableLessons = lessons.filter(l => l.status === "available");
 
     grid.innerHTML = "";
 
@@ -246,7 +252,6 @@ async function loadLessons() {
         <span class="badge">Lesson ${index + 1}</span>
         <h2>${lesson.title}</h2>
         <p>${lesson.description}</p>
-        <p><strong>Level:</strong> ${lesson.level}</p>
         <a class="button" href="${lesson.url}">Start Lesson</a>
       `;
 
@@ -257,15 +262,14 @@ async function loadLessons() {
       grid.innerHTML = `
         <div class="card">
           <h2>No lessons yet</h2>
-          <p>Lessons will appear here soon.</p>
         </div>
       `;
     }
+
   } catch (err) {
     grid.innerHTML = `
       <div class="card">
-        <h2>Could not load lessons</h2>
-        <p>Please check lessons.json.</p>
+        <h2>Error loading lessons</h2>
       </div>
     `;
   }
