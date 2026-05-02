@@ -11,7 +11,7 @@ const chunks = JSON.parse(
     path.join(process.cwd(), "sources", "ramakrishna-chunks.json"),
     "utf8"
   )
-);
+).filter(chunk => chunk && chunk.text);
 
 function getDayNumber() {
   const now = new Date();
@@ -22,9 +22,15 @@ function pickDailyChunks() {
   const day = getDayNumber();
   const selected = [];
 
+  if (!chunks.length) return selected;
+
   for (let i = 0; i < 6; i++) {
-    const index = (day * 7 + i * 17) % chunks.length;
-    selected.push(chunks[index]);
+    const index = Math.abs((day * 7 + i * 17) % chunks.length);
+    const chunk = chunks[index];
+
+    if (chunk && chunk.text) {
+      selected.push(chunk);
+    }
   }
 
   return selected;
@@ -34,8 +40,17 @@ export default async function handler(req, res) {
   try {
     const selectedChunks = pickDailyChunks();
 
+    if (!selectedChunks.length) {
+      return res.status(500).json({
+        lesson: "Sorry, I could not find today’s lesson material."
+      });
+    }
+
     const context = selectedChunks
-      .map(chunk => `Source: ${chunk.source}\n${chunk.text}`)
+      .map(chunk => {
+        const source = chunk.source || "Sri Ramakrishna Gospel";
+        return `Source: ${source}\n${chunk.text}`;
+      })
       .join("\n\n---\n\n");
 
     const prompt = `
@@ -69,12 +84,12 @@ ${context}
       contents: prompt
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       lesson: response.text
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       lesson: "Sorry, I could not create today’s lesson right now."
     });
   }
