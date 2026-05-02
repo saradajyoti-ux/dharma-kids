@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dharma Kids</title>
 
-
 <style>
 body {
   margin: 0;
@@ -79,6 +78,49 @@ body {
 .button.secondary {
   background: #ffedd5;
   color: #7c2d12;
+}
+
+.reflection-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #fff7ed, #fed7aa);
+  color: #7c2d12;
+  padding: 16px 22px;
+  border-radius: 24px;
+  border: 2px solid #fdba74;
+  box-shadow: 0 8px 20px rgba(251, 146, 60, 0.25);
+  font-family: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reflection-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(251, 146, 60, 0.35);
+}
+
+.reflection-icon {
+  font-size: 34px;
+  background: white;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+}
+
+.reflection-button strong {
+  display: block;
+  font-size: 18px;
+}
+
+.reflection-button small {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  color: #9a3412;
 }
 
 .badge {
@@ -156,9 +198,7 @@ input, select {
         <option value="Teen">Teen</option>
       </select>
     </div>
-  
-    <a href="reflection.html">🌸 Guided Reflections</a>
-  
+    
     <button class="button" onclick="saveProfile()">Save Profile</button>
 
     <div class="parent-mode-box">
@@ -183,6 +223,22 @@ input, select {
       Begin with a short teaching, a simple explanation, and one reflection question for the day.
     </p>
     <a class="button" href="/daily-lesson.html">Open Today’s Lesson</a>
+  </div>
+
+  <div class="card">
+    <span class="badge">New Feature</span>
+    <h2>🌸 Guided Reflections</h2>
+    <p>
+      Help children pause, notice their feelings, and reflect with gentle prompts about gratitude, calm, and kindness.
+    </p>
+
+    <a href="/reflection.html" class="reflection-button">
+      <span class="reflection-icon">🌸</span>
+      <span>
+        <strong>Guided Reflections</strong>
+        <small>Calm thoughts, gratitude & kindness</small>
+      </span>
+    </a>
   </div>
 
   <h2 class="section-title">Your Lessons</h2>
