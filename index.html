@@ -32,100 +32,35 @@ body {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1050px;
   margin: auto;
   padding: 24px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
 }
 
 .card {
   background: white;
   border: 1px solid #fed7aa;
-  border-radius: 24px;
-  padding: 22px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-  margin-bottom: 18px;
-}
-
-.card h2 {
-  margin-top: 0;
-  color: #7c2d12;
-}
-
-.card p {
-  color: #57534e;
-  line-height: 1.5;
-}
-
-.button {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 12px 16px;
-  border-radius: 999px;
-  background: #ea580c;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-
-.button.secondary {
-  background: #ffedd5;
-  color: #7c2d12;
-}
-
-.reflection-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 12px;
-  text-decoration: none;
-  background: linear-gradient(135deg, #fff7ed, #fed7aa);
-  color: #7c2d12;
-  padding: 16px 22px;
-  border-radius: 24px;
-  border: 2px solid #fdba74;
-  box-shadow: 0 8px 20px rgba(251, 146, 60, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.reflection-button:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(251, 146, 60, 0.35);
-}
-
-.reflection-icon {
-  font-size: 34px;
-  background: white;
-  width: 54px;
-  height: 54px;
-  display: grid;
-  place-items: center;
   border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 18px rgba(124, 45, 18, 0.08);
 }
 
-.reflection-button strong {
-  display: block;
-  font-size: 18px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
 }
 
-.reflection-button small {
-  display: block;
-  margin-top: 3px;
-  font-size: 13px;
-  color: #9a3412;
+h2 {
+  color: #7c2d12;
+  margin-top: 0;
 }
 
 .badge {
   display: inline-block;
   background: #ffedd5;
-  color: #7c2d12;
+  color: #9a3412;
   padding: 6px 10px;
   border-radius: 999px;
   font-size: 13px;
@@ -133,285 +68,342 @@ body {
   margin-bottom: 10px;
 }
 
-.section-title {
-  margin-top: 32px;
-  color: #7c2d12;
+button,
+.link-button {
+  border: none;
+  background: #ea580c;
+  color: white;
+  padding: 11px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+button:hover,
+.link-button:hover {
+  background: #c2410c;
+}
+
+.secondary-button {
+  background: #fff7ed;
+  color: #9a3412;
+  border: 1px solid #fdba74;
+}
+
+.secondary-button:hover {
+  background: #ffedd5;
 }
 
 .profile-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  align-items: center;
+  margin: 12px 0;
 }
 
-input, select {
-  padding: 12px;
-  border-radius: 14px;
-  border: 1px solid #fed7aa;
-  font-size: 15px;
+input,
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #fdba74;
+  background: #fffaf5;
 }
 
-.profile-summary {
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
   margin-top: 12px;
-  color: #57534e;
-  font-size: 14px;
 }
 
-.parent-mode-box {
-  margin-top: 14px;
+.avatar-option {
+  border: 2px solid #fed7aa;
   background: #fff7ed;
+  border-radius: 16px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.avatar-option.selected {
+  border-color: #ea580c;
+  background: #ffedd5;
+}
+
+.avatar-face {
+  font-size: 42px;
+}
+
+.avatar-name {
+  font-weight: bold;
+  margin-top: 6px;
+  color: #7c2d12;
+}
+
+.avatar-style {
+  font-size: 13px;
+  color: #78716c;
+}
+
+.chat-preview {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #fff7ed;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.chat-avatar {
+  font-size: 44px;
+}
+
+.chat-bubble {
+  background: white;
   border: 1px solid #fed7aa;
   border-radius: 16px;
-  padding: 12px;
+  padding: 14px;
+  flex: 1;
+}
+
+.lesson-card p,
+.guide-card p {
+  color: #57534e;
 }
 
 .footer {
   text-align: center;
-  padding: 24px;
   color: #78716c;
-  font-size: 14px;
+  padding: 30px;
 }
 </style>
 </head>
 
 <body>
 
-<section class="hero">
-  <h1>🪷 Dharma Kids</h1>
+<header class="hero">
+  <h1>🌼 Dharma Kids</h1>
   <p>Simple spiritual lessons, stories, and reflections for children.</p>
-</section>
+</header>
 
 <main class="container">
 
-  <div class="card">
+  <section class="card">
     <span class="badge">Child Profile</span>
     <h2>Who is learning today?</h2>
 
     <div class="profile-row">
-      <input id="nameInput" placeholder="Child's name" />
-      <input id="ageInput" placeholder="Age" />
-      <select id="levelInput">
+      <input id="childName" type="text" placeholder="Child name" />
+      <input id="childAge" type="number" placeholder="Age" min="3" max="18" />
+      <select id="childLevel">
         <option value="General">General</option>
         <option value="Young Child">Young Child</option>
         <option value="Older Child">Older Child</option>
         <option value="Teen">Teen</option>
       </select>
     </div>
-    
-    <button class="button" onclick="saveProfile()">Save Profile</button>
 
-    <div class="parent-mode-box">
+    <div class="profile-row">
       <label>
-        <input type="checkbox" id="parentModeToggle" onchange="toggleParentMode()" />
-        👨‍👩‍👧 Parent / Teacher Mode
+        <input id="parentMode" type="checkbox" />
+        Parent / Teacher Mode
       </label>
-      <p style="margin-bottom:0;">
-        Adds deeper context and a discussion question to chatbot answers.
-      </p>
     </div>
 
-    <div id="profileSummary" class="profile-summary">
+    <p>Adds deeper context and discussion questions to chatbot answers.</p>
+
+    <button onclick="saveProfile()">Save Profile</button>
+    <a class="link-button secondary-button" href="guided-reflections.html">Guided Reflections</a>
+
+    <p id="profileSummary">
       Name: Guest · Age: Not set · Level: General · Parent Mode: Off
-    </div>
-  </div>
-
-  <div class="card">
-    <span class="badge">Daily Practice</span>
-    <h2>🌞 Today’s Dharma Lesson</h2>
-    <p>
-      Begin with a short teaching, a simple explanation, and one reflection question for the day.
     </p>
-    <a class="button" href="/daily-lesson.html">Open Today’s Lesson</a>
-  </div>
+  </section>
 
-  <div class="card">
+  <section class="card">
     <span class="badge">New Feature</span>
-    <h2>🌸 Guided Reflections</h2>
-    <p>
-      Help children pause, notice their feelings, and reflect with gentle prompts about gratitude, calm, and kindness.
-    </p>
+    <h2>Choose Your Dharma Guide Avatar</h2>
+    <p>Pick a guide personality. This changes how the app speaks to the child.</p>
 
-    <a href="/reflection.html" class="reflection-button">
-      <span class="reflection-icon">🌸</span>
-      <span>
-        <strong>Guided Reflections</strong>
-        <small>Calm thoughts, gratitude & kindness</small>
-      </span>
-    </a>
-  </div>
+    <div class="avatar-grid">
+      <div class="avatar-option" onclick="selectAvatar('ananda')" id="avatar-ananda">
+        <div class="avatar-face">🪷</div>
+        <div class="avatar-name">Ananda</div>
+        <div class="avatar-style">Gentle & calming</div>
+      </div>
 
-  <h2 class="section-title">Your Lessons</h2>
+      <div class="avatar-option" onclick="selectAvatar('tara')" id="avatar-tara">
+        <div class="avatar-face">🌟</div>
+        <div class="avatar-name">Tara</div>
+        <div class="avatar-style">Cheerful & playful</div>
+      </div>
 
-  <div id="progressArea"></div>
+      <div class="avatar-option" onclick="selectAvatar('vivek')" id="avatar-vivek">
+        <div class="avatar-face">📚</div>
+        <div class="avatar-name">Vivek</div>
+        <div class="avatar-style">Wise & thoughtful</div>
+      </div>
 
-  <div id="lessonsGrid" class="grid">
-    <div class="card">
-      <h2>Loading lessons...</h2>
-      <p>Please wait.</p>
-    </div>
-  </div>
-
-  <p>
-    <a class="button secondary" href="/lessons.html">View All Lessons</a>
-  </p>
-
-  <h2 class="section-title">Guides</h2>
-
-  <div class="grid">
-    <div class="card">
-      <span class="badge">Available Now</span>
-      <h2>Sri Ramakrishna Guide</h2>
-      <p>
-        Ask questions about Sri Ramakrishna and learn through simple answers, stories, and quizzes.
-      </p>
-      <a class="button" href="/sri-ramakrishna.html">Open Guide</a>
+      <div class="avatar-option" onclick="selectAvatar('gopal')" id="avatar-gopal">
+        <div class="avatar-face">🎵</div>
+        <div class="avatar-name">Gopal</div>
+        <div class="avatar-style">Story-based & fun</div>
+      </div>
     </div>
 
-    <div class="card">
-      <span class="badge">Coming Soon</span>
-      <h2>Bhagavad Gita Guide</h2>
-      <p>
-        Learn teachings from the Gita in a child-friendly way.
-      </p>
-      <a class="button secondary" href="#">Coming Soon</a>
+    <div class="chat-preview">
+      <div class="chat-avatar" id="previewAvatar">🪷</div>
+      <div class="chat-bubble">
+        <strong id="previewName">Ananda</strong>
+        <p id="previewMessage">
+          Let us learn slowly and peacefully. Every kind thought is like a little flower offered to God.
+        </p>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="card">
+    <span class="badge">Daily Practice</span>
+    <h2>Today’s Dharma Lesson</h2>
+    <p>Begin with a short teaching, a simple explanation, and one reflection question for the day.</p>
+    <a class="link-button" href="lesson1.html">Open Today’s Lesson</a>
+  </section>
+
+  <section class="card">
+    <h2>Your Lessons</h2>
+
+    <div class="grid">
+      <div class="card lesson-card">
+        <span class="badge">Lesson 1</span>
+        <h2>Loving God Within Us</h2>
+        <p>Learn how kindness, prayer, and truthfulness help us feel God within.</p>
+        <a class="link-button" href="lesson1.html">Open Lesson</a>
+      </div>
+
+      <div class="card lesson-card">
+        <span class="badge">Lesson 2</span>
+        <h2>Seeing God in Everyone</h2>
+        <p>Practice respect, compassion, and seeing the divine in all beings.</p>
+        <a class="link-button" href="lesson2.html">Open Lesson</a>
+      </div>
+    </div>
+
+    <a class="link-button secondary-button" href="lesson1.html">View All Lessons</a>
+  </section>
+
+  <section class="card">
+    <h2>Guides</h2>
+
+    <div class="grid">
+      <div class="card guide-card">
+        <span class="badge">Available Now</span>
+        <h2>Sri Ramakrishna Guide</h2>
+        <p>Ask questions about Sri Ramakrishna and learn through simple answers, stories, and quizzes.</p>
+        <a class="link-button" href="sri-ramakrishna.html">Open Guide</a>
+      </div>
+
+      <div class="card guide-card">
+        <span class="badge">Coming Soon</span>
+        <h2>Bhagavad Gita Guide</h2>
+        <p>Learn teachings from the Gita in a child-friendly way.</p>
+        <button class="secondary-button" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<div class="footer">
+<footer class="footer">
   Dharma Kids · Learning with love, reflection, and kindness
-</div>
+</footer>
 
 <script>
+const avatarData = {
+  ananda: {
+    emoji: "🪷",
+    name: "Ananda",
+    personality: "gentle",
+    message: "Let us learn slowly and peacefully. Every kind thought is like a little flower offered to God."
+  },
+  tara: {
+    emoji: "🌟",
+    name: "Tara",
+    personality: "playful",
+    message: "Yay, let’s explore! Dharma can be joyful, bright, and full of little discoveries."
+  },
+  vivek: {
+    emoji: "📚",
+    name: "Vivek",
+    personality: "wise",
+    message: "Let us think carefully. A good question can open the door to wisdom."
+  },
+  gopal: {
+    emoji: "🎵",
+    name: "Gopal",
+    personality: "story",
+    message: "Come, I’ll tell you a story. Sometimes the heart learns best through wonder."
+  }
+};
+
+let selectedAvatar = localStorage.getItem("dkAvatar") || "ananda";
+
 function saveProfile() {
-  const name = document.getElementById("nameInput").value.trim() || "Guest";
-  const age = document.getElementById("ageInput").value.trim() || "Not set";
-  const level = document.getElementById("levelInput").value || "General";
+  const name = document.getElementById("childName").value.trim() || "Guest";
+  const age = document.getElementById("childAge").value || "Not set";
+  const level = document.getElementById("childLevel").value;
+  const parentMode = document.getElementById("parentMode").checked;
 
-  localStorage.setItem("dkName", name);
-  localStorage.setItem("dkAge", age);
-  localStorage.setItem("dkLevel", level);
+  localStorage.setItem("dkChildName", name);
+  localStorage.setItem("dkChildAge", age);
+  localStorage.setItem("dkChildLevel", level);
+  localStorage.setItem("dkParentMode", parentMode ? "on" : "off");
 
-  updateProfileSummary();
-}
-
-function toggleParentMode() {
-  const enabled = document.getElementById("parentModeToggle").checked;
-  localStorage.setItem("dkParentMode", enabled ? "true" : "false");
   updateProfileSummary();
 }
 
 function updateProfileSummary() {
-  const name = localStorage.getItem("dkName") || "Guest";
-  const age = localStorage.getItem("dkAge") || "Not set";
-  const level = localStorage.getItem("dkLevel") || "General";
-  const parentMode = localStorage.getItem("dkParentMode") === "true";
+  const name = localStorage.getItem("dkChildName") || "Guest";
+  const age = localStorage.getItem("dkChildAge") || "Not set";
+  const level = localStorage.getItem("dkChildLevel") || "General";
+  const parentMode = localStorage.getItem("dkParentMode") === "on" ? "On" : "Off";
 
-  document.getElementById("nameInput").value = name === "Guest" ? "" : name;
-  document.getElementById("ageInput").value = age === "Not set" ? "" : age;
-  document.getElementById("levelInput").value = level;
-  document.getElementById("parentModeToggle").checked = parentMode;
-
-  document.getElementById("profileSummary").innerText =
-    "Name: " + name +
-    " · Age: " + age +
-    " · Level: " + level +
-    " · Parent Mode: " + (parentMode ? "On" : "Off");
+  document.getElementById("profileSummary").textContent =
+    `Name: ${name} · Age: ${age} · Level: ${level} · Parent Mode: ${parentMode}`;
 }
 
-async function loadLessons() {
-  const grid = document.getElementById("lessonsGrid");
-  const progressArea = document.getElementById("progressArea");
+function selectAvatar(key) {
+  selectedAvatar = key;
+  localStorage.setItem("dkAvatar", key);
+  localStorage.setItem("dkAvatarPersonality", avatarData[key].personality);
 
-  try {
-    const res = await fetch("/lessons.json");
-    const lessons = await res.json();
+  Object.keys(avatarData).forEach(id => {
+    document.getElementById(`avatar-${id}`).classList.remove("selected");
+  });
 
-    const availableLessons = lessons.filter(l => l.status === "available");
+  document.getElementById(`avatar-${key}`).classList.add("selected");
 
-    const completedCount = availableLessons.filter(lesson => {
-      return localStorage.getItem("lessonCompleted:" + lesson.url) === "true";
-    }).length;
-
-    const totalCount = availableLessons.length;
-
-    progressArea.innerHTML = `
-      <div class="card">
-        <span class="badge">Progress</span>
-        <h2>🎉 You’ve completed ${completedCount} of ${totalCount} lessons</h2>
-        <p>Keep going, one small lesson at a time.</p>
-      </div>
-    `;
-
-    const nextLesson = availableLessons.find(lesson => {
-      return localStorage.getItem("lessonCompleted:" + lesson.url) !== "true";
-    });
-
-    if (nextLesson) {
-      progressArea.innerHTML += `
-        <div class="card">
-          <span class="badge">Recommended</span>
-          <h2>👉 Continue Learning</h2>
-          <p><strong>${nextLesson.title}</strong></p>
-          <p>${nextLesson.description}</p>
-          <a class="button" href="${nextLesson.url}">Start Lesson</a>
-        </div>
-      `;
-    } else if (totalCount > 0) {
-      progressArea.innerHTML += `
-        <div class="card">
-          <span class="badge">Wonderful</span>
-          <h2>🌟 All lessons completed!</h2>
-          <p>You have completed every available lesson. You can review any lesson again.</p>
-          <a class="button" href="/lessons.html">Review Lessons</a>
-        </div>
-      `;
-    }
-
-    grid.innerHTML = "";
-
-    availableLessons.forEach((lesson, index) => {
-      const lessonKey = "lessonCompleted:" + lesson.url;
-      const isCompleted = localStorage.getItem(lessonKey) === "true";
-
-      const card = document.createElement("div");
-      card.className = "card";
-
-      card.innerHTML = `
-        <span class="badge">${isCompleted ? "✅ Completed" : "Lesson " + (index + 1)}</span>
-        <h2>${lesson.title}</h2>
-        <p>${lesson.description}</p>
-        <a class="button" href="${lesson.url}">
-          ${isCompleted ? "Review Lesson" : "Start Lesson"}
-        </a>
-      `;
-
-      grid.appendChild(card);
-    });
-
-    if (!availableLessons.length) {
-      grid.innerHTML = `
-        <div class="card">
-          <h2>No lessons yet</h2>
-          <p>Lessons will appear here soon.</p>
-        </div>
-      `;
-    }
-
-  } catch (err) {
-    progressArea.innerHTML = "";
-    grid.innerHTML = `
-      <div class="card">
-        <h2>Error loading lessons</h2>
-        <p>Please check lessons.json.</p>
-      </div>
-    `;
-  }
+  document.getElementById("previewAvatar").textContent = avatarData[key].emoji;
+  document.getElementById("previewName").textContent = avatarData[key].name;
+  document.getElementById("previewMessage").textContent = avatarData[key].message;
 }
 
-updateProfileSummary();
-loadLessons();
+function loadProfile() {
+  document.getElementById("childName").value = localStorage.getItem("dkChildName") || "";
+  document.getElementById("childAge").value =
+    localStorage.getItem("dkChildAge") === "Not set" ? "" : localStorage.getItem("dkChildAge") || "";
+  document.getElementById("childLevel").value = localStorage.getItem("dkChildLevel") || "General";
+  document.getElementById("parentMode").checked = localStorage.getItem("dkParentMode") === "on";
+
+  updateProfileSummary();
+  selectAvatar(selectedAvatar);
+}
+
+loadProfile();
 </script>
 
 </body>
