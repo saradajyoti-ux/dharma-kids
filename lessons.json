@@ -12,5 +12,12 @@
     "url": "/lesson2.html",
     "level": "Young Child",
     "status": "available"
+  },
+  {
+    "title": "Understanding Hinduism Beyond Stereotypes",
+    "description": "A lesson inspired by Swami Medhananda about explaining Hinduism kindly and clearly.",
+    "url": "/lesson3.html",
+    "level": "Older Child",
+    "status": "available"
   }
 ]
