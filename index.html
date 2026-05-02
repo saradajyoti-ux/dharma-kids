@@ -166,23 +166,10 @@ input, select {
 
   <h2 class="section-title">Your Lessons</h2>
 
-  <div class="grid">
+  <div id="lessonsGrid" class="grid">
     <div class="card">
-      <span class="badge">Lesson 1</span>
-      <h2>Loving God Within Us</h2>
-      <p>
-        A guided lesson inspired by Sri Ramakrishna’s childhood, kindness, prayer, and truthfulness.
-      </p>
-      <a class="button" href="/lesson1.html">Start Lesson</a>
-    </div>
-
-    <div class="card">
-      <span class="badge">Lesson 2</span>
-      <h2>Courage Like Hanumanji</h2>
-      <p>
-        Learn courage, devotion, humility, and service through Hanumanji.
-      </p>
-      <a class="button" href="/lesson2.html">Start Lesson</a>
+      <h2>Loading lessons...</h2>
+      <p>Please wait.</p>
     </div>
   </div>
 
@@ -203,15 +190,6 @@ input, select {
       <h2>Bhagavad Gita Guide</h2>
       <p>
         Learn teachings from the Gita in a child-friendly way.
-      </p>
-      <a class="button secondary" href="#">Coming Soon</a>
-    </div>
-
-    <div class="card">
-      <span class="badge">Coming Soon</span>
-      <h2>Stories & Saints</h2>
-      <p>
-        Explore inspiring stories from Hindu tradition and the lives of great souls.
       </p>
       <a class="button secondary" href="#">Coming Soon</a>
     </div>
@@ -249,7 +227,52 @@ function updateProfileSummary() {
     "Name: " + name + " · Age: " + age + " · Level: " + level;
 }
 
+async function loadLessons() {
+  const grid = document.getElementById("lessonsGrid");
+
+  try {
+    const res = await fetch("/lessons.json");
+    const lessons = await res.json();
+
+    const availableLessons = lessons.filter(lesson => lesson.status === "available");
+
+    grid.innerHTML = "";
+
+    availableLessons.forEach((lesson, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <span class="badge">Lesson ${index + 1}</span>
+        <h2>${lesson.title}</h2>
+        <p>${lesson.description}</p>
+        <p><strong>Level:</strong> ${lesson.level}</p>
+        <a class="button" href="${lesson.url}">Start Lesson</a>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    if (!availableLessons.length) {
+      grid.innerHTML = `
+        <div class="card">
+          <h2>No lessons yet</h2>
+          <p>Lessons will appear here soon.</p>
+        </div>
+      `;
+    }
+  } catch (err) {
+    grid.innerHTML = `
+      <div class="card">
+        <h2>Could not load lessons</h2>
+        <p>Please check lessons.json.</p>
+      </div>
+    `;
+  }
+}
+
 updateProfileSummary();
+loadLessons();
 </script>
 
 </body>
