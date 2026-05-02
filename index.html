@@ -80,6 +80,7 @@ body {
   color: #7c2d12;
 }
 
+/* NEW FEATURE BUTTON */
 .reflection-button {
   display: inline-flex;
   align-items: center;
@@ -92,7 +93,6 @@ body {
   border-radius: 24px;
   border: 2px solid #fdba74;
   box-shadow: 0 8px 20px rgba(251, 146, 60, 0.25);
-  font-family: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -184,6 +184,7 @@ input, select {
 
 <main class="container">
 
+  <!-- PROFILE -->
   <div class="card">
     <span class="badge">Child Profile</span>
     <h2>Who is learning today?</h2>
@@ -211,11 +212,10 @@ input, select {
       </p>
     </div>
 
-    <div id="profileSummary" class="profile-summary">
-      Name: Guest · Age: Not set · Level: General · Parent Mode: Off
-    </div>
+    <div id="profileSummary" class="profile-summary"></div>
   </div>
 
+  <!-- DAILY LESSON -->
   <div class="card">
     <span class="badge">Daily Practice</span>
     <h2>🌞 Today’s Dharma Lesson</h2>
@@ -225,11 +225,12 @@ input, select {
     <a class="button" href="/daily-lesson.html">Open Today’s Lesson</a>
   </div>
 
+  <!-- NEW FEATURE -->
   <div class="card">
     <span class="badge">New Feature</span>
     <h2>🌸 Guided Reflections</h2>
     <p>
-      Help children pause, notice their feelings, and reflect with gentle prompts about gratitude, calm, and kindness.
+      Help children pause, notice their feelings, and reflect with gentle prompts.
     </p>
 
     <a href="/reflection.html" class="reflection-button">
@@ -241,8 +242,8 @@ input, select {
     </a>
   </div>
 
+  <!-- LESSONS -->
   <h2 class="section-title">Your Lessons</h2>
-
   <div id="progressArea"></div>
 
   <div id="lessonsGrid" class="grid">
@@ -256,28 +257,6 @@ input, select {
     <a class="button secondary" href="/lessons.html">View All Lessons</a>
   </p>
 
-  <h2 class="section-title">Guides</h2>
-
-  <div class="grid">
-    <div class="card">
-      <span class="badge">Available Now</span>
-      <h2>Sri Ramakrishna Guide</h2>
-      <p>
-        Ask questions about Sri Ramakrishna and learn through simple answers, stories, and quizzes.
-      </p>
-      <a class="button" href="/sri-ramakrishna.html">Open Guide</a>
-    </div>
-
-    <div class="card">
-      <span class="badge">Coming Soon</span>
-      <h2>Bhagavad Gita Guide</h2>
-      <p>
-        Learn teachings from the Gita in a child-friendly way.
-      </p>
-      <a class="button secondary" href="#">Coming Soon</a>
-    </div>
-  </div>
-
 </main>
 
 <div class="footer">
@@ -286,20 +265,19 @@ input, select {
 
 <script>
 function saveProfile() {
-  const name = document.getElementById("nameInput").value.trim() || "Guest";
-  const age = document.getElementById("ageInput").value.trim() || "Not set";
-  const level = document.getElementById("levelInput").value || "General";
+  const name = document.getElementById("nameInput").value || "Guest";
+  const age = document.getElementById("ageInput").value || "Not set";
+  const level = document.getElementById("levelInput").value;
 
   localStorage.setItem("dkName", name);
   localStorage.setItem("dkAge", age);
   localStorage.setItem("dkLevel", level);
-
   updateProfileSummary();
 }
 
 function toggleParentMode() {
   const enabled = document.getElementById("parentModeToggle").checked;
-  localStorage.setItem("dkParentMode", enabled ? "true" : "false");
+  localStorage.setItem("dkParentMode", enabled);
   updateProfileSummary();
 }
 
@@ -309,110 +287,11 @@ function updateProfileSummary() {
   const level = localStorage.getItem("dkLevel") || "General";
   const parentMode = localStorage.getItem("dkParentMode") === "true";
 
-  document.getElementById("nameInput").value = name === "Guest" ? "" : name;
-  document.getElementById("ageInput").value = age === "Not set" ? "" : age;
-  document.getElementById("levelInput").value = level;
-  document.getElementById("parentModeToggle").checked = parentMode;
-
   document.getElementById("profileSummary").innerText =
-    "Name: " + name +
-    " · Age: " + age +
-    " · Level: " + level +
-    " · Parent Mode: " + (parentMode ? "On" : "Off");
-}
-
-async function loadLessons() {
-  const grid = document.getElementById("lessonsGrid");
-  const progressArea = document.getElementById("progressArea");
-
-  try {
-    const res = await fetch("/lessons.json");
-    const lessons = await res.json();
-
-    const availableLessons = lessons.filter(l => l.status === "available");
-
-    const completedCount = availableLessons.filter(lesson => {
-      return localStorage.getItem("lessonCompleted:" + lesson.url) === "true";
-    }).length;
-
-    const totalCount = availableLessons.length;
-
-    progressArea.innerHTML = `
-      <div class="card">
-        <span class="badge">Progress</span>
-        <h2>🎉 You’ve completed ${completedCount} of ${totalCount} lessons</h2>
-        <p>Keep going, one small lesson at a time.</p>
-      </div>
-    `;
-
-    const nextLesson = availableLessons.find(lesson => {
-      return localStorage.getItem("lessonCompleted:" + lesson.url) !== "true";
-    });
-
-    if (nextLesson) {
-      progressArea.innerHTML += `
-        <div class="card">
-          <span class="badge">Recommended</span>
-          <h2>👉 Continue Learning</h2>
-          <p><strong>${nextLesson.title}</strong></p>
-          <p>${nextLesson.description}</p>
-          <a class="button" href="${nextLesson.url}">Start Lesson</a>
-        </div>
-      `;
-    } else if (totalCount > 0) {
-      progressArea.innerHTML += `
-        <div class="card">
-          <span class="badge">Wonderful</span>
-          <h2>🌟 All lessons completed!</h2>
-          <p>You have completed every available lesson. You can review any lesson again.</p>
-          <a class="button" href="/lessons.html">Review Lessons</a>
-        </div>
-      `;
-    }
-
-    grid.innerHTML = "";
-
-    availableLessons.forEach((lesson, index) => {
-      const lessonKey = "lessonCompleted:" + lesson.url;
-      const isCompleted = localStorage.getItem(lessonKey) === "true";
-
-      const card = document.createElement("div");
-      card.className = "card";
-
-      card.innerHTML = `
-        <span class="badge">${isCompleted ? "✅ Completed" : "Lesson " + (index + 1)}</span>
-        <h2>${lesson.title}</h2>
-        <p>${lesson.description}</p>
-        <a class="button" href="${lesson.url}">
-          ${isCompleted ? "Review Lesson" : "Start Lesson"}
-        </a>
-      `;
-
-      grid.appendChild(card);
-    });
-
-    if (!availableLessons.length) {
-      grid.innerHTML = `
-        <div class="card">
-          <h2>No lessons yet</h2>
-          <p>Lessons will appear here soon.</p>
-        </div>
-      `;
-    }
-
-  } catch (err) {
-    progressArea.innerHTML = "";
-    grid.innerHTML = `
-      <div class="card">
-        <h2>Error loading lessons</h2>
-        <p>Please check lessons.json.</p>
-      </div>
-    `;
-  }
+    `Name: ${name} · Age: ${age} · Level: ${level} · Parent Mode: ${parentMode ? "On" : "Off"}`;
 }
 
 updateProfileSummary();
-loadLessons();
 </script>
 
 </body>
