@@ -17,7 +17,8 @@ export default async function handler(req, res) {
     lessonText,
     childName,
     childAge,
-    childLevel
+    childLevel,
+    parentMode
   } = req.body || {};
 
   if (!question || !lessonText) {
@@ -45,6 +46,17 @@ Adapt your answer to the child:
 - If age or level is missing:
   Use simple, friendly language.
 
+${parentMode === "true" ? `
+Parent / Teacher Mode is ON.
+
+After the child-friendly answer, add:
+
+Parent / Teacher Note:
+- Give a slightly deeper explanation for an adult.
+- Suggest one discussion question an adult can ask the child.
+- Keep it respectful and practical.
+` : ""}
+
 Lesson title:
 ${lessonTitle}
 
@@ -57,7 +69,6 @@ ${question}
 Rules:
 - Answer only from the lesson material.
 - Be warm, gentle, and encouraging.
-- Keep the answer short.
 - Do not invent new facts.
 - If the answer is not in the lesson, say exactly:
 "I do not know from this lesson. Please ask your teacher."
