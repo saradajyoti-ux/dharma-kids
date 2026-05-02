@@ -257,6 +257,31 @@ async function loadLessons() {
       </div>
     `;
 
+    const nextLesson = availableLessons.find(lesson => {
+      return localStorage.getItem("lessonCompleted:" + lesson.url) !== "true";
+    });
+
+    if (nextLesson) {
+      progressArea.innerHTML += `
+        <div class="card">
+          <span class="badge">Recommended</span>
+          <h2>👉 Continue Learning</h2>
+          <p><strong>${nextLesson.title}</strong></p>
+          <p>${nextLesson.description}</p>
+          <a class="button" href="${nextLesson.url}">Start Lesson</a>
+        </div>
+      `;
+    } else if (totalCount > 0) {
+      progressArea.innerHTML += `
+        <div class="card">
+          <span class="badge">Wonderful</span>
+          <h2>🌟 All lessons completed!</h2>
+          <p>You have completed every available lesson. You can review any lesson again.</p>
+          <a class="button" href="/lessons.html">Review Lessons</a>
+        </div>
+      `;
+    }
+
     grid.innerHTML = "";
 
     availableLessons.forEach((lesson, index) => {
