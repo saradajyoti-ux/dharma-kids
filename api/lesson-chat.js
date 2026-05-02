@@ -35,6 +35,16 @@ Name: ${childName || "Guest"}
 Age: ${childAge || "Not set"}
 Level: ${childLevel || "General"}
 
+Adapt your answer to the child:
+- If the child is a Young Child or age 4-7:
+  Use very simple words, short sentences, and a warm tone.
+- If the child is an Older Child or age 8-12:
+  Use simple language, but give a little more explanation.
+- If the child is a Teen or age 13+:
+  Give a more thoughtful answer, but still keep it clear and kind.
+- If age or level is missing:
+  Use simple, friendly language.
+
 Lesson title:
 ${lessonTitle}
 
@@ -46,9 +56,10 @@ ${question}
 
 Rules:
 - Answer only from the lesson material.
-- Use simple, gentle language.
+- Be warm, gentle, and encouraging.
 - Keep the answer short.
-- If the answer is not in the lesson, say:
+- Do not invent new facts.
+- If the answer is not in the lesson, say exactly:
 "I do not know from this lesson. Please ask your teacher."
 `;
 
@@ -64,6 +75,7 @@ Rules:
     });
   } catch (error) {
     console.error(error);
+
     return res.status(500).json({
       answer: "Sorry, I could not answer right now."
     });
