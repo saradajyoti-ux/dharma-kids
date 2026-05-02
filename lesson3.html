@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lesson 3 | Understanding Hinduism</title>
+<title>Lesson 3 | Understanding Hinduism Beyond Stereotypes</title>
 
 <style>
 body {
@@ -52,75 +52,20 @@ body {
   margin-bottom: 10px;
 }
 
-.avatar-wrap {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.avatar {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
-  background: #ffedd5;
-  border: 3px solid #fdba74;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.avatar .face {
-  width: 46px;
-  height: 46px;
-  background: #fed7aa;
-  border-radius: 50%;
-  position: absolute;
-  top: 12px;
-  left: 20px;
-}
-
-.avatar .robe {
-  width: 58px;
-  height: 34px;
-  background: #f97316;
-  border-radius: 28px 28px 10px 10px;
-  position: absolute;
-  bottom: 8px;
-  left: 14px;
-}
-
-.avatar .eye {
-  width: 5px;
-  height: 5px;
-  background: #292524;
-  border-radius: 50%;
-  position: absolute;
-  top: 30px;
-}
-
-.avatar .eye.left {
-  left: 34px;
-}
-
-.avatar .eye.right {
-  right: 34px;
-}
-
-.avatar .smile {
-  width: 18px;
-  height: 9px;
-  border-bottom: 2px solid #292524;
-  border-radius: 0 0 20px 20px;
-  position: absolute;
-  top: 40px;
-  left: 34px;
-}
-
 h1, h2 {
   color: #7c2d12;
 }
 
 p, li {
   line-height: 1.6;
+}
+
+.lesson-box {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 18px;
+  padding: 14px;
+  margin: 12px 0;
 }
 
 .question {
@@ -142,6 +87,201 @@ p, li {
   border: none;
   cursor: pointer;
 }
+
+.button.orange {
+  background: #ea580c;
+}
+
+.header-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.big-avatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: #ffedd5;
+  border: 3px solid #fdba74;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.big-avatar .face {
+  width: 46px;
+  height: 46px;
+  background: #fed7aa;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  left: 20px;
+}
+
+.big-avatar .robe {
+  width: 58px;
+  height: 34px;
+  background: #f97316;
+  border-radius: 28px 28px 10px 10px;
+  position: absolute;
+  bottom: 8px;
+  left: 14px;
+}
+
+.big-avatar .eye {
+  width: 5px;
+  height: 5px;
+  background: #292524;
+  border-radius: 50%;
+  position: absolute;
+  top: 30px;
+}
+
+.big-avatar .eye.left {
+  left: 34px;
+}
+
+.big-avatar .eye.right {
+  right: 34px;
+}
+
+.big-avatar .smile {
+  width: 18px;
+  height: 9px;
+  border-bottom: 2px solid #292524;
+  border-radius: 0 0 20px 20px;
+  position: absolute;
+  top: 40px;
+  left: 34px;
+}
+
+.chat-box {
+  height: 360px;
+  overflow-y: auto;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.message-row.user-row {
+  justify-content: flex-end;
+}
+
+.message {
+  max-width: 80%;
+  padding: 12px 14px;
+  border-radius: 18px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.user {
+  background: #dcfce7;
+  border-bottom-right-radius: 4px;
+}
+
+.bot {
+  background: white;
+  border: 1px solid #fed7aa;
+  color: #7c2d12;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffedd5;
+  border: 2px solid #fdba74;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.chat-avatar .face {
+  width: 22px;
+  height: 22px;
+  background: #fed7aa;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 8px;
+}
+
+.chat-avatar .robe {
+  width: 26px;
+  height: 15px;
+  background: #f97316;
+  border-radius: 14px 14px 5px 5px;
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+}
+
+.chat-avatar .eye {
+  width: 3px;
+  height: 3px;
+  background: #292524;
+  border-radius: 50%;
+  position: absolute;
+  top: 14px;
+}
+
+.chat-avatar .eye.left {
+  left: 14px;
+}
+
+.chat-avatar .eye.right {
+  right: 14px;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1;
+  padding: 13px;
+  border-radius: 999px;
+  border: 1px solid #fed7aa;
+  font-size: 15px;
+}
+
+button.ask {
+  padding: 13px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #f97316;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.quick-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.quick-row button {
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: none;
+  background: #ffedd5;
+  color: #7c2d12;
+  font-weight: bold;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -157,8 +297,8 @@ p, li {
   <div class="card">
     <span class="badge">Lesson 3</span>
 
-    <div class="avatar-wrap">
-      <div class="avatar" aria-label="Cute monk teacher avatar">
+    <div class="header-row">
+      <div class="big-avatar" aria-label="Cute monk teacher avatar">
         <div class="robe"></div>
         <div class="face"></div>
         <div class="eye left"></div>
@@ -175,16 +315,14 @@ p, li {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" id="lessonMaterial">
     <h2>🌟 Big Idea</h2>
     <p>
       Hinduism is much deeper than simple stereotypes. It teaches us to seek truth,
       respect different paths to God, and understand people by their qualities and actions,
       not by labels.
     </p>
-  </div>
 
-  <div class="card">
     <h2>📖 Story</h2>
     <p>
       Swami Medhananda once spoke about how some people misunderstand Hinduism.
@@ -200,21 +338,19 @@ p, li {
 
     <p>
       He also explained that the Bhagavad Gita does not teach that a person’s worth
-      comes from birth. Rather, it speaks about a person’s qualities and actions.
+      comes only from birth. Rather, it speaks about a person’s qualities and actions.
       This means we should look at people with fairness, kindness, and respect.
     </p>
-  </div>
 
-  <div class="card">
     <h2>🪷 Simple Teaching</h2>
-    <p>
+    <div class="lesson-box">
       Do not judge a religion or a person by a stereotype.
       Learn carefully, speak respectfully, and look for the deeper truth.
-    </p>
+    </div>
   </div>
 
   <div class="card">
-    <h2>💭 Reflection</h2>
+    <h2>💭 Reflection Questions</h2>
 
     <div class="question">
       <strong>Question 1:</strong>
@@ -245,6 +381,26 @@ p, li {
     </p>
   </div>
 
+  <div class="card">
+    <h2>Lesson Helper</h2>
+    <p>
+      Ask a question about this lesson.
+    </p>
+
+    <div id="chat" class="chat-box"></div>
+
+    <div class="input-row">
+      <input id="question" placeholder="Ask about Hinduism, stereotypes, or respect..." onkeydown="handleEnter(event)" />
+      <button class="ask" onclick="askLessonGuide()">Ask</button>
+    </div>
+
+    <div class="quick-row">
+      <button onclick="quickAsk('What is the main idea of this lesson?')">Main idea?</button>
+      <button onclick="quickAsk('How can I explain Hinduism kindly?')">Explain Hinduism kindly?</button>
+      <button onclick="quickAsk('Why should we avoid stereotypes?')">Avoid stereotypes?</button>
+    </div>
+  </div>
+
   <div class="card" style="text-align:center;">
     <button class="button" onclick="markLessonComplete('/lesson3.html')">
       ✅ Mark Lesson Complete
@@ -254,10 +410,128 @@ p, li {
 </div>
 
 <script>
+const lessonTitle = "Understanding Hinduism Beyond Stereotypes";
+
+const lessonText = `
+This lesson is inspired by a talk by Swami Medhananda.
+
+Hinduism is much deeper than simple stereotypes.
+It teaches us to seek truth, respect different paths to God, and understand people by their qualities and actions, not by labels.
+
+Some people misunderstand Hinduism.
+They may think Hinduism is only about caste, cows, curry, or many gods.
+But this is not the heart of Hinduism.
+
+Hinduism teaches that people can approach God in many ways.
+Some love God as Mother.
+Some love God as Krishna.
+Some meditate on the Divine as pure spirit.
+
+The important thing is sincerity, truthfulness, and spiritual practice.
+
+The Bhagavad Gita does not teach that a person’s worth comes only from birth.
+It speaks about a person’s qualities and actions.
+This means we should look at people with fairness, kindness, and respect.
+
+Do not judge a religion or a person by a stereotype.
+Learn carefully, speak respectfully, and look for the deeper truth.
+
+A simple way to explain Hinduism is:
+Hinduism teaches that there are many sincere ways to love and reach God.
+`;
+
+function createAvatar() {
+  const avatar = document.createElement("div");
+  avatar.className = "chat-avatar";
+  avatar.innerHTML = `
+    <div class="robe"></div>
+    <div class="face"></div>
+    <div class="eye left"></div>
+    <div class="eye right"></div>
+  `;
+  return avatar;
+}
+
+function addMessage(text, who) {
+  const row = document.createElement("div");
+  row.className = "message-row " + (who === "user" ? "user-row" : "bot-row");
+
+  const bubble = document.createElement("div");
+  bubble.className = "message " + who;
+  bubble.innerText = text;
+
+  if (who === "bot") {
+    row.appendChild(createAvatar());
+    row.appendChild(bubble);
+  } else {
+    row.appendChild(bubble);
+  }
+
+  const chat = document.getElementById("chat");
+  chat.appendChild(row);
+  chat.scrollTop = chat.scrollHeight;
+
+  return bubble;
+}
+
+function handleEnter(event) {
+  if (event.key === "Enter") {
+    askLessonGuide();
+  }
+}
+
+function quickAsk(text) {
+  document.getElementById("question").value = text;
+  askLessonGuide();
+}
+
+async function askLessonGuide() {
+  const input = document.getElementById("question");
+  const question = input.value.trim();
+
+  if (!question) return;
+
+  addMessage(question, "user");
+  input.value = "";
+
+  const loadingBubble = addMessage("Let me help with that lesson question...", "bot");
+
+  const childName = localStorage.getItem("dkName");
+  const childAge = localStorage.getItem("dkAge");
+  const childLevel = localStorage.getItem("dkLevel");
+
+  try {
+    const res = await fetch("/api/lesson-chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        question,
+        lessonTitle,
+        lessonText,
+        childName,
+        childAge,
+        childLevel
+      })
+    });
+
+    const data = await res.json();
+
+    loadingBubble.innerText =
+      data.answer ||
+      "I do not know from this lesson. Please ask your teacher.";
+  } catch (err) {
+    loadingBubble.innerText = "Sorry, I could not answer right now.";
+  }
+}
+
 function markLessonComplete(url) {
   localStorage.setItem("lessonCompleted:" + url, "true");
   alert("Great job! This lesson is now marked complete.");
 }
+
+addMessage("Namaste! I can help you understand this lesson about Hinduism and stereotypes.", "bot");
 </script>
 
 </body>
