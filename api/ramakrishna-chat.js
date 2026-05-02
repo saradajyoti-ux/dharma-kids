@@ -2,82 +2,114 @@ import { GoogleGenAI } from "@google/genai";
 import fs from "fs";
 import path from "path";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY
+});
 
-const ragData = JSON.parse(
-  fs.readFileSync(path.join(process.cwd(), "sources", "ramakrishna-chunks.json"), "utf8")
+const rawChunks = JSON.parse(
+  fs.readFileSync(
+    path.join(process.cwd(), "sources", "ramakrishna-chunks.json"),
+    "utf8"
+  )
 );
 
-const chunks = Array.isArray(ragData) ? ragData : ragData.chunks;
-
-const STOP_WORDS = new Set([
-  "a", "an", "and", "are", "as", "at", "be", "but", "by", "for", "from", "has", "have",
-  "he", "her", "him", "his", "i", "in", "is", "it", "me", "my", "of", "on", "or", "our",
-  "she", "sir", "so", "that", "the", "their", "them", "then", "there", "they", "this",
-  "to", "was", "we", "were", "what", "when", "where", "who", "why", "with", "you", "your"
-]);
-
-function words(text) {
-  return String(text || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
-    .split(/\s+/)
-    .filter(word => word.length > 2 && !STOP_WORDS.has(word));
+function normalizeChunks(data) {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data.chunks)) return data.chunks;
+  if (Array.isArray(data.items)) return data.items;
+  if (Array.isArray(data.data)) return data.data;
+  return Object.values(data).filter(item => item && typeof item === "object");
 }
 
-function scoreChunk(questionTerms, chunk) {
-  const text = chunk.text.toLowerCase();
-  let score = 0;
+const chunks = normalizeChunks(rawChunks).filter(chunk => {
+  return chunk && (chunk.text || chunk.content) && chunk.embedding;
+});
 
-  for (const term of questionTerms) {
-    const re = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "g");
-    const matches = text.match(re);
-    if (matches) score += matches.length;
+function cosine(a, b) {
+  let dot = 0;
+  let magA = 0;
+  let magB = 0;
+
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    magA += a[i] * a[i];
+    magB += b[i] * b[i];
   }
 
-  // Small boost when important Dharma terms appear exactly.
-  for (const term of questionTerms) {
-    if (["god", "mother", "kali", "maya", "bhakti", "devotion", "jnana", "guru", "samadhi", "truth"].includes(term) && text.includes(term)) {
-      score += 3;
-    }
-  }
-
-  return score;
+  return dot / (Math.sqrt(magA) * Math.sqrt(magB));
 }
 
-function retrieve(question, limit = 7) {
-  const terms = [...new Set(words(question))];
-  if (terms.length === 0) return [];
+async function embed(text) {
+  const result = await ai.models.embedContent({
+    model: "gemini-embedding-001",
+    contents: text
+  });
 
-  return chunks
-    .map(chunk => ({ ...chunk, score: scoreChunk(terms, chunk) }))
-    .filter(chunk => chunk.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
+  return result.embeddings[0].values;
 }
+
+const modeInstructions = {
+  simple: `
+Mode: Simple Explanation
+- Explain in 3 to 5 short sentences.
+- Use very simple words.
+- Speak gently, like a loving teacher.
+- Explain Sanskrit words in plain English.
+- End with one small reflection question.
+`,
+  story: `
+Mode: Story
+- Turn the teaching into a gentle short story for a child.
+- Keep the story short.
+- Use warm, simple language.
+- Do not invent new teachings.
+- End with one small reflection question.
+`,
+  quiz: `
+Mode: Quiz
+- Create 3 simple quiz questions for a child.
+- Give the answer after each question.
+- Keep the tone kind and encouraging.
+- Use only the Gospel context.
+`
+};
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ answer: "Only POST requests are allowed." });
+    return res.status(405).json({
+      answer: "Only POST requests are allowed."
+    });
   }
 
-  const { question, childName, childAge, childLevel } = req.body || {};
+  const {
+    question,
+    childName,
+    childAge,
+    childLevel,
+    mode = "simple",
+    parentMode
+  } = req.body || {};
 
   if (!question || question.length > 500) {
-    return res.status(400).json({ answer: "Please ask a shorter question." });
+    return res.status(400).json({
+      answer: "Please ask a shorter question."
+    });
   }
 
   try {
-    const topChunks = retrieve(question, 7);
+    const selectedMode = modeInstructions[mode] || modeInstructions.simple;
+    const questionEmbedding = await embed(question);
 
-    if (topChunks.length === 0) {
-      return res.status(200).json({
-        answer: "I do not know from the materials I have. Please ask your teacher."
-      });
-    }
+    const topChunks = chunks
+      .map(chunk => ({
+        ...chunk,
+        score: cosine(questionEmbedding, chunk.embedding)
+      }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8);
 
     const context = topChunks
-      .map(chunk => `Source: ${chunk.source}, pages ${chunk.pageStart}-${chunk.pageEnd}\n${chunk.text}`)
+      .map(chunk => chunk.text || chunk.content)
       .join("\n\n---\n\n");
 
     const prompt = `
@@ -88,13 +120,32 @@ Name: ${childName || "Guest"}
 Age: ${childAge || "Unknown"}
 Level: ${childLevel || "General"}
 
+Adapt your answer:
+- Young Child or age 4-7: very simple, short, gentle answer.
+- Older Child or age 8-12: simple but with a little more explanation.
+- Teen or age 13+: thoughtful but clear answer.
+
 Rules:
 - Answer only from the Gospel context below.
 - Do not use outside knowledge.
-- Keep answers short, gentle, and age-appropriate.
-- Do not mention page numbers unless the child asks for sources.
+- Keep answers kind, safe, and age-appropriate.
+- Avoid scary or harsh language.
+- When possible, include a short phrase from Sri Ramakrishna from the context.
 - If the context does not clearly answer, say exactly:
 "I do not know from the materials I have. Please ask your teacher."
+
+${parentMode === "true" ? `
+Parent / Teacher Mode is ON.
+
+After the child-friendly answer, add:
+
+Parent / Teacher Note:
+- Give a slightly deeper explanation for an adult.
+- Suggest one discussion question an adult can ask the child.
+- Keep it respectful and practical.
+` : ""}
+
+${selectedMode}
 
 Gospel context:
 ${context}
@@ -109,10 +160,14 @@ ${question}
     });
 
     return res.status(200).json({
-      answer: response.text || "I do not know from the materials I have. Please ask your teacher."
+      answer:
+        response.text ||
+        "I do not know from the materials I have. Please ask your teacher."
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ answer: "Sorry, I could not answer right now." });
+    return res.status(500).json({
+      answer: "Sorry, I could not answer right now."
+    });
   }
 }
