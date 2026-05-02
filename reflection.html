@@ -1,36 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Guided Reflections</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guided Reflections · Dharma Kids</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #fff7ed, #ffe4e6);
-      color: #7c2d12;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff7ed;
+  color: #292524;
+}
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+.hero {
+  background: linear-gradient(135deg, #ffedd5, #ffffff);
+  padding: 36px 20px;
+  text-align: center;
+  border-bottom: 1px solid #fed7aa;
+}
 
-    h1 {
-      text-align: center;
-    }
+.hero h1 {
+  margin: 0;
+  font-size: 38px;
+  color: #7c2d12;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin-bottom: 20px;
-    }
+.hero p {
+  color: #57534e;
+  font-size: 18px;
+}
 
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 15px;
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 24px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #fed7aa;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  margin-bottom: 18px;
+}
+
+.badge {
+  display: inline-block;
+  background: #ffedd5;
+  color: #7c2d12;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.option-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-3px);
+}
+
+.option-card.active {
+  border: 2px solid #ea580c;
+  background: #fff7ed;
+}
+
+.option-card h2 {
+  color: #7c2d12;
+  margin-top: 8px;
+}
+
+.big-emoji {
+  font-size: 42px;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: #ea580c;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.button.secondary {
+  background: #ffedd5;
+  color: #7c2d12;
+}
+
+.mood-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mood-button {
+  background: #ffedd5;
+  color: #7c2d12;
+  border: 1px solid #fed7aa;
+  border-radius: 18px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #fed7aa;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.question-box {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.journal-entry {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: #78716c;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+  <h1>🌸 Guided Reflections</h1>
+  <p>Gentle prompts for gratitude, calm, kindness, and courage.</p>
+  <a class="button secondary" href="/index.html">← Back Home</a>
+</section>
+
+<main class="container">
+
+  <div class="grid" id="reflectionCards"></div>
+
+  <div class="card">
+    <span class="badge" id="themeBadge">Reflection</span>
+    <h2 id="reflectionTitle">Loading...</h2>
+    <p id="reflectionIntro"></p>
+
+    <div id="moodSection">
+      <h3>How are you feeling today?</h3>
+      <div class="mood-row">
+        <button class="mood-button" onclick="setMood('😊 Happy')">😊 Happy</button>
+        <button class="mood-button" onclick="setMood('😌 Calm')">😌 Calm</button>
+        <button class="mood-button" onclick="setMood('🤔 Unsure')">🤔 Unsure</button>
+        <button class="mood-button" onclick="setMood('😢 Sad')">😢 Sad</button>
+        <button class="mood-button" onclick="setMood('🤩 Excited')">🤩 Excited</button>
+      </div>
+    </div>
+
+    <div id="questionSection" style="display:none;">
+      <div class="question-box">
+        <span class="badge" id="stepBadge">Step 1</span>
+        <h3 id="questionText"></h3>
+      </div>
+
+      <textarea id="answerInput" placeholder="Write your reflection here..."></textarea>
+
+      <br />
+
+      <button class="button secondary" onclick="previousStep()">Back</button>
+      <button class="button" onclick="nextStep()" id="nextButton">Next</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge">Journal</span>
+    <h2>📘 Saved Reflections</h2>
+    <p>Your reflections are saved on this device only.</p>
+    <div id="journalArea"></div>
+  </div>
+
+</main>
+
+<div class="footer">
+  Dharma Kids · Learning with love, reflection, and kindness
+</div>
+
+<script>
+const reflections = [
+  {
+    title: "Gratitude Garden",
+    emoji: "🌸",
+    theme: "Gratitude",
+    intro: "Let’s notice the good things around us, like flowers growing in a garden.",
+    steps: [
+      "What is one thing that made you smile today?",
+      "Who helped you or showed you kindness?",
+      "What is one thing you can say thank you for?"
+    ]
+  },
+  {
+    title: "Peaceful Breath",
+    emoji: "🕯️",
+    theme: "Calm",
+    intro: "Let’s slow down and find a quiet place inside, like a still lake.",
+    steps: [
+      "Take 3 slow breaths. How does your body feel?",
+      "What thought is floating in your mind right now?",
+      "What can help you feel peaceful today?"
+    ]
+  },
+  {
+    title: "Kindness Hero",
+    emoji: "💛",
+    theme: "Kindness",
+    intro: "Every kind action is like a little light you share with the world.",
+    steps: [
+      "What kind thing did you do recently?",
+      "How did it make you feel?",
+      "What kind thing can you do tomorrow?"
+    ]
+  },
+  {
+    title: "Brave Little Light",
+    emoji: "🔥",
+    theme: "Courage",
+    intro: "Courage means trying even when something feels difficult.",
+    steps: [
+      "What felt hard for you today?",
+      "What helped you keep going?",
+      "What brave step can you take next?"
+    ]
+  }
+];
+
+let selectedReflection = 0;
+let currentStep = 0;
+let selectedMood = "";
+let answers = [];
+
+function renderReflectionCards() {
+  const area = document.getElementById("reflectionCards");
+  area.innerHTML = "";
+
+  reflections.forEach((reflection, index) => {
+    const card = document.createElement("div");
+    card.className = "card option-card" + (index === selectedReflection ? " active" : "");
+    card.onclick = function() {
+      chooseReflection(index);
+    };
+
+    card.innerHTML = `
+      <div class="big-emoji">${reflection.emoji}</div>
+      <h2>${reflection.title}</h2>
+      <p>${reflection.theme}</p>
+    `;
+
+    area.appendChild(card);
+  });
+}
+
+function chooseReflection(index) {
+  selectedReflection = index;
+  currentStep = 0;
+  selectedMood = "";
+  answers = [];
+
+  document.getElementById("moodSection").style.display = "block";
+  document.getElementById("questionSection").style.display = "none";
+
+  renderPage();
+}
+
+function renderPage() {
+  const reflection = reflections[selectedReflection];
+
+  document.getElementById("themeBadge").innerText = reflection.theme;
+  document.getElementById("reflectionTitle").innerText =
+    reflection.emoji + " " + reflection.title;
+  document.getElementById("reflectionIntro").innerText = reflection.intro;
+
+  renderReflectionCards();
+}
+
+function setMood(mood) {
+  selectedMood = mood;
+  document.getElementById("moodSection").style.display = "none";
+  document.getElementById("questionSection").style.display = "block";
+  showQuestion();
+}
+
+function showQuestion() {
+  const reflection = reflections[selectedReflection];
+
+  document.getElementById("stepBadge").innerText =
+    "Step " + (currentStep + 1) + " of " + reflection.steps.length;
+
+  document.getElementById("questionText").innerText =
+    reflection.steps[currentStep];
+
+  document.getElementById("answerInput").value = answers[currentStep] || "";
+
+  document.getElementById("nextButton").innerText =
+    currentStep === reflection.steps.length - 1 ? "Save Reflection" : "Next";
+}
+
+function nextStep() {
+  const reflection = reflections[selectedReflection];
+  answers[currentStep] = document.getElementById("answerInput").value;
+
+  if (currentStep < reflection.steps.length - 1) {
+    currentStep++;
+    showQuestion();
+  } else {
+    saveReflection();
+  }
+}
+
+function previousStep() {
+  if (currentStep > 0) {
+    answers[currentStep] = document.getElementById("answerInput").value;
+    currentStep--;
+    showQuestion();
+  }
+}
+
+function saveReflection() {
+  const reflection = reflections[selectedReflection];
+
+  const entry = {
+    title: reflection.title,
+    emoji: reflection.emoji,
+    theme: reflection.theme,
+    mood: selectedMood,
+    answers: answers,
+    date: new Date().toLocaleDateString()
+  };
+
+  const saved = JSON.parse(localStorage.getItem("dkReflections") || "[]");
+  saved.unshift(entry);
+  localStorage.setItem("dkReflections", JSON.stringify(saved));
+
+  alert("Reflection saved 🌸");
+
+  chooseReflection(selectedReflection);
+  renderJournal();
+}
+
+function renderJournal() {
+  const area = document.getElementById("journalArea");
+  const saved = JSON.parse(localStorage.getItem("dkReflections") || "[]");
+
+  if (saved.length === 0) {
+    area.innerHTML = "<p>No reflections saved yet.</p>";
+    return;
+  }
+
+  area.innerHTML = "";
+
+  saved.forEach((entry) => {
+    const div = document.createElement("div");
+    div.className = "journal-entry";
+
+    div.innerHTML = `
+      <strong>${entry.emoji} ${entry.title}</strong><br>
+      <small>${entry.date} · ${entry.mood}</small>
+      <p style="margin-bottom:0;">Theme: ${entry.theme}</p>
+    `;
+
+    area.appendChild(div);
+  });
+}
+
+renderPage();
+renderJournal();
+</script>
+
+</body>
+</html>
