@@ -6,34 +6,25 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
 });
 
-const chunks = JSON.parse(
+const rawChunks = JSON.parse(
   fs.readFileSync(
     path.join(process.cwd(), "sources", "ramakrishna-chunks.json"),
     "utf8"
   )
-).filter(chunk => chunk && chunk.text);
+);
 
-function getDayNumber() {
-  const now = new Date();
-  return Math.floor(now.getTime() / (1000 * 60 * 60 * 24));
-}
+const chunks = rawChunks.filter(chunk => chunk && chunk.text);
 
 function pickDailyChunks() {
-  const day = getDayNumber();
-  const selected = [];
+  const day = Math.floor(Date.now() / 86400000);
 
-  if (!chunks.length) return selected;
-
-  for (let i = 0; i < 6; i++) {
-    const index = Math.abs((day * 7 + i * 17) % chunks.length);
-    const chunk = chunks[index];
-
-    if (chunk && chunk.text) {
-      selected.push(chunk);
-    }
+  if (!chunks.length) {
+    return [];
   }
 
-  return selected;
+  return [0, 1, 2, 3, 4, 5]
+    .map(i => chunks[(day + i * 23) % chunks.length])
+    .filter(chunk => chunk && chunk.text);
 }
 
 export default async function handler(req, res) {
@@ -47,10 +38,7 @@ export default async function handler(req, res) {
     }
 
     const context = selectedChunks
-      .map(chunk => {
-        const source = chunk.source || "Sri Ramakrishna Gospel";
-        return `Source: ${source}\n${chunk.text}`;
-      })
+      .map(chunk => chunk.text)
       .join("\n\n---\n\n");
 
     const prompt = `
@@ -73,7 +61,6 @@ Rules:
 - Be warm, simple, and child-friendly.
 - Do not use outside knowledge.
 - Avoid scary or harsh language.
-- If the context is unclear, choose a simpler teaching from the context.
 
 Gospel context:
 ${context}
@@ -85,7 +72,7 @@ ${context}
     });
 
     return res.status(200).json({
-      lesson: response.text
+      lesson: response.text || "Sorry, I could not create today’s lesson right now."
     });
   } catch (error) {
     console.error(error);
