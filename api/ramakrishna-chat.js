@@ -2,68 +2,82 @@ import { GoogleGenAI } from "@google/genai";
 import fs from "fs";
 import path from "path";
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY
-});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const chunks = JSON.parse(
-  fs.readFileSync(
-    path.join(process.cwd(), "sources", "ramakrishna-chunks.json"),
-    "utf8"
-  )
+const ragData = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), "sources", "ramakrishna-chunks.json"), "utf8")
 );
 
-function cosine(a, b) {
-  let dot = 0;
-  let magA = 0;
-  let magB = 0;
+const chunks = Array.isArray(ragData) ? ragData : ragData.chunks;
 
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i];
-    magA += a[i] * a[i];
-    magB += b[i] * b[i];
-  }
+const STOP_WORDS = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "but", "by", "for", "from", "has", "have",
+  "he", "her", "him", "his", "i", "in", "is", "it", "me", "my", "of", "on", "or", "our",
+  "she", "sir", "so", "that", "the", "their", "them", "then", "there", "they", "this",
+  "to", "was", "we", "were", "what", "when", "where", "who", "why", "with", "you", "your"
+]);
 
-  return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+function words(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(word => word.length > 2 && !STOP_WORDS.has(word));
 }
 
-async function embed(text) {
-  const result = await ai.models.embedContent({
-    model: "gemini-embedding-001",
-    contents: text
-  });
+function scoreChunk(questionTerms, chunk) {
+  const text = chunk.text.toLowerCase();
+  let score = 0;
 
-  return result.embeddings[0].values;
+  for (const term of questionTerms) {
+    const re = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "g");
+    const matches = text.match(re);
+    if (matches) score += matches.length;
+  }
+
+  // Small boost when important Dharma terms appear exactly.
+  for (const term of questionTerms) {
+    if (["god", "mother", "kali", "maya", "bhakti", "devotion", "jnana", "guru", "samadhi", "truth"].includes(term) && text.includes(term)) {
+      score += 3;
+    }
+  }
+
+  return score;
+}
+
+function retrieve(question, limit = 7) {
+  const terms = [...new Set(words(question))];
+  if (terms.length === 0) return [];
+
+  return chunks
+    .map(chunk => ({ ...chunk, score: scoreChunk(terms, chunk) }))
+    .filter(chunk => chunk.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
 }
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({
-      answer: "Only POST requests are allowed."
-    });
+    return res.status(405).json({ answer: "Only POST requests are allowed." });
   }
 
   const { question, childName, childAge, childLevel } = req.body || {};
 
   if (!question || question.length > 500) {
-    return res.status(400).json({
-      answer: "Please ask a shorter question."
-    });
+    return res.status(400).json({ answer: "Please ask a shorter question." });
   }
 
   try {
-    const questionEmbedding = await embed(question);
+    const topChunks = retrieve(question, 7);
 
-    const topChunks = chunks
-      .map(chunk => ({
-        ...chunk,
-        score: cosine(questionEmbedding, chunk.embedding)
-      }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 6);
+    if (topChunks.length === 0) {
+      return res.status(200).json({
+        answer: "I do not know from the materials I have. Please ask your teacher."
+      });
+    }
 
     const context = topChunks
-      .map(chunk => `Source: ${chunk.source}\n${chunk.text}`)
+      .map(chunk => `Source: ${chunk.source}, pages ${chunk.pageStart}-${chunk.pageEnd}\n${chunk.text}`)
       .join("\n\n---\n\n");
 
     const prompt = `
@@ -78,6 +92,7 @@ Rules:
 - Answer only from the Gospel context below.
 - Do not use outside knowledge.
 - Keep answers short, gentle, and age-appropriate.
+- Do not mention page numbers unless the child asks for sources.
 - If the context does not clearly answer, say exactly:
 "I do not know from the materials I have. Please ask your teacher."
 
@@ -98,8 +113,6 @@ ${question}
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({
-      answer: "Sorry, I could not answer right now."
-    });
+    return res.status(500).json({ answer: "Sorry, I could not answer right now." });
   }
 }
