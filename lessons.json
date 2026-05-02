@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Loving God Within Us",
+    "description": "A lesson about kindness, prayer, and truthfulness.",
+    "url": "/lesson1.html",
+    "level": "Young Child",
+    "status": "available"
+  },
+  {
+    "title": "Courage Like Hanumanji",
+    "description": "A lesson about courage, devotion, humility, and service.",
+    "url": "/lesson2.html",
+    "level": "Young Child",
+    "status": "available"
+  }
+]
